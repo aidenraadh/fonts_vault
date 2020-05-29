@@ -1,0 +1,211 @@
+*{
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+html{
+	font-size: 10px;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: #333333;
+  background-color: #FAFAFA;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+.cb_container{
+	padding-left: 1rem;
+}
+
+.cb {display: block;
+  position: relative;
+  padding-left: 3.5rem; /*changeable -- give space between custom checkbox and the text beside it*/
+  cursor: pointer;
+  font-size: 1.6rem; /* changeable -- font size of text beside checkbox */
+  width: 100%;
+}
+
+/* Hide the browser's default checkbox */
+.cb input {
+  opacity: 0; /* hide the the default checkbox without using display: none; */
+  cursor: pointer;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+  position: absolute;
+  right: 0; left: 0; /* changeable -- adjust the custom checkbox position with the text beside it */
+  height: 2.4rem; width: 2.4rem; /* changeable -- dimension of custom checkbox */
+  background-color: #eee; /* changeable -- background color of custom checkbox */
+}
+
+/* Style the checkmark/indicator */
+/* the checkmark is made by the span element's left and bottom border, the the span element is rotated 45 degree to appear properly*/
+
+.checkmark:after {
+  content: "";
+  display: none; /* hide the checkmark if checkbox is not checked */
+  position: absolute;
+  left: 0.9rem; top: 0.5rem; /* changealbe -- adjust the position of checkmark againts checkbox */
+  width: 0.5rem; height: 1rem; /* changealbe -- the dimension of checkmark */
+  border-style: solid; 
+  border-color: white; /* changealbe -- change the checkmark color */
+  border-width: 0 0.3rem 0.3rem 0; /* changealbe -- the boldness of checkmark */
+  transform: rotate(45deg); /* changealbe -- rotate the checkmark to appear properly */
+}
+/* On mouse-over, add a grey background color */
+.cb:hover input ~ .checkmark {
+  background-color: #ccc; /* changeable -- change background color of custom checkbox when it's label element is hovered */
+}
+
+/* When the checkbox is checked, add a blue background */
+.cb input:checked ~ .checkmark {
+  background-color: #2196F3; /* changeable -- change background color of custom checkbox is checked */
+}
+
+
+/* Show the checkmark when checked */
+.cb input:checked ~ .checkmark:after {
+  display: block;
+}
+
+.TimingFunc{
+	transition-timing-function: ease;
+}
+
+.modal{
+	position: fixed;
+	top: 0; left: 0;
+	display: none;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	height: 100%;
+}
+
+.modal.shown{
+	display: flex;
+	transition-property: background-color;
+	transition-duration: 0.3s;
+}
+
+.modal.shown.darkBG{
+	background-color: rgba(0,0,0,0.4);
+}
+
+.modal .content{
+	width: 20rem;
+	height: 2rem;
+	background-color: red;
+	opacity: 1;
+}
+
+.modal .content.shown{
+	opacity: 1;
+}
+
+#App{display: none;}
+
+#Header{
+	position: fixed;
+	width: 100%;
+}
+
+#Header h1{
+	font-size: 3rem;
+	padding-left: 8rem;
+}
+
+#FontFilter .filters{
+	position: fixed; top: 0;
+	width: 28rem; height: 100%;
+	padding-top: 2rem;
+	background-color: red;
+	transform: translateX(-100%);
+	transition-property: transform;
+	transition-duration: 0.4s;
+
+}
+
+#FontFilter .filters.shown{
+	transform: translateX(0);
+}
+
+.toggleFilter.opn{
+	position: fixed;
+	z-index: 0;
+}
+
+.toggleFilter.cls{
+	font-size: 2.6rem;
+}
+
+#DisplaysConfig{
+	position: fixed;
+	width: 100%;
+}
+
+#DisplaysConfig > div{
+	display: flex;
+	justify-content: flex-end;
+}
+
+#Displays{
+	padding-top: 7rem;
+}
+
+#DisplaysBody{
+	display: flex;
+	flex-wrap: wrap;
+	width: 100%;
+	font-size: 1.6rem;
+	text-align: left;
+}
+
+#DisplaysBody .display{
+	width: 24%;
+	min-height: 14rem;
+	margin: 0.6rem;
+	padding: 0.4rem 0.8rem;
+	border: 1px solid #F4F6Fb !important;
+	border-radius: 6px !important;
+	background-color: transparent;
+	background-clip: border-box;	
+	box-shadow: 0 0 3px 1px rgba(2,39,119,0.17);
+	cursor: pointer;
+	flex-shrink: 0;
+}
+
+#DisplaysBody .font_name{
+	display: block; margin-bottom: 0.8rem;
+}
+
+#DisplaysBody .demo{
+	display: block; width: 100%;
+}
+
+#DisplaysBody .board{
+	word-wrap: break-word;
+}
+
+@media only screen and (min-width: 1281px) {
+  html{
+    font-size: 0.78125vw;
+  }
+}
+
+@media only screen and (max-width: 1280px) {
+	html{
+		font-size: calc(10px -  ( (1280px - 100vw) *  0.00138 ) );
+	}
+}
