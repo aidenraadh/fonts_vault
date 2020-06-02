@@ -3,7 +3,7 @@
 namespace App\Providers;
 use Illuminate\Contracts\Support\DeferrableProvider;
 use Illuminate\Support\ServiceProvider;
-use App\Admin\AdminPanel;
+use App\Admin\AdminCRUD;
 
 class AdminProvider extends ServiceProvider
 {
@@ -14,8 +14,8 @@ class AdminProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->singleton('App\Admin\AdminPanel', function ($app) {
-            return new AdminPanel();
+        $this->app->singleton('App\Admin\AdminCRUD', function ($app) {
+            return new AdminCRUD();
         });
     }
 
@@ -31,6 +31,6 @@ class AdminProvider extends ServiceProvider
 
     public function provides()
     {
-        return [AdminPanel::class];
+        return [AdminCRUD::class];
     }    
 }

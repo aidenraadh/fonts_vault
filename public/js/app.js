@@ -65643,7 +65643,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _reusables_Header_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./reusables/Header.js */ "./resources/js/components/reusables/Header.js");
 /* harmony import */ var _reusables_Checkbox_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./reusables/Checkbox.js */ "./resources/js/components/reusables/Checkbox.js");
 /* harmony import */ var _reusables_Table_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./reusables/Table.js */ "./resources/js/components/reusables/Table.js");
+/* harmony import */ var _reusables_Modal_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./reusables/Modal.js */ "./resources/js/components/reusables/Modal.js");
+/* harmony import */ var _reusables_LARAVEL_CSRF_TOKEN_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./reusables/LARAVEL_CSRF_TOKEN.js */ "./resources/js/components/reusables/LARAVEL_CSRF_TOKEN.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -65670,38 +65678,70 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
+
+
 var AdminApp = /*#__PURE__*/function (_React$Component) {
   _inherits(AdminApp, _React$Component);
 
   var _super = _createSuper(AdminApp);
 
   function AdminApp(props) {
+    var _this;
+
     _classCallCheck(this, AdminApp);
 
-    return _super.call(this, props);
+    _this = _super.call(this, props);
+    _this.state = {
+      toggleModal: {
+        deleteFontsMdl: null,
+        uploadFontMdl: null
+      }
+    };
+    _this.TableHeadData = [/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_reusables_Checkbox_js__WEBPACK_IMPORTED_MODULE_2__["default"], {
+      cbData: [{
+        name: 'test[]',
+        value: 'haha'
+      }]
+    }), 'Family Name', 'Total Fonts', 'Inserted At', 'Updated At', 'Actions'];
+    _this.TableBodyData = _this.props.fonts.map(function (font) {
+      return [/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_reusables_Checkbox_js__WEBPACK_IMPORTED_MODULE_2__["default"], {
+        attr: {
+          name: 'selectedFams[]',
+          value: font.id,
+          form: 'deleteFonts'
+        }
+      }), font.font_name, '12', font.created_at, font.updated_at, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        href: "#"
+      }, "Edit"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        href: "#"
+      }, "Delete"))];
+    });
+    _this.getToggleModal = _this.getToggleModal.bind(_assertThisInitialized(_this)); //
+
+    return _this;
   }
 
   _createClass(AdminApp, [{
+    key: "getToggleModal",
+    value: function getToggleModal(modalid, toggleModalFunc) {
+      this.setState(function (state) {
+        var newToggleMdl = _objectSpread({}, state.toggleModal);
+
+        Object.keys(newToggleMdl).forEach(function (key) {
+          if (key === modalid) {
+            newToggleMdl[modalid] = toggleModalFunc;
+          }
+        });
+        return {
+          toggleModal: newToggleMdl
+        };
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
-      var headData = [/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_reusables_Checkbox_js__WEBPACK_IMPORTED_MODULE_2__["default"], {
-        cbData: [{
-          name: 'test[]',
-          value: 'haha'
-        }]
-      }), 'Family Name', 'Total Fonts', 'Inserted At', 'Updated At', 'Actions'];
-      var bodyData = this.props.fonts.map(function (font) {
-        return [/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_reusables_Checkbox_js__WEBPACK_IMPORTED_MODULE_2__["default"], {
-          cbData: [{
-            name: 'test[]',
-            value: font.id
-          }]
-        }), font.font_name, '12', font.created_at, font.updated_at, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-          href: "#"
-        }, "Edit"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-          href: "#"
-        }, "Delete"))];
-      });
+      var _this2 = this;
+
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_reusables_Header_js__WEBPACK_IMPORTED_MODULE_1__["default"], {
         subHeader: null,
         AppURLs: this.props.AppURLs
@@ -65718,10 +65758,39 @@ var AdminApp = /*#__PURE__*/function (_React$Component) {
         }
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
         className: "heading"
-      }, "All Fonts"), "asd"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_reusables_Table_js__WEBPACK_IMPORTED_MODULE_3__["default"], {
-        headData: headData,
-        bodyData: bodyData
-      }))) //
+      }, "All Fonts"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        type: "button",
+        onClick: function onClick() {
+          return _this2.state.toggleModal.uploadFontMdl(true);
+        }
+      }, "add"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        type: "button",
+        onClick: function onClick() {
+          return _this2.state.toggleModal.deleteFontsMdl(true);
+        }
+      }, "delete")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_reusables_Table_js__WEBPACK_IMPORTED_MODULE_3__["default"], {
+        headData: this.TableHeadData,
+        bodyData: this.TableBodyData
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_reusables_Modal_js__WEBPACK_IMPORTED_MODULE_4__["Modal_2"], {
+        modalid: "deleteFontsMdl",
+        messages: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          style: {
+            textAlign: 'center'
+          }
+        }, "Are you sure want to delete the following fonts?", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+          id: "deleteFonts",
+          method: "POST",
+          action: this.props.AppURLs.deleteFontsURL
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_reusables_LARAVEL_CSRF_TOKEN_js__WEBPACK_IMPORTED_MODULE_5__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+          type: "submit"
+        }, "DELETE"))),
+        getToggleModal: this.getToggleModal
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_reusables_Modal_js__WEBPACK_IMPORTED_MODULE_4__["Modal_1"], {
+        modalid: 'uploadFontMdl',
+        heading: 'test',
+        body: 'test',
+        getToggleModal: this.getToggleModal
+      })) //
       ;
     }
   }]);
@@ -65751,6 +65820,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _FontFilter_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./FontFilter.js */ "./resources/js/components/FontFilter.js");
 /* harmony import */ var _FontConfig_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./FontConfig.js */ "./resources/js/components/FontConfig.js");
 /* harmony import */ var _FontDisplay_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./FontDisplay.js */ "./resources/js/components/FontDisplay.js");
+/* harmony import */ var _DisplaySelectedFam_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./DisplaySelectedFam.js */ "./resources/js/components/DisplaySelectedFam.js");
+/* harmony import */ var _reusables_Buttons_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./reusables/Buttons.js */ "./resources/js/components/reusables/Buttons.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
@@ -65787,6 +65858,8 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
+
+
 var fontFaces = document.getElementById('fontFaces');
 var selectedFamFontFaces = document.getElementById('selectedFamFontFaces');
 
@@ -65797,15 +65870,6 @@ var generateFontFaces = function generateFontFaces(filteredFonts, storageLink) {
   });
   return rules;
 };
-
-function DisplaySelectedFam(props) {
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, props.selectedFamily ? props.selectedFamily.map(function (font, idx) {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      key: idx
-    }, font.file_name);
-  }) : '') //
-  ;
-}
 
 var App = /*#__PURE__*/function (_React$Component) {
   _inherits(App, _React$Component);
@@ -65820,7 +65884,10 @@ var App = /*#__PURE__*/function (_React$Component) {
     _this = _super.call(this, props);
     _this.state = {
       filteredFonts: _this.props.filteredFonts,
-      selectedFamily: null,
+      selectedFamily: {
+        family_name: null,
+        font_files: null
+      },
       board: 'Valar Morghulis',
       fontConfig: {
         fontSize: '26px',
@@ -65829,7 +65896,9 @@ var App = /*#__PURE__*/function (_React$Component) {
         lineHeight: 'auto'
       },
       fontFilterShown: false,
-      toggleModal: null
+      toggleModal: {
+        selectedFamily: null
+      }
     };
     fontFaces.innerHTML += generateFontFaces(_this.state.filteredFonts, _this.props.AppURLs.storageLink);
     _this.changefilteredFonts = _this.changefilteredFonts.bind(_assertThisInitialized(_this));
@@ -65837,7 +65906,7 @@ var App = /*#__PURE__*/function (_React$Component) {
     _this.configureFont = _this.configureFont.bind(_assertThisInitialized(_this));
     _this.writeText = _this.writeText.bind(_assertThisInitialized(_this));
     _this.toggleFontFilter = _this.toggleFontFilter.bind(_assertThisInitialized(_this));
-    _this.modalCallback = _this.modalCallback.bind(_assertThisInitialized(_this));
+    _this.getToggleModal = _this.getToggleModal.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -65858,7 +65927,10 @@ var App = /*#__PURE__*/function (_React$Component) {
         });
         selectedFamFontFaces.innerHTML = rules;
         callingComponent.setState({
-          selectedFamily: font_files
+          selectedFamily: {
+            family_name: family_name,
+            font_files: font_files
+          }
         });
       }, this);
     }
@@ -65896,18 +65968,26 @@ var App = /*#__PURE__*/function (_React$Component) {
       });
     }
   }, {
-    key: "modalCallback",
-    value: function modalCallback(toggleModalFunc) {
-      this.setState({
-        toggleModal: toggleModalFunc
+    key: "getToggleModal",
+    value: function getToggleModal(modalid, toggleModalFunc) {
+      this.setState(function (state) {
+        var newToggleMdl = _objectSpread({}, state.toggleModal);
+
+        Object.keys(newToggleMdl).forEach(function (key) {
+          if (key === modalid) {
+            newToggleMdl[modalid] = toggleModalFunc;
+          }
+        });
+        return {
+          toggleModal: newToggleMdl
+        };
       });
     }
   }, {
     key: "componentDidUpdate",
     value: function componentDidUpdate(prevProps, prevState) {
       if (this.state.selectedFamily !== prevState.selectedFamily) {
-        console.log(this.state.selectedFamily);
-        this.state.toggleModal(true);
+        this.state.toggleModal.selectedFamily(true);
       }
     }
   }, {
@@ -65918,15 +65998,15 @@ var App = /*#__PURE__*/function (_React$Component) {
           toggleFontFilter: this.toggleFontFilter,
           fontFilterShown: this.state.fontFilterShown
         }),
-        headerWidgetBtn: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-          className: "btn",
-          "aria-describedby": "Open",
-          "aria-label": "FontFilter",
-          type: "button",
-          onClick: this.toggleFontFilter
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-          className: "sprite"
-        })),
+        headerWidgetBtn: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_reusables_Buttons_js__WEBPACK_IMPORTED_MODULE_9__["default"], {
+          tagname: 'button',
+          data: {
+            btnIcon: 1
+          },
+          events: {
+            onClick: this.toggleFontFilter
+          }
+        }),
         subHeader: {
           leftCol: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_FontConfig_js__WEBPACK_IMPORTED_MODULE_6__["default"], {
             configureFont: this.configureFont,
@@ -65940,12 +66020,15 @@ var App = /*#__PURE__*/function (_React$Component) {
         updateSelectedFam: this.updateSelectedFam,
         fontConfig: this.state.fontConfig,
         board: this.state.board
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_reusables_Modal_js__WEBPACK_IMPORTED_MODULE_2__["default"], {
-        heading: 'leehoo',
-        body: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(DisplaySelectedFam, {
-          selectedFamily: this.state.selectedFamily
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_reusables_Modal_js__WEBPACK_IMPORTED_MODULE_2__["Modal_1"], {
+        modalid: 'selectedFamily',
+        heading: this.state.selectedFamily.family_name,
+        body: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_DisplaySelectedFam_js__WEBPACK_IMPORTED_MODULE_8__["default"], {
+          font_files: this.state.selectedFamily.font_files,
+          fontsDir: this.props.AppURLs.storageLink + this.state.selectedFamily.family_name,
+          board: this.state.board
         }),
-        modalCallback: this.modalCallback
+        getToggleModal: this.getToggleModal
       })) //
       ;
     }
@@ -65955,6 +66038,95 @@ var App = /*#__PURE__*/function (_React$Component) {
 }(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
 
 /* harmony default export */ __webpack_exports__["default"] = (App);
+
+/***/ }),
+
+/***/ "./resources/js/components/DisplaySelectedFam.js":
+/*!*******************************************************!*\
+  !*** ./resources/js/components/DisplaySelectedFam.js ***!
+  \*******************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _reusables_Buttons_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./reusables/Buttons.js */ "./resources/js/components/reusables/Buttons.js");
+/* harmony import */ var _reusables_FontFileParsers_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./reusables/FontFileParsers.js */ "./resources/js/components/reusables/FontFileParsers.js");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _createSuper(Derived) { return function () { var Super = _getPrototypeOf(Derived), result; if (_isNativeReflectConstruct()) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+
+
+var DisplaySelectedFam = /*#__PURE__*/function (_React$Component) {
+  _inherits(DisplaySelectedFam, _React$Component);
+
+  var _super = _createSuper(DisplaySelectedFam);
+
+  function DisplaySelectedFam(props) {
+    _classCallCheck(this, DisplaySelectedFam);
+
+    return _super.call(this, props);
+  }
+
+  _createClass(DisplaySelectedFam, [{
+    key: "render",
+    value: function render() {
+      var _this = this;
+
+      if (this.props.font_files) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, this.props.font_files.map(function (file, idx) {
+          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
+            key: idx,
+            className: "selectedFamDisplay"
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            className: "displayHeader"
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, Object(_reusables_FontFileParsers_js__WEBPACK_IMPORTED_MODULE_2__["getFontFamValue"])(file.file_name)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_reusables_Buttons_js__WEBPACK_IMPORTED_MODULE_1__["default"], {
+            tagname: 'a',
+            data: {
+              url: _this.props.fontsDir + '/' + file.file_name,
+              btnIcon: 4
+            }
+          })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            className: "board",
+            style: {
+              fontFamily: Object(_reusables_FontFileParsers_js__WEBPACK_IMPORTED_MODULE_2__["getFontFamValue"])(file.file_name)
+            }
+          }, _this.props.board));
+        })) //
+        ;
+      } else {
+        return '';
+      }
+    }
+  }]);
+
+  return DisplaySelectedFam;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+
+/* harmony default export */ __webpack_exports__["default"] = (DisplaySelectedFam);
 
 /***/ }),
 
@@ -66231,9 +66403,43 @@ var FontFilter = /*#__PURE__*/function (_React$Component) {
   var _super = _createSuper(FontFilter);
 
   function FontFilter(props) {
+    var _this;
+
     _classCallCheck(this, FontFilter);
 
-    return _super.call(this, props);
+    _this = _super.call(this, props);
+    _this.filters = [{
+      attr: {
+        name: '',
+        value: ''
+      },
+      label: 'Serif'
+    }, {
+      attr: {
+        name: '',
+        value: ''
+      },
+      label: 'Sans Serif'
+    }, {
+      attr: {
+        name: '',
+        value: ''
+      },
+      label: 'Monospace'
+    }, {
+      attr: {
+        name: '',
+        value: ''
+      },
+      label: 'Script'
+    }, {
+      attr: {
+        name: '',
+        value: ''
+      },
+      label: 'Display'
+    }];
+    return _this;
   }
 
   _createClass(FontFilter, [{
@@ -66248,28 +66454,12 @@ var FontFilter = /*#__PURE__*/function (_React$Component) {
         "aria-label": "FontFilter",
         type: "button",
         onClick: this.props.toggleFontFilter
-      }, "\xD7"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_reusables_Checkbox__WEBPACK_IMPORTED_MODULE_1__["default"], {
-        cbData: [{
-          name: '',
-          value: '',
-          label: 'Serif'
-        }, {
-          name: '',
-          value: '',
-          label: 'Sans Serif'
-        }, {
-          name: '',
-          value: '',
-          label: 'Monospace'
-        }, {
-          name: '',
-          value: '',
-          label: 'Script'
-        }, {
-          name: '',
-          value: '',
-          label: 'Display'
-        }]
+      }, "\xD7"), this.filters.map(function (filter, idx) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_reusables_Checkbox__WEBPACK_IMPORTED_MODULE_1__["default"], {
+          key: idx,
+          attr: filter.attr,
+          label: filter.label
+        });
       })));
     }
   }]);
@@ -66347,6 +66537,84 @@ function AJAXGetRequest(data, URL, callback, callingComponent) {
 
 /***/ }),
 
+/***/ "./resources/js/components/reusables/Buttons.js":
+/*!******************************************************!*\
+  !*** ./resources/js/components/reusables/Buttons.js ***!
+  \******************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+
+
+function Button_1(props) {
+  var iconPosition;
+
+  switch (props.data.btnIcon) {
+    case 1:
+      iconPosition = '0 0';
+      break;
+
+    case 2:
+      iconPosition = '25% 0';
+      break;
+
+    case 3:
+      iconPosition = '50% 0';
+      break;
+
+    case 4:
+      iconPosition = '75% 0';
+      break;
+
+    case 5:
+      iconPosition = '100% 0';
+      break;
+
+    default:
+      iconPosition = '0 0';
+  }
+
+  switch (props.tagname) {
+    case 'a':
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        href: props.data.url,
+        className: "btn_1"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "sprite",
+        style: {
+          backgroundPosition: iconPosition
+        }
+      }))) //
+      ;
+      break;
+
+    case 'button':
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", _extends({
+        type: "button",
+        className: "btn_1"
+      }, props.events), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "sprite",
+        style: {
+          backgroundPosition: iconPosition
+        }
+      })));
+      break;
+
+    default:
+      return '';
+  }
+}
+
+/* harmony default export */ __webpack_exports__["default"] = (Button_1);
+
+/***/ }),
+
 /***/ "./resources/js/components/reusables/Checkbox.js":
 /*!*******************************************************!*\
   !*** ./resources/js/components/reusables/Checkbox.js ***!
@@ -66359,6 +66627,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -66381,12 +66651,6 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
 
-/*
-cbData = [
-	{name: (str)name, value: (str)value, label: (str)label},
-	...,
-]
-*/
 
 var Checkbox = /*#__PURE__*/function (_React$Component) {
   _inherits(Checkbox, _React$Component);
@@ -66402,18 +66666,13 @@ var Checkbox = /*#__PURE__*/function (_React$Component) {
   _createClass(Checkbox, [{
     key: "render",
     value: function render() {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, this.props.cbData.map(function (data, idx) {
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-          key: idx,
-          className: "cb"
-        }, data.label, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-          type: "checkbox",
-          name: data.name,
-          value: data.value
-        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-          className: "checkmark"
-        }));
-      })) //
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        className: "cb"
+      }, this.props.label, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", _extends({
+        type: "checkbox"
+      }, this.props.attr)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "checkmark"
+      }))) //
       ;
     }
   }]);
@@ -66563,15 +66822,41 @@ var Header = /*#__PURE__*/function (_React$Component) {
 
 /***/ }),
 
-/***/ "./resources/js/components/reusables/Modal.js":
-/*!****************************************************!*\
-  !*** ./resources/js/components/reusables/Modal.js ***!
-  \****************************************************/
+/***/ "./resources/js/components/reusables/LARAVEL_CSRF_TOKEN.js":
+/*!*****************************************************************!*\
+  !*** ./resources/js/components/reusables/LARAVEL_CSRF_TOKEN.js ***!
+  \*****************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return LARAVEL_CSRF_TOKEN; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+function LARAVEL_CSRF_TOKEN() {
+  var token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+    type: "hidden",
+    name: "_token",
+    value: token
+  }));
+}
+
+/***/ }),
+
+/***/ "./resources/js/components/reusables/Modal.js":
+/*!****************************************************!*\
+  !*** ./resources/js/components/reusables/Modal.js ***!
+  \****************************************************/
+/*! exports provided: Modal_1, Modal_2 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Modal_1", function() { return Modal_1; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Modal_2", function() { return Modal_2; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -66597,16 +66882,15 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
 
+var Modal_1 = /*#__PURE__*/function (_React$Component) {
+  _inherits(Modal_1, _React$Component);
 
-var Modal = /*#__PURE__*/function (_React$Component) {
-  _inherits(Modal, _React$Component);
+  var _super = _createSuper(Modal_1);
 
-  var _super = _createSuper(Modal);
-
-  function Modal(props) {
+  function Modal_1(props) {
     var _this;
 
-    _classCallCheck(this, Modal);
+    _classCallCheck(this, Modal_1);
 
     _this = _super.call(this, props);
     _this.modalRef = react__WEBPACK_IMPORTED_MODULE_0___default.a.createRef();
@@ -66614,28 +66898,34 @@ var Modal = /*#__PURE__*/function (_React$Component) {
     return _this;
   }
 
-  _createClass(Modal, [{
+  _createClass(Modal_1, [{
     key: "toggleModal",
-    value: function toggleModal(isShown) {
-      if (isShown) {
-        this.modalRef.current.classList.add('shown');
-        this.modalRef.current.offsetHeight;
-        this.modalRef.current.classList.add('darkBG');
-        this.modalRef.current.addEventListener('transitionend', function () {
-          this.children[0].classList.add('shown');
+    value: function toggleModal(modalShown) {
+      var modal = this.modalRef.current;
+      var modalOverlay = modal.children[0];
+      var modalContent = modalOverlay.children[0]; // Show the modal
+
+      if (modalShown) {
+        modal.classList.add('shown');
+        modalOverlay.addEventListener('transitionend', function () {
+          modalContent.classList.add('shown');
+        }, {
+          once: true
         });
-      } else {
-        var modalRef = this.modalRef.current;
-        this.modalRef.current.children[0].classList.remove('shown');
-        this.modalRef.current.children[0].addEventListener('transitionend', function () {
-          modalRef.classList.remove('darkBG', 'shown');
-        });
-      }
+      } // Hide the modal
+      else {
+          modalContent.classList.remove('shown');
+          modalContent.addEventListener('transitionend', function () {
+            modal.classList.remove('shown');
+          }, {
+            once: true
+          });
+        }
     }
   }, {
     key: "componentDidMount",
     value: function componentDidMount() {
-      this.props.modalCallback(this.toggleModal);
+      this.props.getToggleModal(this.props.modalid, this.toggleModal);
     }
   }, {
     key: "render",
@@ -66643,8 +66933,11 @@ var Modal = /*#__PURE__*/function (_React$Component) {
       var _this2 = this;
 
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
-        className: "modal",
+        id: this.props.modalid,
+        className: "modal_1",
         ref: this.modalRef
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "overlay"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "content"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -66658,15 +66951,71 @@ var Modal = /*#__PURE__*/function (_React$Component) {
         className: "body section_padding"
       }, this.props.body), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "footer section_padding"
-      })))) //
+      }))))) //
       ;
     }
   }]);
 
-  return Modal;
+  return Modal_1;
 }(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+var Modal_2 = /*#__PURE__*/function (_React$Component2) {
+  _inherits(Modal_2, _React$Component2);
 
-/* harmony default export */ __webpack_exports__["default"] = (Modal);
+  var _super2 = _createSuper(Modal_2);
+
+  function Modal_2(props) {
+    var _this3;
+
+    _classCallCheck(this, Modal_2);
+
+    _this3 = _super2.call(this, props);
+    _this3.modalRef = react__WEBPACK_IMPORTED_MODULE_0___default.a.createRef();
+    _this3.toggleModal = _this3.toggleModal.bind(_assertThisInitialized(_this3));
+    return _this3;
+  }
+
+  _createClass(Modal_2, [{
+    key: "toggleModal",
+    value: function toggleModal(modalShown) {
+      // Show the modal
+      if (modalShown) {
+        this.modalRef.current.classList.add('shown');
+      } // Hide the modal
+      else {
+          this.modalRef.current.classList.remove('shown');
+        }
+    }
+  }, {
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.props.getToggleModal(this.props.modalid, this.toggleModal);
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this4 = this;
+
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
+        id: this.props.modalid,
+        className: "modal_2",
+        ref: this.modalRef
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "content"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        className: "clsBtn",
+        type: "button",
+        onClick: function onClick() {
+          return _this4.toggleModal(false);
+        }
+      }, "\xD7"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "body"
+      }, this.props.messages)))) //
+      ;
+    }
+  }]);
+
+  return Modal_2;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
 
 /***/ }),
 

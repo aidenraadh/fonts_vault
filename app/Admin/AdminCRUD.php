@@ -4,7 +4,7 @@ namespace App\Admin;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
-class AdminPanel
+class AdminCRUD
 {
 	public function storeFonts($fontData, $fontFiles){
 		// Store font files in storage
@@ -56,10 +56,24 @@ class AdminPanel
 		return DB::select( 'SELECT * FROM fonts');
 	}
 
-	/*public function getFontFamilies($data){
-		DB::select(
-			'',
-			$data
-		);
-	}*/	
+        // Delete Font Families
+        // params: (array of string)$font_IDs
+        public function deleteFonts($font_IDs){
+                $IDs = implode(',', $font_IDs);
+                $family_names = DB::select('SELECT font_name FROM fonts WHERE id IN('.$IDs.')');
+                $publicDisk = Storage::disk('public');
+
+                DB::beginTransaction();
+                
+                try {
+                        DB::delete('DELETE FROM fonts WHERE id IN('.$IDs.')');
+                        DB::commit();
+                        foreach ($family_names as $name) {
+                                $publicDisk->deleteDirectory('fonts/'.$name->font_name);
+                        }
+                } catch (Exception $e) {
+                    DB::rollback();
+                    return false;
+                }
+        }
 }

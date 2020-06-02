@@ -4,6 +4,13 @@ import Checkbox from './reusables/Checkbox';
 class FontFilter extends React.Component{
 	constructor(props){
 		super(props);
+		this.filters = [
+			{attr: {name: '', value: ''}, label: 'Serif'},
+			{attr: {name: '', value: ''}, label: 'Sans Serif'},
+			{attr: {name: '', value: ''}, label: 'Monospace'},
+			{attr: {name: '', value: ''}, label: 'Script'},
+			{attr: {name: '', value: ''}, label: 'Display'},
+		];
 	}
 
 	render(){
@@ -15,15 +22,11 @@ class FontFilter extends React.Component{
 			    >
 			       &times;
 			    </button>
-			    <Checkbox
-			    	cbData = {[
-			    		{name: '', value: '', label: 'Serif'},
-			    		{name: '', value: '', label: 'Sans Serif'},
-			    		{name: '', value: '', label: 'Monospace'},
-			    		{name: '', value: '', label: 'Script'},
-			    		{name: '', value: '', label: 'Display'},
-			    	]}
-			    />
+			    {
+			    	this.filters.map((filter, idx) => (
+			    	<Checkbox key={idx} attr = {filter.attr} label = {filter.label} />
+			    	))
+			    }
 			</section>
 			</>
 		);

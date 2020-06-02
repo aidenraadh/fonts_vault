@@ -18,20 +18,13 @@ class TestController extends Controller
         // else{
         //     return 'false';
         // }
-        Auth::guard('admins')->logout();
+        //Auth::guard('admins')->logout();
         //return $request->path();
+
+        return view('test_view');
     }
 
-    public function testpost(Request $request, Fonts $Fonts){
-    	$v = Validator::make($request->all(),[
-    		'font_id' => ['bail', 'required', 'integer', 'exists:fonts_files,font_id']
-    	]);
-
-    	if($v->fails()){
-    		return 'noooo';
-    	}
-
-    	return json_encode($Fonts->getFontFamily($request->font_id), true);
+    public function testpost(Request $request){
     }    
 }
 

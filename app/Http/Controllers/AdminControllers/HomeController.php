@@ -28,13 +28,14 @@ class HomeController extends Controller
         return view(
             'admin_views.home',
             [
-                'fonts' => json_encode(app()->make('App\Admin\AdminPanel')->getFonts(),true),
+                'fonts' => json_encode(app()->make('App\Admin\AdminCRUD')->getFonts(),true),
                 'AppURLs' => json_encode([
                     'domain' => config('app.url'),
                     'images' => asset('images').'/',
                     'icons' => asset('images/icons').'/',
                     'storageLink' => asset('storage/fonts').'/',
                     'getFontFamilyURL' => route('getFontFamily'),
+                    'deleteFontsURL' => config('app.url').'admin/fonts/delete',
                 ], true),
             ]
         );

@@ -1,13 +1,15 @@
 import React from 'react';
 
 import Header from './reusables/Header.js';
-import Modal from './reusables/Modal.js';
+import {Modal_1} from './reusables/Modal.js';
 import {getFontFace} from './reusables/FontFileParsers.js';
 import {AJAXPostRequest} from './reusables/AJAXRequest.js';
 
 import FontFilter from './FontFilter.js';
 import FontConfig from './FontConfig.js';
 import FontDisplay from './FontDisplay.js';
+import DisplaySelectedFam from './DisplaySelectedFam.js';
+import Button_1 from './reusables/Buttons.js';
 
 const fontFaces = document.getElementById('fontFaces');
 const selectedFamFontFaces = document.getElementById('selectedFamFontFaces');
@@ -20,20 +22,6 @@ const generateFontFaces = function(filteredFonts, storageLink){
 	return rules;
 }
 
-function DisplaySelectedFam(props){
-	return (
-	<>
-	{(
-		props.selectedFamily ? 
-			props.selectedFamily.map((font, idx) => (
-				<div key={idx}>{font.file_name}</div>
-			)) : ''
-	)}
-	</>
-	//
-	);
-}
-
 class App extends React.Component{
 	constructor(props){
 		super(props);
@@ -41,7 +29,10 @@ class App extends React.Component{
 		this.state = {
 			filteredFonts: this.props.filteredFonts,
 
-			selectedFamily: null,
+			selectedFamily: {
+				family_name: null,
+				font_files: null
+			},
 
 			board: 'Valar Morghulis',
 
@@ -53,7 +44,9 @@ class App extends React.Component{
 			},
 
 			fontFilterShown: false,
-			toggleModal: null,
+			toggleModal: {
+				selectedFamily: null,
+			},
 		};
 
 		fontFaces.innerHTML += generateFontFaces(this.state.filteredFonts, this.props.AppURLs.storageLink);
@@ -63,7 +56,7 @@ class App extends React.Component{
 		this.configureFont = this.configureFont.bind(this);
 		this.writeText = this.writeText.bind(this);
 		this.toggleFontFilter = this.toggleFontFilter.bind(this);
-		this.modalCallback = this.modalCallback.bind(this);
+		this.getToggleModal = this.getToggleModal.bind(this);
 
 	}
 
@@ -87,7 +80,10 @@ class App extends React.Component{
 				selectedFamFontFaces.innerHTML = rules;
 
 				callingComponent.setState({
-					selectedFamily: font_files,
+					selectedFamily: {
+						family_name: family_name,
+						font_files: font_files
+					},
 				});				
 			},
 			this
@@ -117,16 +113,22 @@ class App extends React.Component{
 		}));
 	}
 
-	modalCallback(toggleModalFunc){
-		this.setState({
-			toggleModal: toggleModalFunc
-		});
+	getToggleModal(modalid, toggleModalFunc){
+
+		this.setState(function(state){
+			let newToggleMdl = {...state.toggleModal};
+			Object.keys(newToggleMdl).forEach((key) => {
+				if(key === modalid){
+					newToggleMdl[modalid] = toggleModalFunc;
+				}
+			});
+			return {toggleModal: newToggleMdl};
+		});		
 	}
 
 	componentDidUpdate(prevProps, prevState){
 		if(this.state.selectedFamily !== prevState.selectedFamily){
-			console.log(this.state.selectedFamily);
-			this.state.toggleModal(true);
+			this.state.toggleModal.selectedFamily(true);
 		}
 	}
 
@@ -139,11 +141,12 @@ class App extends React.Component{
 						fontFilterShown = {this.state.fontFilterShown}
 					/>
 
-					headerWidgetBtn =
-					<button className="btn" aria-describedby="Open"
-					aria-label="FontFilter" type="button" onClick={this.toggleFontFilter}>
-			        	<span className="sprite"></span>
-			        </button>
+					headerWidgetBtn = <Button_1
+						tagname = {'button'} data = {{btnIcon: 1}}
+						events = {{
+							onClick: this.toggleFontFilter,
+						}}
+					/>
 
 					subHeader = {{
 						leftCol: <FontConfig
@@ -163,12 +166,15 @@ class App extends React.Component{
 					board = {this.state.board}
 				/>
 
-				<Modal
-					heading = {'leehoo'}
+				<Modal_1
+					modalid = {'selectedFamily'}
+					heading = {this.state.selectedFamily.family_name}
 					body = <DisplaySelectedFam
-						selectedFamily = {this.state.selectedFamily}
+						font_files = {this.state.selectedFamily.font_files}
+						fontsDir = {this.props.AppURLs.storageLink+this.state.selectedFamily.family_name}
+						board = {this.state.board}
 					/>
-					modalCallback = {this.modalCallback}
+					getToggleModal = {this.getToggleModal}
 				/>			
 			</>
 			//

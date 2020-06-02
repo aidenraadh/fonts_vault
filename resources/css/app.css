@@ -88,6 +88,28 @@ input:focus {
 	padding: 1.4rem 2.2rem;
 }
 
+.btn_1{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	width: 3rem; height: 3rem;
+	border: 4px;
+	transition: background-color 0.3s ease;	
+}
+
+.btn_1:hover{
+	background-color: rgba(77, 89, 149, 0.06);
+}
+
+.btn_1 .sprite{
+	display: block;
+	width: 70%; height: 70%;
+	background: url('../images/icons/btn_1_sprite.png') no-repeat scroll 0 0;
+	background-size: auto 100%;
+}
+
+
 .section_1{
   width: 90%;
   margin: 0 auto;
@@ -162,7 +184,7 @@ input:focus {
 
 .checkmark:after {
   content: "";
-  display: none; /* hide the checkmark if checkbox is not checked */
+  display: block; /* hide the checkmark if checkbox is not checked */
   position: absolute;
   left: 35%; top: 15%; /* changealbe -- adjust the position of checkmark againts checkbox */
   width: 18%; height: 40%; /* changealbe -- the dimension of checkmark */
@@ -170,12 +192,14 @@ input:focus {
   border-color: #5d78ff; /* changealbe -- change the checkmark color */
   border-width: 0 0.25rem 0.25rem 0; /* changealbe -- the boldness of checkmark */
   transform: rotate(45deg); /* changealbe -- rotate the checkmark to appear properly */
+  opacity: 0;
+  transition: opacity 0.3s;
 }
 
 
 /* Show the checkmark when checked */
 .cb input:checked ~ .checkmark:after {
-  display: block;
+  opacity: 1;
 }
 
 
@@ -206,25 +230,15 @@ input:focus {
 	border-top: 1px solid #EFF0F6;
 }
 
-#Header .btn{
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;	
-	border: 4px;
+#Header .btn_1{
 	width: 4.4rem;
 	height: 4.4rem;
-	transition: background-color 0.3s ease;	
-}
-
-#Header .btn:hover{
-	background-color: rgba(77, 89, 149, 0.06);
 }
 
 #Header .sprite{
 	width: 2.8rem;
 	height: 2.8rem;
-	background: url('../images/icons/Asset 146.png') no-repeat scroll 0 0;
+	background: url('../images/icons/btn_1_sprite.png') no-repeat scroll 0 0;
 	background-size: auto 100%;
 }
 
@@ -245,6 +259,10 @@ input:focus {
 
 #navbarLinks ul{
 	list-style-type: none;
+}
+
+#navbarLinks li{
+	margin-left: 1rem;
 }
 
 #navbarLinks a{
@@ -283,10 +301,8 @@ input:focus {
 	margin: 0 1.8rem 2.8rem;
 }
 
-#FontConfig .Input_1{
-}
-
-#FontConfig .input_group{
+#FontConfig .input_group, #FontConfig .Input_1{
+	margin-right: 2rem;
 }
 
 #FontConfig .input_group .sprite{
@@ -300,55 +316,149 @@ input:focus {
 	width: 10rem;
 }
 
-.modal{
+.modal_1{
 	position: fixed;
 	top: 0; left: 0;
 	z-index: 99;
-	display: none;
-	flex-direction: row;
-	justify-content: center;
-	align-items: center;
 	width: 100vw;
 	height: 100vh;
-	transition: background-color 0.3s ease;
+	visibility: hidden;
 }
 
-.modal.shown{
+.modal_1.shown{
+	visibility: visible;
+}
+
+.modal_1 .overlay{
+	position: absolute;
+	top: 0; left: 0;
 	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;	
+	width: 100%; height: 100%;
+	opacity: 0;
+	background-color: rgba(0,0,0,0.2);
+	transition: opacity 0.3s;
 }
 
-.modal.shown.darkBG{
-	background-color: rgba(0,0,0,0.3);
+.modal_1.shown .overlay{
+	opacity: 1;
 }
 
-.modal .content{
+.modal_1 .content{
+	z-index: 1;
 	border-radius: 4px;
 	opacity: 0;
 	color: #6C7293;
 	background-color: #FFFFFF;
-	transition: opacity 0.3s ease;
+	transition: opacity 0.3s;
 }
 
-.modal .content.shown{
+.modal_1 .content.shown{
 	opacity: 1;
 }
 
-.modal .header{
+.modal_1 .header{
 	border-bottom: 1px solid #ebedf2;
 }
 
-.modal h6{
+.modal_1 h6{
 	font-size: 2.4rem;
 	font-family: 'Roboto', sans-serif;
 	font-weight: 500;
 }
 
-.modal .body{
+.modal_1 .body{
 	width: 60rem;
 	min-height: 20rem;
 	border-bottom: 1px solid #ebedf2;
 	font-family: 'Roboto', sans-serif;
 	font-size: 1.55rem;
+}
+
+.modal_2{
+	position: fixed;
+	top: 0; left: 0;
+	z-index: 99;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	width: 100vw;
+	height: 100vh;
+	visibility: hidden;
+}
+
+.modal_2.shown{
+	visibility: visible;
+}
+
+.modal_2 .content{
+	max-width: 48rem;
+	border-radius: 4px;
+	padding: 1.6rem 2rem;
+	font-family: 'Roboto', sans-serif;
+	font-size: 1.6rem;
+	color: #FFFFFF;
+	opacity: 0;
+	background-color: rgba(27,27,40,0.8);
+	transition: opacity 0.3s;
+}
+
+.modal_2.shown .content{
+	opacity: 1;
+}
+
+.modal_2 .clsBtn{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	width: 2.8rem; height: 2.8rem;
+	border-radius: 100%;
+	border: 2px solid #FFFFFF;
+	margin-bottom: 1.6rem;
+	font-size: 2rem;
+	color: #FFFFFF;
+	float: right;
+}
+
+.modal_2 .body{
+	clear: both;
+}
+
+#selectedFamily.modal_1 .body{
+	width: 80rem;
+	max-height: 70vh;
+	overflow-y: auto;
+}
+
+.selectedFamDisplay{
+	margin-bottom: 3rem;
+}
+
+.selectedFamDisplay .displayHeader{
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 1rem 0;
+	margin-bottom: 1rem;
+	border-bottom: 1px solid #e2e5ec;
+}
+
+.selectedFamDisplay h6{
+	font-size: 1.6rem;
+	font-weight: normal;
+	text-transform: capitalize;
+}
+
+.selectedFamDisplay .board{
+	font-size: 2.6rem;
+}
+
+.selectedFamDisplay .btn_1{
+	width: 3.6rem; height: 3.6rem;
 }
 
 .cards_container{
@@ -456,6 +566,12 @@ input:focus {
 @media only screen and (max-width: 1280px) {
 	html{
 		font-size: calc(10px -  ( (1280px - 100vw) *  0.00138 ) );
+	}
+}
+
+@media only screen and (max-width: 800px) {
+	#selectedFamily.modal_1 .body{
+		width: 90vw;
 	}
 }
 

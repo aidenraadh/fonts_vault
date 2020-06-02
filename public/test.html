@@ -1,34 +1,36 @@
+
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>asd</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="css/app.css">
+    <meta name="csrf-token" content="ywX4JyrXlN4h6XHSNe8Rmq2ftv27nYJQgBV02Djw">
+    <title>Admin - Home</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">    
+    <link rel="stylesheet" type="text/css" href="http://localhost/fonts_vault/public/css/app.css">
     <style type="text/css" id="fontFaces"></style>
     <style type="text/css" id="selectedFamFontFaces"></style>
-    <style type="text/css">     
-    </style>
 </head>
 
 <body>
 
-<div id="App" class="App">
 
-<section class="modal shown darkBG">
-  <div class="content shown">
-    <div class="header section_padding cols_container space_between">
-      <h6>Heading</h6>
-      <button type="button">&times;</button>
+<section class="modal_2 shown">
+  <div class="content">
+    <button class="clsBtn" type="button">&times;</button>
+    <div class="body">
+      <div style="text-align: center;">
+        Are you sure want to delete the following fonts?
+      </div>
     </div>
-    <div class="body section_padding">
-    </div>
-    <div class="footer section_padding"></div>
   </div>
 </section>
 
-</div>
+<script type="application/json" id="fonts">[{"id":1,"font_name":"Montserrat","typeface":"sans serif","default_file":"Montserrat-Regular.ttf","created_at":"2020-05-20 22:22:29","updated_at":"2020-05-20 22:22:29"},{"id":2,"font_name":"Akzidenz","typeface":"sans serif","default_file":"Akzidenz-grotesk-light.ttf","created_at":"2020-05-25 14:41:03","updated_at":"2020-05-25 14:41:03"},{"id":3,"font_name":"Fira Sans","typeface":"sans serif","default_file":"FiraSans-Medium.otf","created_at":"2020-05-25 15:18:33","updated_at":"2020-05-25 15:18:33"},{"id":4,"font_name":"Playfair Display","typeface":"serif","default_file":"PlayfairDisplay-Regular.otf","created_at":"2020-05-25 15:19:10","updated_at":"2020-05-25 15:19:10"},{"id":5,"font_name":"Lobster","typeface":"script","default_file":"Lobster_1.3.otf","created_at":"2020-05-25 15:19:36","updated_at":"2020-05-25 15:19:36"},{"id":6,"font_name":"Roboto","typeface":"sans serif","default_file":"RobotoCondensed-Regular.ttf","created_at":"2020-05-25 15:20:25","updated_at":"2020-05-25 15:20:25"},{"id":7,"font_name":"Great Vibes","typeface":"script","default_file":"GreatVibes-Regular.otf","created_at":"2020-05-25 15:20:45","updated_at":"2020-05-25 15:20:45"}]</script>
+<script type="application/json" id="AppURLs">{"domain":"http:\/\/localhost\/fonts_vault\/public\/","images":"http:\/\/localhost\/fonts_vault\/public\/images\/","icons":"http:\/\/localhost\/fonts_vault\/public\/images\/icons\/","storageLink":"http:\/\/localhost\/fonts_vault\/public\/storage\/fonts\/","getFontFamilyURL":"http:\/\/localhost\/fonts_vault\/public\/fonts\/getFontFamily"}</script>
 
+<script type="text/javascript" src="http://localhost/fonts_vault/public/js/app.js" defer></script>
 </body>
+
 </html>
