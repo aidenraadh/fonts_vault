@@ -15,9 +15,10 @@ class CreateFontsTable extends Migration
     {
         Schema::create('fonts', function (Blueprint $table) {
             $table->id();
-            $table->string('font_name', 50)->unique();
+            $table->string('family_name', 50)->unique();
             $table->string('typeface', 20);
             $table->string('default_file', 255);
+            $table->unsignedTinyInteger('num_of_files');
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')
             ->default(DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));

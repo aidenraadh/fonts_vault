@@ -29,15 +29,20 @@ Route::post('fonts/getFontFamily', 'FontsController@getFontFamily')->name('getFo
 // Route::get('/home', 'HomeController@index')->name('home');
 
 Route::prefix('admin')->group(function () {
-	Route::get('home', 'AdminControllers\AdminPanelController@index')->name('admin/home');
+	Route::get('home', 'AdminControllers\AdminPanelController@index')
+	->middleware('auth:admins')->name('admin/home');
 
 	Route::get('fonts/upload', 'AdminControllers\AdminPanelController@uploadFont')
 	->middleware('auth:admins');
 	Route::post('fonts/store', 'AdminControllers\AdminPanelController@storeFont')
 	->middleware('auth:admins');
+
 	Route::post('fonts/delete', 'AdminControllers\AdminPanelController@deleteFonts')
 	->middleware('auth:admins');
-	Route::get('fonts/update', 'AdminControllers\AdminPanelController@updateFont')
+	
+	Route::get('fonts/edit/{font_id}', 'AdminControllers\AdminPanelController@editFont')
+	->middleware('auth:admins');	
+	Route::post('fonts/update', 'AdminControllers\AdminPanelController@updateFont')
 	->middleware('auth:admins');
 
 	Route::get('login', 'AdminControllers\Auth\LoginController@showLoginForm')->name('admin/login');

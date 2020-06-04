@@ -11,20 +11,11 @@ use App\Fonts;
 class TestController extends Controller
 {
     public function index(Request $request, Fonts $Fonts){
-    	//return view('test_view', ['x' => asset('storage/fonts').'/']);
-        // if($request->is('test')){
-        //     return 'its truee';
-        // }
-        // else{
-        //     return 'false';
-        // }
-        //Auth::guard('admins')->logout();
-        //return $request->path();
-
-        return view('test_view');
+    	return view('test_view');
     }
 
     public function testpost(Request $request){
+    	var_dump($request->default_file);
     }    
 }
 

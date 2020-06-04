@@ -6,7 +6,7 @@
 
 <div id="App" class="App"></div>
 
-<script type="application/json" id="filteredFonts">
+<script type="application/json" id="displayedFonts">
 	<?= $fonts ?>
 </script>
 

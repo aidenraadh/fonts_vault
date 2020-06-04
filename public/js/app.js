@@ -65640,6 +65640,55 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _AdminViews_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./AdminViews.js */ "./resources/js/components/AdminViews.js");
+
+
+/*
+|--------------------------------------------------------------------------
+| AdminApp
+|--------------------------------------------------------------------------
+|
+| This component will serve the views for admin according to 'data-view-name'
+| attribute of #AdminApp element.
+|
+*/
+
+var AppURLs = JSON.parse(document.getElementById('AppURLs').innerHTML);
+
+function AdminApp(props) {
+  var viewName = props.viewName;
+
+  if (viewName === 'home') {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_AdminViews_js__WEBPACK_IMPORTED_MODULE_1__["HomeView"], {
+      fonts: JSON.parse(document.getElementById('fonts').innerHTML),
+      AppURLs: AppURLs
+    });
+  } else if (viewName === 'edit_font') {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_AdminViews_js__WEBPACK_IMPORTED_MODULE_1__["EditFontView"], {
+      font: JSON.parse(document.getElementById('font').innerHTML),
+      typefaces: JSON.parse(document.getElementById('typefaces').innerHTML),
+      AppURLs: AppURLs
+    });
+  }
+}
+
+/* harmony default export */ __webpack_exports__["default"] = (AdminApp);
+
+/***/ }),
+
+/***/ "./resources/js/components/AdminViews.js":
+/*!***********************************************!*\
+  !*** ./resources/js/components/AdminViews.js ***!
+  \***********************************************/
+/*! exports provided: HomeView, EditFontView */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "HomeView", function() { return HomeView; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "EditFontView", function() { return EditFontView; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _reusables_Header_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./reusables/Header.js */ "./resources/js/components/reusables/Header.js");
 /* harmony import */ var _reusables_Checkbox_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./reusables/Checkbox.js */ "./resources/js/components/reusables/Checkbox.js");
 /* harmony import */ var _reusables_Table_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./reusables/Table.js */ "./resources/js/components/reusables/Table.js");
@@ -65679,16 +65728,21 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
+/*
+|
+| Below are all view components for admin
+|
+*/
 
-var AdminApp = /*#__PURE__*/function (_React$Component) {
-  _inherits(AdminApp, _React$Component);
+var HomeView = /*#__PURE__*/function (_React$Component) {
+  _inherits(HomeView, _React$Component);
 
-  var _super = _createSuper(AdminApp);
+  var _super = _createSuper(HomeView);
 
-  function AdminApp(props) {
+  function HomeView(props) {
     var _this;
 
-    _classCallCheck(this, AdminApp);
+    _classCallCheck(this, HomeView);
 
     _this = _super.call(this, props);
     _this.state = {
@@ -65710,7 +65764,7 @@ var AdminApp = /*#__PURE__*/function (_React$Component) {
           value: font.id,
           form: 'deleteFonts'
         }
-      }), font.font_name, '12', font.created_at, font.updated_at, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+      }), font.family_name, font.num_of_files, font.created_at, font.updated_at, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
         href: "#"
       }, "Edit"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
         href: "#"
@@ -65721,7 +65775,7 @@ var AdminApp = /*#__PURE__*/function (_React$Component) {
     return _this;
   }
 
-  _createClass(AdminApp, [{
+  _createClass(HomeView, [{
     key: "getToggleModal",
     value: function getToggleModal(modalid, toggleModalFunc) {
       this.setState(function (state) {
@@ -65788,17 +65842,122 @@ var AdminApp = /*#__PURE__*/function (_React$Component) {
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_reusables_Modal_js__WEBPACK_IMPORTED_MODULE_4__["Modal_1"], {
         modalid: 'uploadFontMdl',
         heading: 'test',
-        body: 'test',
+        body: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+          method: "POST",
+          action: this.props.AppURLs.domain + 'admin/fonts/store',
+          encType: "multipart/form-data"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_reusables_LARAVEL_CSRF_TOKEN_js__WEBPACK_IMPORTED_MODULE_5__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+          type: "text",
+          name: "family_name",
+          placeholder: "family_name",
+          required: true
+        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
+          name: "typeface",
+          required: true
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+          value: "serif"
+        }, "serif"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+          value: "sans serif"
+        }, "sans serif"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+          value: "monospace"
+        }, "monospace"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+          value: "display"
+        }, "display"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+          value: "script"
+        }, "script")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+          type: "file",
+          name: "font_files[]",
+          multiple: true,
+          required: true
+        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+          type: "submit"
+        }, "SUBMIT")),
         getToggleModal: this.getToggleModal
       })) //
       ;
     }
   }]);
 
-  return AdminApp;
+  return HomeView;
 }(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+var EditFontView = /*#__PURE__*/function (_React$Component2) {
+  _inherits(EditFontView, _React$Component2);
 
-/* harmony default export */ __webpack_exports__["default"] = (AdminApp);
+  var _super2 = _createSuper(EditFontView);
+
+  function EditFontView(props) {
+    var _this3;
+
+    _classCallCheck(this, EditFontView);
+
+    _this3 = _super2.call(this, props);
+    _this3.font_info = _this3.props.font.font_info;
+    _this3.font_files = _this3.props.font.font_files;
+    return _this3;
+  }
+
+  _createClass(EditFontView, [{
+    key: "render",
+    value: function render() {
+      var _this4 = this;
+
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        form: "updateFont",
+        type: "text",
+        name: "family_name",
+        defaultValue: this.font_info.family_name,
+        required: true
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
+        form: "updateFont",
+        name: "typeface",
+        defaultValue: this.font_info.typeface,
+        required: true
+      }, this.props.typefaces.map(function (typeface, idx) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+          key: idx,
+          value: typeface
+        }, typeface);
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), this.font_files.map(function (file, idx) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          key: idx
+        }, file.file_name, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+          form: "updateFont",
+          type: "file",
+          name: 'updatedFiles[][' + file.file_name + ']'
+        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), file.file_name === _this4.font_info.default_file ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+          form: "updateFont",
+          type: "radio",
+          name: "default_file",
+          value: file.file_name,
+          defaultChecked: true,
+          required: true
+        }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+          form: "updateFont",
+          type: "radio",
+          name: "default_file",
+          value: file.file_name,
+          required: true
+        }), "default file", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+          form: "updateFont",
+          type: "checkbox",
+          name: "deleted_files[]",
+          value: file.file_name
+        }), "delete file", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null));
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+        id: "updateFont",
+        method: "POST",
+        action: this.props.AppURLs.updateFontURL
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_reusables_LARAVEL_CSRF_TOKEN_js__WEBPACK_IMPORTED_MODULE_5__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        type: "submit"
+      }, "update")));
+    }
+  }]);
+
+  return EditFontView;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+/*
+input file, the value is the family name of the font
+*/
 
 /***/ }),
 
@@ -65863,10 +66022,10 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 var fontFaces = document.getElementById('fontFaces');
 var selectedFamFontFaces = document.getElementById('selectedFamFontFaces');
 
-var generateFontFaces = function generateFontFaces(filteredFonts, storageLink) {
+var generateFontFaces = function generateFontFaces(displayedFonts, storageLink) {
   var rules = '';
-  filteredFonts.forEach(function (filteredFont) {
-    rules += Object(_reusables_FontFileParsers_js__WEBPACK_IMPORTED_MODULE_3__["getFontFace"])(filteredFont.font_name, filteredFont.default_file, storageLink);
+  displayedFonts.forEach(function (displayedFont) {
+    rules += Object(_reusables_FontFileParsers_js__WEBPACK_IMPORTED_MODULE_3__["getFontFace"])(displayedFont.font_name, displayedFont.default_file, storageLink);
   });
   return rules;
 };
@@ -65883,7 +66042,7 @@ var App = /*#__PURE__*/function (_React$Component) {
 
     _this = _super.call(this, props);
     _this.state = {
-      filteredFonts: _this.props.filteredFonts,
+      displayedFonts: _this.props.displayedFonts,
       selectedFamily: {
         family_name: null,
         font_files: null
@@ -65900,8 +66059,8 @@ var App = /*#__PURE__*/function (_React$Component) {
         selectedFamily: null
       }
     };
-    fontFaces.innerHTML += generateFontFaces(_this.state.filteredFonts, _this.props.AppURLs.storageLink);
-    _this.changefilteredFonts = _this.changefilteredFonts.bind(_assertThisInitialized(_this));
+    fontFaces.innerHTML += generateFontFaces(_this.state.displayedFonts, _this.props.AppURLs.storageLink);
+    _this.changeDisplayedFonts = _this.changeDisplayedFonts.bind(_assertThisInitialized(_this));
     _this.updateSelectedFam = _this.updateSelectedFam.bind(_assertThisInitialized(_this));
     _this.configureFont = _this.configureFont.bind(_assertThisInitialized(_this));
     _this.writeText = _this.writeText.bind(_assertThisInitialized(_this));
@@ -65911,8 +66070,8 @@ var App = /*#__PURE__*/function (_React$Component) {
   }
 
   _createClass(App, [{
-    key: "changefilteredFonts",
-    value: function changefilteredFonts() {
+    key: "changeDisplayedFonts",
+    value: function changeDisplayedFonts() {
       ;
     }
   }, {
@@ -66016,7 +66175,7 @@ var App = /*#__PURE__*/function (_React$Component) {
         },
         AppURLs: this.props.AppURLs
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_FontDisplay_js__WEBPACK_IMPORTED_MODULE_7__["default"], {
-        filteredFonts: this.state.filteredFonts,
+        displayedFonts: this.state.displayedFonts,
         updateSelectedFam: this.updateSelectedFam,
         fontConfig: this.state.fontConfig,
         board: this.state.board
@@ -66326,26 +66485,26 @@ var FontDisplay = /*#__PURE__*/function (_React$Component) {
         id: "FontDisplay"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "cards_container"
-      }, this.props.filteredFonts.map(function (filteredFont, idx) {
+      }, this.props.displayedFonts.map(function (displayedFont, idx) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("article", {
           className: "card",
           key: idx,
           onClick: function onClick() {
-            return _this.props.updateSelectedFam(filteredFont.id, filteredFont.font_name);
+            return _this.props.updateSelectedFam(displayedFont.id, displayedFont.family_name);
           }
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "head"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
           className: "fontName"
-        }, filteredFont.font_name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        }, displayedFont.family_name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
           className: "stylesNumber"
-        }, "12 styles")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        }, displayedFont.num_of_files, " Styles")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "body",
           style: _this.props.fontConfig
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "board",
           style: {
-            fontFamily: Object(_reusables_FontFileParsers_js__WEBPACK_IMPORTED_MODULE_1__["getFontFamValue"])(filteredFont.default_file)
+            fontFamily: Object(_reusables_FontFileParsers_js__WEBPACK_IMPORTED_MODULE_1__["getFontFamValue"])(displayedFont.default_file)
           }
         }, _this.props.board)));
       })))) //
@@ -66494,13 +66653,12 @@ var AppURLs = JSON.parse(document.getElementById('AppURLs').innerHTML);
 
 if (document.getElementById('App')) {
   react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_App_js__WEBPACK_IMPORTED_MODULE_2__["default"], {
-    filteredFonts: JSON.parse(document.getElementById('filteredFonts').innerHTML),
+    displayedFonts: JSON.parse(document.getElementById('displayedFonts').innerHTML),
     AppURLs: AppURLs
   }), document.getElementById('App'));
 } else if (document.getElementById('AdminApp')) {
   react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_AdminApp_js__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    fonts: JSON.parse(document.getElementById('fonts').innerHTML),
-    AppURLs: AppURLs
+    viewName: document.getElementById('AdminApp').getAttribute('data-view-name')
   }), document.getElementById('AdminApp'));
 }
 

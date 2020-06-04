@@ -5,6 +5,8 @@ namespace App\Http\Controllers\AdminControllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
+use App\Rules\FontFileRule;
 use Illuminate\Support\Facades\Auth;
 
 class AdminPanelController extends Controller
@@ -27,13 +29,9 @@ class AdminPanelController extends Controller
         );
     }
 
-	public function uploadFont(){
-		return view('admin_views.upload_font');
-	}
-
-	public function storeFont(){
-/*    	$v = Validator::make($request->all(), [
-            'font_name' => ['bail', 'required', 'string', 'max:50'],
+	public function storeFont(Request $request){
+    	$v = Validator::make($request->all(), [
+            'family_name' => ['bail', 'required', 'string', 'max:50'],
             'typeface' => ['bail', 'required', 'string', 'max:50', Rule::in(config('app.typefaces'))],
     		'font_files' => ['bail', 'required', 'array'],
     		'font_files.*' => ['bail', 'required', 'file', new FontFileRule],
@@ -43,10 +41,14 @@ class AdminPanelController extends Controller
     		return $v->errors()->all();
     	}
 
+        //return $request->family_name;
+
         app()->make('App\Admin\AdminCRUD')->storeFonts(
-            ['font_name' => $request->font_name, 'typeface' => $request->typeface],
+            ['family_name' => $request->family_name, 'typeface' => $request->typeface],
             $request->font_files
-        );*/
+        );
+
+        return redirect()->back();
 	}
 
 
@@ -70,9 +72,31 @@ class AdminPanelController extends Controller
         }
 
         app()->make('App\Admin\AdminCRUD')->deleteFonts($request->selectedFams);
+
+        return redirect()->back();
 	}
 
-	public function updateFont(){
-		return 'asd';
+    public function editFont(Request $request, $font_id){
+        // Check if the font exists
+        $v = Validator::make(['id' => $font_id], [
+            'id' => ['bail', 'required', 'integer', 'exists:fonts,id'],
+        ]);
+
+        if($v->fails()){
+            abort(404);
+        }
+
+        return view('admin_views.edit_font', [
+            'font' => json_encode(app()->make('App\Admin\AdminCRUD')->getFontsForEdit($font_id), true),
+            'typefaces' => json_encode(config('app.typefaces'), true),
+            'AppURLs' => json_encode([
+                'domain' => config('app.url'),
+                'updateFontURL' => config('app.url').'admin/fonts/update',
+            ], true)
+        ]);
+    }    
+
+	public function updateFont(Request $request){
+        dd($request->all());
 	}		
 }

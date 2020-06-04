@@ -4,7 +4,7 @@
 
 @section('content')
 
-<div id="AdminApp">
+<div id="AdminApp" data-view-name="home">
 	
 </div>
 

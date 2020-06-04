@@ -8,7 +8,7 @@ const AppURLs = JSON.parse(document.getElementById('AppURLs').innerHTML);
 if(document.getElementById('App')){
 	ReactDOM.render(
 		<App
-			filteredFonts={JSON.parse(document.getElementById('filteredFonts').innerHTML)}
+			displayedFonts={JSON.parse(document.getElementById('displayedFonts').innerHTML)}
 			AppURLs = {AppURLs}
 		/>,
 		document.getElementById('App')
@@ -18,8 +18,7 @@ if(document.getElementById('App')){
 else if(document.getElementById('AdminApp')){
 	ReactDOM.render(
 		<AdminApp
-			fonts = {JSON.parse(document.getElementById('fonts').innerHTML)}
-			AppURLs = {AppURLs}
+			viewName = {document.getElementById('AdminApp').getAttribute('data-view-name')}
 		/>,
 		document.getElementById('AdminApp')
 	);

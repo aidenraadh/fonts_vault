@@ -8,7 +8,7 @@ class Fonts
 
 	public function getAllFonts(){
 		return DB::select(
-			'SELECT id, font_name, default_file FROM fonts'
+			'SELECT id, family_name, default_file, num_of_files FROM fonts'
 		);
 	}
 

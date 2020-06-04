@@ -14,10 +14,10 @@ import Button_1 from './reusables/Buttons.js';
 const fontFaces = document.getElementById('fontFaces');
 const selectedFamFontFaces = document.getElementById('selectedFamFontFaces');
 
-const generateFontFaces = function(filteredFonts, storageLink){
+const generateFontFaces = function(displayedFonts, storageLink){
 	let rules = '';
-	filteredFonts.forEach((filteredFont) => {
-		rules += getFontFace(filteredFont.font_name, filteredFont.default_file, storageLink);
+	displayedFonts.forEach((displayedFont) => {
+		rules += getFontFace(displayedFont.font_name, displayedFont.default_file, storageLink);
 	});
 	return rules;
 }
@@ -27,7 +27,7 @@ class App extends React.Component{
 		super(props);
 
 		this.state = {
-			filteredFonts: this.props.filteredFonts,
+			displayedFonts: this.props.displayedFonts,
 
 			selectedFamily: {
 				family_name: null,
@@ -49,9 +49,9 @@ class App extends React.Component{
 			},
 		};
 
-		fontFaces.innerHTML += generateFontFaces(this.state.filteredFonts, this.props.AppURLs.storageLink);
+		fontFaces.innerHTML += generateFontFaces(this.state.displayedFonts, this.props.AppURLs.storageLink);
 
-		this.changefilteredFonts = this.changefilteredFonts.bind(this);
+		this.changeDisplayedFonts = this.changeDisplayedFonts.bind(this);
 		this.updateSelectedFam = this.updateSelectedFam.bind(this);
 		this.configureFont = this.configureFont.bind(this);
 		this.writeText = this.writeText.bind(this);
@@ -60,7 +60,7 @@ class App extends React.Component{
 
 	}
 
-	changefilteredFonts(){
+	changeDisplayedFonts(){
 		;
 	}
 
@@ -160,7 +160,7 @@ class App extends React.Component{
 				/>
 
 				<FontDisplay
-					filteredFonts = {this.state.filteredFonts}
+					displayedFonts = {this.state.displayedFonts}
 					updateSelectedFam = {this.updateSelectedFam}
 					fontConfig = {this.state.fontConfig}
 					board = {this.state.board}

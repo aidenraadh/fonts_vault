@@ -12,16 +12,16 @@ class FontDisplay extends React.Component{
 			<section id="FontDisplay">
 				<div className="cards_container">
 					{
-					this.props.filteredFonts.map((filteredFont, idx) =>	
+					this.props.displayedFonts.map((displayedFont, idx) =>	
 					<article className="card" key={idx}
-						onClick={() => this.props.updateSelectedFam(filteredFont.id, filteredFont.font_name)}
+						onClick={() => this.props.updateSelectedFam(displayedFont.id, displayedFont.family_name)}
 					>
 						<div className="head">
-							<h6 className="fontName">{filteredFont.font_name}</h6>
-							<span className="stylesNumber">12 styles</span>
+							<h6 className="fontName">{displayedFont.family_name}</h6>
+							<span className="stylesNumber">{displayedFont.num_of_files} Styles</span>
 						</div>
 						<div className="body" style={this.props.fontConfig}>
-							<div className="board" style={{fontFamily: getFontFamValue(filteredFont.default_file)}}>
+							<div className="board" style={{fontFamily: getFontFamValue(displayedFont.default_file)}}>
 								{this.props.board}
 							</div>
 						</div>
