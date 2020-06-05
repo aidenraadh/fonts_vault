@@ -1,6 +1,6 @@
 import React from 'react';
 import Header from './reusables/Header.js';
-import Checkbox from './reusables/Checkbox.js';
+import {Checkbox, Select, Input_1} from './reusables/Forms.js';
 import Table from './reusables/Table.js';
 import {Modal_1,Modal_2} from './reusables/Modal.js';
 import {Button_2} from './reusables/Buttons.js';
@@ -181,24 +181,23 @@ export class EditFontView extends React.Component{
 		}
 	}
 
-	componentDidUpdate(){
-		console.log(this.state.addedFiles);
-	}
-
 	render(){
 		return (
 			<>
 			<section className="section_1">
-			<input type="text" name="family_name" defaultValue={this.font_info.family_name} required /><br/><br/>
-			<select name="typeface" defaultValue={this.font_info.typeface} required>
-			{this.props.typefaces.map((typeface, idx) => (
-				<option key={idx} value={typeface}>{typeface}</option>
-			))}
-			</select><br/><br/>
+			<Input_1 attr = {
+				{type:"text", name:"family_name", defaultValue: this.font_info.family_name, required: 'required'}
+			}/><br/><br/>
+			<Select
+				attr = {{name: 'typeface'}}
+				options = {this.props.typefaces.map((typeface) => (
+					{attr: {value: typeface}, optionText: typeface}
+				))}
+			/><br/><br/>	
 			<input form="updateFont" type="file" name="newFiles" multiple onChange={(e) => this.addFile(e)} />
 
 			{this.state.addedFiles.map((file_name, idx) => (
-				<section key={idx} id="FilesList" className="list_widget_1 cols_container space_between section_padding">
+				<section key={idx} className="FilesList list_widget_1 cols_container space_between section_padding">
 				  <div className="cols_container align_center">
 				    <div className="icon">
 				    	<span className="sprite" style={{backgroundPosition: '50% 0'}}></span>
@@ -232,7 +231,7 @@ export class EditFontView extends React.Component{
 			{this.font_files.map((file, idx) => {
 				if(!this.state.deletedFiles.includes(file.file_name)){
 					return (
-					<section key={idx} id="FilesList" className="list_widget_1 cols_container space_between section_padding">
+					<section key={idx} className="FilesList list_widget_1 cols_container space_between section_padding">
 					  <div className="cols_container align_center">
 					    <div className="icon">
 					    	<span className="sprite" style={{backgroundPosition: '0 0'}}></span>
@@ -267,7 +266,7 @@ export class EditFontView extends React.Component{
 			<hr/>
 
 			{this.state.deletedFiles.map((file_name, idx) => (
-				<section key={idx} id="FilesList" className="list_widget_1 cols_container space_between section_padding">
+				<section key={idx} className="FilesList list_widget_1 cols_container space_between section_padding">
 				  <div className="cols_container align_center">
 				    <div className="icon">
 				    	<span className="sprite" style={{backgroundPosition: '100% 0'}}></span>
@@ -311,46 +310,4 @@ export class EditFontView extends React.Component{
 
 /*
 input file, the value is the family name of the font
-*/
-/*
-{this.font_files.map((file, idx) => {
-	if(!this.state.deletedFiles.includes(file.file_name)){
-		return
-		<section key={idx} id="files" className="list_widget_1 cols_container space_between section_padding">
-		  <div className="cols_container align_center">
-		    <div className="icon">
-		    </div>
-		    <div className="text">
-		      <div className="main">{file.file_name}</div>
-		      <div className="sub">Test</div>
-		    </div>
-		  </div>
-		  <section className="cols_container center align_center">
-			<Button_2
-				tagname = {'button'}
-				text = {'Default'}
-				color = {'blue'}
-				isActive = {false}
-				attributes = {{type: 'submit', style: {marginLeft: '1.8rem'}}}
-			/>
-			<Button_2
-				tagname = {'button'}
-				text = {'Remove'}
-				color = {'red'}
-				isActive = {false}
-				attributes = {{type: 'submit', style: {marginLeft: '1.8rem'}}}
-				events = {{onClick:() => this.toggleDelFiles(true, file.file_name)}}
-			/>
-		  </section>
-		</section>					
-	}
-})}
-*/
-
-/*
-{this.font_files.map((file, idx) => {
-	if(!this.state.deletedFiles.includes(file.file_name)){
-		return <div key={idx} onClick={() => this.toggleDelFiles(true, file.file_name)}>{file.file_name}</div>
-	}
-})}
 */

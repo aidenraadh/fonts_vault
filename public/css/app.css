@@ -37,13 +37,14 @@ button{
 	background-color: transparent;
 	border: none;
 	cursor: pointer;
-}
-
-input{
 	outline: none;
 }
 
-input:focus {
+input, select{
+	outline: none;
+}
+
+input:focus, select:focus {
     outline-offset: 0;
 }
 
@@ -392,7 +393,7 @@ input:focus {
 	width: 10rem;
 }
 
-#FilesList .sprite{
+.FilesList .sprite{
 	position: absolute;
 	width: 100%;
 	height: 100%;
@@ -634,8 +635,24 @@ input:focus {
 }
 
 .input_group .form:focus{
+  font-size: 1.45rem;
+  color: #495057;	
   border-color: #9aabff;
 } 
+
+.Select{
+	padding: 0.8rem 1rem;
+	border: 1px solid #e2e5ec;
+	border-radius: 4px;
+	font-size: 1.45rem;
+	color: #495057;
+	transition: border-color 0.3s ease;
+}
+
+.Select:focus{
+	border-color: #9aabff;
+}
+
 
 #FontDisplay{
 	padding-top: 18rem;
@@ -666,7 +683,7 @@ input:focus {
 }
 
 @media only screen and (max-width: 500px) {
-	#FilesList .main, #FilesList .sub{
+	.FilesList .main, .FilesList .sub{
 		max-width: 16rem;
   		white-space: nowrap;
   		overflow: hidden;
