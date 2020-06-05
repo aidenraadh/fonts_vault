@@ -86,7 +86,7 @@ class AdminCRUD{
 	public function getFontsForEdit($font_id){
 		return [
 			'font_info' => DB::select(
-				'SELECT family_name, typeface, default_file FROM fonts WHERE id = ?',
+				'SELECT id, family_name, typeface, default_file FROM fonts WHERE id = ?',
 				[$font_id]
 			)[0],
 			'font_files' => DB::select(

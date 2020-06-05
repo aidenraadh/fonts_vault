@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use App\Rules\FontFileRule;
+use App\Rules\Uppercase;
+
 use Illuminate\Support\Facades\Auth;
 
 class AdminPanelController extends Controller
@@ -21,8 +23,6 @@ class AdminPanelController extends Controller
                     'domain' => config('app.url'),
                     'images' => asset('images').'/',
                     'icons' => asset('images/icons').'/',
-                    'storageLink' => asset('storage/fonts').'/',
-                    'getFontFamilyURL' => route('getFontFamily'),
                     'deleteFontsURL' => config('app.url').'admin/fonts/delete',
                 ], true),
             ]
@@ -32,7 +32,7 @@ class AdminPanelController extends Controller
 	public function storeFont(Request $request){
     	$v = Validator::make($request->all(), [
             'family_name' => ['bail', 'required', 'string', 'max:50'],
-            'typeface' => ['bail', 'required', 'string', 'max:50', Rule::in(config('app.typefaces'))],
+            'typeface' => ['bail', 'required', 'string', Rule::in(config('app.typefaces'))],
     		'font_files' => ['bail', 'required', 'array'],
     		'font_files.*' => ['bail', 'required', 'file', new FontFileRule],
     	]);
@@ -40,8 +40,6 @@ class AdminPanelController extends Controller
     	if($v->fails()){
     		return $v->errors()->all();
     	}
-
-        //return $request->family_name;
 
         app()->make('App\Admin\AdminCRUD')->storeFonts(
             ['family_name' => $request->family_name, 'typeface' => $request->typeface],
@@ -97,6 +95,14 @@ class AdminPanelController extends Controller
     }    
 
 	public function updateFont(Request $request){
-        dd($request->all());
+        $addedFiles = json_decode($request->newFiles, true);
+        $filteredNewFiles = $request->newFiles;
+        foreach ($request->newFiles as $key => $file) {
+            if(!in_array($file->getClientOriginalName(), $addedFiles)){
+                unset($filteredNewFiles[$key]);
+            }
+        }
+
+        var_dump($filteredNewFiles);
 	}		
 }

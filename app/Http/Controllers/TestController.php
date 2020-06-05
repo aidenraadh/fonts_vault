@@ -15,7 +15,7 @@ class TestController extends Controller
     }
 
     public function testpost(Request $request){
-    	var_dump($request->default_file);
+    	return 'asd';
     }    
 }
 

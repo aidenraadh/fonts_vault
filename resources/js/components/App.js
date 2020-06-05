@@ -9,7 +9,7 @@ import FontFilter from './FontFilter.js';
 import FontConfig from './FontConfig.js';
 import FontDisplay from './FontDisplay.js';
 import DisplaySelectedFam from './DisplaySelectedFam.js';
-import Button_1 from './reusables/Buttons.js';
+import {Button_1} from './reusables/Buttons.js';
 
 const fontFaces = document.getElementById('fontFaces');
 const selectedFamFontFaces = document.getElementById('selectedFamFontFaces');

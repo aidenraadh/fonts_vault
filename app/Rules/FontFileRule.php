@@ -26,6 +26,7 @@ class FontFileRule implements Rule
      */
     public function passes($attribute, $value)
     {
+        // Check if the file already exists
         $count = DB::select(
             'SELECT COUNT(file_name) AS count FROM fonts_files WHERE file_name = ? LIMIT 1',
             [$value->getClientOriginalName()]

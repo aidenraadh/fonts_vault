@@ -109,9 +109,58 @@ input:focus {
 	background-size: auto 100%;
 }
 
+.btn_2{
+  display: inline-block;
+  padding: 0.8rem 1.4rem;
+  border-radius: 2.6px;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+  font-size: 1.5rem;
+  transition: background-color 0.3s;
+}
+
+.btn_2.blue{
+  background-color: rgba(93, 120, 255, 0.1);
+  color: #5d78ff;
+}
+
+.btn_2.blue:hover, .btn_2.blue.active{
+  background-color: #5d78ff;
+  color: #FFFFFF;
+}
+
+.btn_2.green{
+  background-color: rgba(10, 187, 135, 0.1);
+  color: #0abb87;
+}
+
+.btn_2.green:hover, .btn_2.green.active{
+  background-color: #0abb87;
+  color: #FFFFFF;
+}
+
+.btn_2.yellow{
+  background-color: rgba(255, 184, 34, 0.1);
+  color: #ffb822;
+}
+
+.btn_2.yellow:hover, .btn_2.yellow.active{
+  background-color: #ffb822;
+  color: #FFFFFF;
+}
+
+.btn_2.red{
+  background-color: rgba(253, 57, 122, 0.1);
+  color: #fd397a;
+}
+
+.btn_2.red:hover, .btn_2.red.active{
+  background-color: #fd397a;
+  color: #FFFFFF;
+}
 
 .section_1{
-  width: 90%;
+  width: 86%;
   margin: 0 auto;
   border-radius: 4px;
   background-color: #FFFFFF;
@@ -152,6 +201,33 @@ input:focus {
 }
 .table .checkmark{
   width: 2.2rem; height: 2.2rem;
+}
+
+.list_widget_1 .icon{
+	position: relative;
+	width: 4rem;
+	height: 4rem;
+}
+
+.list_widget_1 .text{
+	padding-left: 0.8rem;
+}
+
+.list_widget_1 .main{
+	display: block;
+	margin-bottom: 0.4rem;
+	font-family: 'Roboto', sans-serif;
+	font-weight: 500;
+	font-size: 1.6rem;
+	color: #6A6A73;
+}
+
+.list_widget_1 .sub{
+	display: block;
+	font-family: 'Roboto', sans-serif;
+	font-weight: 400;
+	font-size: 1.45rem;
+	color: #6A6A73;	
 }
 
 .cb{
@@ -314,6 +390,14 @@ input:focus {
 
 #FontConfig .form{
 	width: 10rem;
+}
+
+#FilesList .sprite{
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	background: url('../images/icons/Asset 150.png') no-repeat scroll 0 0;
+	background-size: auto 100%;
 }
 
 .modal_1{
@@ -578,5 +662,14 @@ input:focus {
 @media only screen and (max-width: 700px) {
 	.card{
 		width: 48%;
+	}
+}
+
+@media only screen and (max-width: 500px) {
+	#FilesList .main, #FilesList .sub{
+		max-width: 16rem;
+  		white-space: nowrap;
+  		overflow: hidden;
+  		text-overflow: ellipsis;		
 	}
 }

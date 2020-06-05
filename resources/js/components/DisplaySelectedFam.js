@@ -1,5 +1,5 @@
 import React from 'react';
-import Button_1 from './reusables/Buttons.js';
+import {Button_1} from './reusables/Buttons.js';
 import {getFontFamValue} from './reusables/FontFileParsers.js';
 
 class DisplaySelectedFam extends React.Component{
