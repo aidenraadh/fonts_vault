@@ -1,4 +1,5 @@
 import React from 'react';
+import {Input_1, Input_2} from './reusables/Forms.js'
 
 class FontConfig extends React.Component{
 	constructor(props){
@@ -9,42 +10,30 @@ class FontConfig extends React.Component{
 		return (
 			<>
 			<section id="FontConfig" className="row cols_container left">
-			    <input className="Input_1" type="text" name=""
-			            onChange={(e) => this.props.writeText(e)}
-			            placeholder="Demo Text"
-			    />            
-			    <div className="input_group">
-			      <label className="label">
-			        <span className="sprite"></span>
-			      </label>
-			      <input className="form" type="number" name="" min="0"
-			        onChange={(e) => this.props.configureFont(e,'fontSize')}
-			      />
-			    </div>
-			    <div className="input_group">
-			      <label className="label">
-			        <span className="sprite" style={{backgroundPosition: '33% 0'}}></span>
-			      </label>
-			      <input className="form" type="number" name="" min="0"
-			        onChange={(e) => this.props.configureFont(e,'letterSpacing')}
-			      />
-			    </div>
-			    <div className="input_group">
-			      <label className="label">
-			        <span className="sprite" style={{backgroundPosition: '67.5% 0'}}></span>
-			      </label>
-			      <input className="form" type="number" name="" min="0"
-			        onChange={(e) => this.props.configureFont(e,'wordSpacing')}
-			      />
-			    </div>
-			    <div className="input_group">
-			      <label className="label">
-			        <span className="sprite" style={{backgroundPosition: '103% 0'}}></span>
-			      </label>
-			      <input className="form" type="number" name="" min="0"
-			        onChange={(e) => this.props.configureFont(e,'lineHeight')}
-			      />
-			    </div>                   	    
+				<Input_1
+					attr = {{type: 'text', name: '', placeholder: 'Demo Text'}}
+					events = {{onChange: (e) => this.props.writeText(e)}}
+				/>
+				<Input_2
+					label = {<span className="sprite"></span>}
+					attr = {{type:"number", name:"", min:"0"}}
+					events = {{onChange: (e) => this.props.configureFont(e,'fontSize')}}
+				/>
+				<Input_2
+					label = {<span className="sprite" style={{backgroundPosition: '33% 0'}}></span>}
+					attr = {{type:"number", name:"", min:"0"}}
+					events = {{onChange: (e) => this.props.configureFont(e,'letterSpacing')}}
+				/>
+				<Input_2
+					label = {<span className="sprite" style={{backgroundPosition: '67.5% 0'}}></span>}
+					attr = {{type:"number", name:"", min:"0"}}
+					events = {{onChange: (e) => this.props.configureFont(e,'wordSpacing')}}
+				/>
+				<Input_2
+					label = {<span className="sprite" style={{backgroundPosition: '103% 0'}}></span>}
+					attr = {{type:"number", name:"", min:"0"}}
+					events = {{onChange: (e) => this.props.configureFont(e,'lineHeight')}}
+				/>												                  	    
 			</section>
 			</>
 			//

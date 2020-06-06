@@ -1,9 +1,10 @@
 import React from 'react';
 import Header from './reusables/Header.js';
-import {Checkbox, Select, Input_1} from './reusables/Forms.js';
+import {Checkbox, Select_1, Input_1} from './reusables/Forms.js';
 import Table from './reusables/Table.js';
 import {Modal_1,Modal_2} from './reusables/Modal.js';
 import {Button_2} from './reusables/Buttons.js';
+import Dropdown from './reusables/Dropdown.js';
 import LARAVEL_CSRF_TOKEN from './reusables/LARAVEL_CSRF_TOKEN.js';
 
 
@@ -66,7 +67,21 @@ export class HomeView extends React.Component{
 		return (
 			<>
 			<Header
-				subHeader = {null}
+				subHeader = {{
+					leftCol: <>
+						<h1 className="mainHeading">Dashboard</h1>
+						<Dropdown
+							DDTag = {'div'}
+							DDToggleText = {'Hello, '+this.props.AdminData.name}
+							DDItems = {[
+								{tag: 'a', text: 'Action 1', attr: {href: '#'}},
+								{tag: 'a', text: 'Action 2', attr: {href: '#'}},
+								{tag: 'a', text: 'Action 3', attr: {href: '#'}},
+							]}
+						/>
+					</>,
+					rightCol: null,
+				}}
 				AppURLs = {this.props.AppURLs}
 			/>
 
@@ -184,11 +199,29 @@ export class EditFontView extends React.Component{
 	render(){
 		return (
 			<>
+			<Header
+				subHeader = {{
+					leftCol: <>
+						<h1 className="mainHeading">Edit Font</h1>
+						<Dropdown
+							DDTag = {'div'}
+							DDToggleText = {'Hello, '+this.props.AdminData.name}
+							DDItems = {[
+								{tag: 'a', text: 'Action 1', attr: {href: '#'}},
+								{tag: 'a', text: 'Action 2', attr: {href: '#'}},
+								{tag: 'a', text: 'Action 3', attr: {href: '#'}},
+							]}
+						/>
+					</>,
+					rightCol: null,
+				}}
+				AppURLs = {this.props.AppURLs}
+			/>			
 			<section className="section_1">
 			<Input_1 attr = {
 				{type:"text", name:"family_name", defaultValue: this.font_info.family_name, required: 'required'}
 			}/><br/><br/>
-			<Select
+			<Select_1
 				attr = {{name: 'typeface'}}
 				options = {this.props.typefaces.map((typeface) => (
 					{attr: {value: typeface}, optionText: typeface}
@@ -277,13 +310,6 @@ export class EditFontView extends React.Component{
 				    </div>
 				  </div>
 				  <section className="cols_container center align_center">
-					<Button_2
-						tagname = {'button'}
-						text = {'Default'}
-						color = {'blue'}
-						isActive = {false}
-						attributes = {{type: 'submit', style: {marginLeft: '1.8rem'}}}
-					/>
 					<Button_2
 						tagname = {'button'}
 						text = {'Add back'}

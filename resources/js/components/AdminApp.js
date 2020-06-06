@@ -12,6 +12,7 @@ import {HomeView, EditFontView} from './AdminViews.js';
 */
 
 const AppURLs = JSON.parse(document.getElementById('AppURLs').innerHTML);
+const AdminData = JSON.parse(document.getElementById('AdminData').innerHTML);
 
 function AdminApp(props){
 	const viewName = props.viewName;
@@ -21,6 +22,7 @@ function AdminApp(props){
 			<HomeView
 				fonts = {JSON.parse(document.getElementById('fonts').innerHTML)}
 				AppURLs = {AppURLs}
+				AdminData = {AdminData}
 			/>			
 		);
 	}
@@ -31,6 +33,7 @@ function AdminApp(props){
 				font = {JSON.parse(document.getElementById('font').innerHTML)}
 				typefaces = {JSON.parse(document.getElementById('typefaces').innerHTML)}
 				AppURLs = {AppURLs}
+				AdminData = {AdminData}
 			/>			
 		);
 	}	

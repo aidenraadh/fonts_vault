@@ -160,6 +160,71 @@ input:focus, select:focus {
   color: #FFFFFF;
 }
 
+.dropdown{
+    position: relative;
+    display: inline-block;
+    overflow: none;
+}
+
+.dropdown .toggle{
+    display: block;
+    padding: 1.2rem 1.2rem;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    font-size: 1.5rem;
+    color: #595d6e;
+}
+
+.dropdown .menu{
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 100%; left: 0;
+    min-width: 20rem;
+    padding: 1.4rem 0;
+    border-radius: 4px;
+    background-color: #FFFFFF;
+    box-shadow: 0px 0px 50px 0px rgba(82, 63, 105, 0.15);
+    opacity: 0;
+    transform: translateY(4%);
+    visibility: hidden;
+    transition-property: opacity, transform;
+    transition-duration: 0.3s, 0.3s;
+}
+
+.dropdown .item{
+    display: inline-block;
+    padding: 1.2rem 1.2rem;
+    cursor: pointer;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    font-size: 1.5rem;
+    color: #595d6e;
+    transition: background-color 0.2s ease;
+}
+
+.dropdown .footer{
+    display: flex;
+    padding: 1.2rem 1.2rem;
+    border-top: 1px solid #ebedf2;
+}
+
+.dropdown .item:hover{
+    background-color: #f7f8fa;
+}
+
+.dropdown .toggle:focus ~ .menu{
+    visibility: visible;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.dropdown .menu:hover{
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
 .section_1{
   width: 86%;
   margin: 0 auto;
@@ -202,203 +267,6 @@ input:focus, select:focus {
 }
 .table .checkmark{
   width: 2.2rem; height: 2.2rem;
-}
-
-.list_widget_1 .icon{
-	position: relative;
-	width: 4rem;
-	height: 4rem;
-}
-
-.list_widget_1 .text{
-	padding-left: 0.8rem;
-}
-
-.list_widget_1 .main{
-	display: block;
-	margin-bottom: 0.4rem;
-	font-family: 'Roboto', sans-serif;
-	font-weight: 500;
-	font-size: 1.6rem;
-	color: #6A6A73;
-}
-
-.list_widget_1 .sub{
-	display: block;
-	font-family: 'Roboto', sans-serif;
-	font-weight: 400;
-	font-size: 1.45rem;
-	color: #6A6A73;	
-}
-
-.cb{
-  display: block;
-  position: relative;
-  padding-left: 3.5rem; /*changeable -- give space between custom checkbox and the text beside it*/
-  cursor: pointer;
-  font-size: 1.7rem; /* changeable -- font size of text beside checkbox */
-  width: 100%;
-}
-
-/* Hide the browser's default checkbox */
-.cb input {
-  outline: none;
-  opacity: 0; /* hide the the default checkbox without using display: none; */
-  cursor: pointer;
-}
-
-/* Create a custom checkbox */
-.checkmark {
-  position: absolute;
-  right: 0; left: 0; /* changeable -- adjust the custom checkbox position with the text beside it */
-  height: 2.5rem; width: 2.5rem; /* changeable -- dimension of custom checkbox */
-  background-color: #e4e8ee;
-  border-radius: 4px;
-}
-
-/* Style the checkmark/indicator */
-/* the checkmark is made by the span element's left and bottom border, the the span element is rotated 45 degree to appear properly*/
-
-.checkmark:after {
-  content: "";
-  display: block; /* hide the checkmark if checkbox is not checked */
-  position: absolute;
-  left: 35%; top: 15%; /* changealbe -- adjust the position of checkmark againts checkbox */
-  width: 18%; height: 40%; /* changealbe -- the dimension of checkmark */
-  border-style: solid; 
-  border-color: #5d78ff; /* changealbe -- change the checkmark color */
-  border-width: 0 0.25rem 0.25rem 0; /* changealbe -- the boldness of checkmark */
-  transform: rotate(45deg); /* changealbe -- rotate the checkmark to appear properly */
-  opacity: 0;
-  transition: opacity 0.3s;
-}
-
-
-/* Show the checkmark when checked */
-.cb input:checked ~ .checkmark:after {
-  opacity: 1;
-}
-
-
-
-.App{
-	width: 100%;
-	min-height: 100vh;
-	background-color: rgb(247, 248, 250);
-}
-
-#Header{
-	width: 100%;
-	position: fixed; top: 0; left: 0;
-	z-index: 98;
-	background-color: #FFFFFF;
-	box-shadow: 0px 10px 30px 0px rgba(82, 63, 105, 0.08);
-}
-
-#Header > .row{
-	width: 100%;
-}
-
-#Header .section_padding{
-	padding: 1.4rem 2.2rem;
-}
-
-#Header .subHeader{
-	border-top: 1px solid #EFF0F6;
-}
-
-#Header .btn_1{
-	width: 4.4rem;
-	height: 4.4rem;
-}
-
-#Header .sprite{
-	width: 2.8rem;
-	height: 2.8rem;
-	background: url('../images/icons/btn_1_sprite.png') no-repeat scroll 0 0;
-	background-size: auto 100%;
-}
-
-.clsFontFilter{
-	font-size: 2.6rem;
-	float: right;
-	border-radius: 4px;
-	background-color: #5d78ff;
-	color: #FFFFFF;
-	width: 2.8rem;
-	margin: 2rem 1.8rem;
-}
-
-
-#Navbar{
-	width: 100%;
-}
-
-#navbarLinks ul{
-	list-style-type: none;
-}
-
-#navbarLinks li{
-	margin-left: 1rem;
-}
-
-#navbarLinks a{
-	border-radius: 4px;
-	padding: 0.8rem 1.4rem;
-	display: inline-block;
-	font-family: 'Roboto', sans-serif;	
-	font-size: 1.55rem;
-	font-weight: 500;
-	color: #6C7293;
-	transition-property: color, background-color;
-	transition-duration: 0.3s, 0.3s;
-}
-
-#navbarLinks a:hover{
-	color: #5D78FF;
-	background-color: rgba(77, 89, 149, 0.06);
-}
-
-#FontFilter{
-	position: fixed; top: 0; left: 0;
-	width: 30rem;
-	height: 100vh;
-	background-color: #FFFFFF;
-	box-shadow: 10px 0 30px 0px rgba(82, 63, 105, 0.08);
-	transform: translateX(-100%);
-	transition: transform 0.4s ease;
-}
-
-#FontFilter.shown{
-	transform: translateX(0);
-}
-
-#FontFilter .cb{
-	clear: both;
-	margin: 0 1.8rem 2.8rem;
-}
-
-#FontConfig .input_group, #FontConfig .Input_1{
-	margin-right: 2rem;
-}
-
-#FontConfig .input_group .sprite{
-  margin: 0 1rem;
-  width: 2.25rem; height: 1.6rem;
-  background: url('../images/icons/Asset 144.png') no-repeat scroll 0 0;
-  background-size: auto 100%;
-}
-
-#FontConfig .form{
-	width: 10rem;
-}
-
-.FilesList .sprite{
-	position: absolute;
-	width: 100%;
-	height: 100%;
-	background: url('../images/icons/Asset 150.png') no-repeat scroll 0 0;
-	background-size: auto 100%;
 }
 
 .modal_1{
@@ -513,37 +381,31 @@ input:focus, select:focus {
 	clear: both;
 }
 
-#selectedFamily.modal_1 .body{
-	width: 80rem;
-	max-height: 70vh;
-	overflow-y: auto;
+.list_widget_1 .icon{
+	position: relative;
+	width: 4rem;
+	height: 4rem;
 }
 
-.selectedFamDisplay{
-	margin-bottom: 3rem;
+.list_widget_1 .text{
+	padding-left: 0.8rem;
 }
 
-.selectedFamDisplay .displayHeader{
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	padding: 1rem 0;
-	margin-bottom: 1rem;
-	border-bottom: 1px solid #e2e5ec;
-}
-
-.selectedFamDisplay h6{
+.list_widget_1 .main{
+	display: block;
+	margin-bottom: 0.4rem;
+	font-family: 'Roboto', sans-serif;
+	font-weight: 500;
 	font-size: 1.6rem;
-	font-weight: normal;
-	text-transform: capitalize;
+	color: #6A6A73;
 }
 
-.selectedFamDisplay .board{
-	font-size: 2.6rem;
-}
-
-.selectedFamDisplay .btn_1{
-	width: 3.6rem; height: 3.6rem;
+.list_widget_1 .sub{
+	display: block;
+	font-family: 'Roboto', sans-serif;
+	font-weight: 400;
+	font-size: 1.45rem;
+	color: #6A6A73;	
 }
 
 .cards_container{
@@ -597,7 +459,7 @@ input:focus, select:focus {
 	transition-timing-function: ease;
 }
 
-.Input_1{
+.form_1{
 	padding: 0.8rem 1.4rem;
 	border: 1px solid #e2e5ec;
 	border-radius: 4px;
@@ -606,16 +468,16 @@ input:focus, select:focus {
 	transition: border-color 0.3s ease;
 }
 
-.Input_1:focus{
+.form_1:focus{
 	border-color: #9aabff;
 }
 
-.input_group{
+.form_2{
   display: flex;
   justify-content: flex-start;
 }
 
-.input_group .label{
+.form_2 .label{
   background-color: rgb(247, 248, 250);
   display: flex;
   align-items: center;
@@ -624,7 +486,7 @@ input:focus, select:focus {
   font-size: 1.45rem;
 }
 
-.input_group .form{
+.form_2 .form{
   display: inline-block;
   padding: 0.8rem 1.4rem;
   border: 1px solid #e2e5ec;
@@ -634,28 +496,226 @@ input:focus, select:focus {
   transition: border-color 0.3s ease;
 }
 
-.input_group .form:focus{
+.form_2 .form:focus{
   font-size: 1.45rem;
   color: #495057;	
   border-color: #9aabff;
-} 
+}
 
-.Select{
-	padding: 0.8rem 1rem;
-	border: 1px solid #e2e5ec;
+.cb{
+  display: block;
+  position: relative;
+  padding-left: 3.5rem; /*changeable -- give space between custom checkbox and the text beside it*/
+  cursor: pointer;
+  font-size: 1.7rem; /* changeable -- font size of text beside checkbox */
+  width: 100%;
+}
+
+/* Hide the browser's default checkbox */
+.cb input {
+  outline: none;
+  opacity: 0; /* hide the the default checkbox without using display: none; */
+  cursor: pointer;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+  position: absolute;
+  right: 0; left: 0; /* changeable -- adjust the custom checkbox position with the text beside it */
+  height: 2.5rem; width: 2.5rem; /* changeable -- dimension of custom checkbox */
+  background-color: #e4e8ee;
+  border-radius: 4px;
+}
+
+/* Style the checkmark/indicator */
+/* the checkmark is made by the span element's left and bottom border, the the span element is rotated 45 degree to appear properly*/
+
+.checkmark:after {
+  content: "";
+  display: block; /* hide the checkmark if checkbox is not checked */
+  position: absolute;
+  left: 35%; top: 15%; /* changealbe -- adjust the position of checkmark againts checkbox */
+  width: 18%; height: 40%; /* changealbe -- the dimension of checkmark */
+  border-style: solid; 
+  border-color: #5d78ff; /* changealbe -- change the checkmark color */
+  border-width: 0 0.25rem 0.25rem 0; /* changealbe -- the boldness of checkmark */
+  transform: rotate(45deg); /* changealbe -- rotate the checkmark to appear properly */
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+
+/* Show the checkmark when checked */
+.cb input:checked ~ .checkmark:after {
+  opacity: 1;
+}
+
+#Navbar{
+	width: 100%;
+}
+
+#navbarLinks ul{
+	list-style-type: none;
+}
+
+#navbarLinks li{
+	margin-left: 1rem;
+}
+
+#navbarLinks a{
 	border-radius: 4px;
-	font-size: 1.45rem;
-	color: #495057;
-	transition: border-color 0.3s ease;
+	padding: 0.8rem 1.4rem;
+	display: inline-block;
+	font-family: 'Roboto', sans-serif;	
+	font-size: 1.55rem;
+	font-weight: 500;
+	color: #6C7293;
+	transition-property: color, background-color;
+	transition-duration: 0.3s, 0.3s;
 }
 
-.Select:focus{
-	border-color: #9aabff;
+#navbarLinks a:hover{
+	color: #5D78FF;
+	background-color: rgba(77, 89, 149, 0.06);
 }
 
+.App{
+	width: 100%;
+	min-height: 100vh;
+	background-color: rgb(247, 248, 250);
+}
+
+.Header{
+	width: 100%;
+	position: fixed; top: 0; left: 0;
+	z-index: 98;
+	background-color: #FFFFFF;
+	box-shadow: 0px 10px 30px 0px rgba(82, 63, 105, 0.08);
+}
+
+.Header > .row{
+	width: 100%;
+}
+
+.Header .section_padding{
+	padding: 1.4rem 2.2rem;
+}
+
+.Header .subHeader{
+	border-top: 1px solid #EFF0F6;
+}
+
+.Header .btn_1{
+	width: 4.4rem;
+	height: 4.4rem;
+}
+
+.Header .sprite{
+	width: 2.8rem;
+	height: 2.8rem;
+	background: url('../images/icons/btn_1_sprite.png') no-repeat scroll 0 0;
+	background-size: auto 100%;
+}
+
+.clsFontFilter{
+	font-size: 2.6rem;
+	float: right;
+	border-radius: 4px;
+	background-color: #5d78ff;
+	color: #FFFFFF;
+	width: 2.8rem;
+	margin: 2rem 1.8rem;
+}
+
+#FontFilter{
+	position: fixed; top: 0; left: 0;
+	width: 30rem;
+	height: 100vh;
+	background-color: #FFFFFF;
+	box-shadow: 10px 0 30px 0px rgba(82, 63, 105, 0.08);
+	transform: translateX(-100%);
+	transition: transform 0.4s ease;
+}
+
+#FontFilter.shown{
+	transform: translateX(0);
+}
+
+#FontFilter .cb{
+	clear: both;
+	margin: 0 1.8rem 2.8rem;
+}
+
+#FontConfig .form_2, #FontConfig .form_1{
+	margin-right: 2rem;
+}
+
+#FontConfig .form_2 .sprite{
+  margin: 0 1rem;
+  width: 2.25rem; height: 1.6rem;
+  background: url('../images/icons/Asset 144.png') no-repeat scroll 0 0;
+  background-size: auto 100%;
+}
+
+#FontConfig .form{
+	width: 10rem;
+}
+
+.FilesList .sprite{
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	background: url('../images/icons/Asset 150.png') no-repeat scroll 0 0;
+	background-size: auto 100%;
+}
+
+#selectedFamily.modal_1 .body{
+	width: 80rem;
+	max-height: 70vh;
+	overflow-y: auto;
+}
+
+.selectedFamDisplay{
+	margin-bottom: 3rem;
+}
+
+.selectedFamDisplay .displayHeader{
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 1rem 0;
+	margin-bottom: 1rem;
+	border-bottom: 1px solid #e2e5ec;
+}
+
+.selectedFamDisplay h6{
+	font-size: 1.6rem;
+	font-weight: normal;
+	text-transform: capitalize;
+}
+
+.selectedFamDisplay .board{
+	font-size: 2.6rem;
+}
+
+.selectedFamDisplay .btn_1{
+	width: 3.6rem; height: 3.6rem;
+} 
 
 #FontDisplay{
 	padding-top: 18rem;
+}
+
+#AdminApp{
+	padding-top: 15rem;
+}
+
+#AdminApp .Header .mainHeading{
+	padding-right: 1.6rem;
+	border-right: 1px solid rgb(235, 237, 242);
+	font-family: 'Roboto', sans-serif;
+	font-weight: 500;
+	font-size: 2rem;
 }
 
 @media only screen and (min-width: 1281px) {
@@ -671,6 +731,10 @@ input:focus, select:focus {
 }
 
 @media only screen and (max-width: 800px) {
+	.section_1{
+		width: 88%;
+	}
+
 	#selectedFamily.modal_1 .body{
 		width: 90vw;
 	}
@@ -683,6 +747,10 @@ input:focus, select:focus {
 }
 
 @media only screen and (max-width: 500px) {
+	.section_1{
+		width: 92%;
+	}
+
 	.FilesList .main, .FilesList .sub{
 		max-width: 16rem;
   		white-space: nowrap;

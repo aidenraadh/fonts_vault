@@ -25,6 +25,9 @@ class AdminPanelController extends Controller
                     'icons' => asset('images/icons').'/',
                     'deleteFontsURL' => config('app.url').'admin/fonts/delete',
                 ], true),
+                'AdminData' => json_encode([
+                    'name' => Auth::user()->name,
+                ], true),
             ]
         );
     }
@@ -90,7 +93,10 @@ class AdminPanelController extends Controller
             'AppURLs' => json_encode([
                 'domain' => config('app.url'),
                 'updateFontURL' => config('app.url').'admin/fonts/update',
-            ], true)
+            ], true),
+            'AdminData' => json_encode([
+                'name' => Auth::user()->name,
+            ], true),            
         ]);
     }    
 

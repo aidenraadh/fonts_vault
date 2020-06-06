@@ -4,10 +4,11 @@
 
 @section('content')
 
-<div id="AdminApp" class="App" data-view-name="home" style="padding-top: 15rem;">
+<div id="AdminApp" class="App" data-view-name="home">
 	
 </div>
 
 <script type="application/json" id="fonts"><?= $fonts ?></script>
 <script type="application/json" id="AppURLs"><?= $AppURLs ?></script>
+<script type="application/json" id="AdminData"><?= $AdminData ?></script>
 @endsection

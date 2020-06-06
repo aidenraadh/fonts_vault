@@ -4,8 +4,6 @@ import Navbar from './Navbar.js';
 /*
 headerWidget = JSX 
 headerWidgetBtn = JSX btn
-subHeaderLeft = JSX
-subHeaderRight = JSX
 
 subHeader = {
 	leftCol: JSX,
@@ -33,7 +31,7 @@ class Header extends React.Component{
 	render(){
 		return (
 			<>
-			<div id = "Header" className = "rows_container">
+			<div className = "Header rows_container">
 			    <div className = "row cols_container align_center section_padding">
 			        <div className="rows_container center align_center">
 			        	{this.props.headerWidgetBtn}
@@ -51,10 +49,10 @@ class Header extends React.Component{
 			    {
 			    (this.props.subHeader !== null ?
 			    <div className="subHeader cols_container space_between align_center section_padding">
-			    	<div>
+			    	<div className="cols_container align_center">
 			    		{this.props.subHeader.leftCol}
 			    	</div>
-			    	<div>
+			    	<div className="cols_container align_center">
 			    		{this.props.subHeader.rightCol}
 			    	</div>
 			    </div> : ''

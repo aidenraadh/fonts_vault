@@ -11,4 +11,5 @@
 <script type="application/json" id="font"><?= $font ?></script>
 <script type="application/json" id="typefaces"><?= $typefaces ?></script>
 <script type="application/json" id="AppURLs"><?= $AppURLs ?></script>
+<script type="application/json" id="AdminData"><?= $AdminData ?></script>
 @endsection
