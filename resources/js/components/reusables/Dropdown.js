@@ -19,8 +19,11 @@ function Dropdown(props){
             <button type="button" className="toggle">{props.DDToggleText}</button>
             <section className="menu">
                 {DDItems}
+                {(props.DDFooter ? 
                 <div className="footer">
-                </div>
+                    {props.DDFooter}
+                </div> : ''
+                )}
             </section>
         </DDTag>
     );

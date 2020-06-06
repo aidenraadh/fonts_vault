@@ -90,7 +90,7 @@ input:focus, select:focus {
 }
 
 .btn_1{
-	display: flex;
+	display: inline-flex;
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
@@ -106,7 +106,20 @@ input:focus, select:focus {
 .btn_1 .sprite{
 	display: block;
 	width: 70%; height: 70%;
-	background: url('../images/icons/btn_1_sprite.png') no-repeat scroll 0 0;
+}
+
+.btn_1 .sprite.blue{
+	background: url('../images/icons/btn_1_sprite_blue.png') no-repeat scroll;
+	background-size: auto 100%;
+}
+
+.btn_1 .sprite.green{
+	background: url('../images/icons/btn_1_sprite_green.png') no-repeat scroll;
+	background-size: auto 100%;
+}
+
+.btn_1 .sprite.red{
+	background: url('../images/icons/btn_1_sprite_red.png') no-repeat scroll;
 	background-size: auto 100%;
 }
 
@@ -116,7 +129,7 @@ input:focus, select:focus {
   border-radius: 2.6px;
   font-family: 'Roboto', sans-serif;
   font-weight: 500;
-  font-size: 1.5rem;
+  font-size: 1.45rem;
   transition: background-color 0.3s;
 }
 
@@ -205,7 +218,8 @@ input:focus, select:focus {
 
 .dropdown .footer{
     display: flex;
-    padding: 1.2rem 1.2rem;
+    justify-content: flex-end;
+    padding: 1.2rem 1.2rem 0;
     border-top: 1px solid #ebedf2;
 }
 
@@ -233,16 +247,28 @@ input:focus, select:focus {
   box-shadow: 0px 0px 13px 0px rgba(82, 63, 105, 0.1);
   font-family: 'Roboto';
 }
-.section_1 .heading{
-  color: #6A6A73;
-  font-weight: 500;
-  font-size: 2.4rem;
+
+.sectionHeader{
+    border-bottom: 1px solid #ebedf2;
+    margin-bottom: 2rem;    
+    font-family: 'Roboto', sans-serif;
+    color: #6A6A73;
 }
+.sectionHeader .heading{
+    font-weight: 500;
+    font-size: 2rem;
+}
+
+.sectionHeader .subHeading{
+    font-weight: 400;
+    font-size: 1.5rem;
+}
+
 .table{
   width: 100%;
   border-collapse: collapse;
   text-align: center;
-  font-size: 1.55rem;
+  font-size: 1.5rem;
   font-family: 'Roboto', sans-serif;
   font-weight: 400;
 }      
@@ -396,7 +422,7 @@ input:focus, select:focus {
 	margin-bottom: 0.4rem;
 	font-family: 'Roboto', sans-serif;
 	font-weight: 500;
-	font-size: 1.6rem;
+	font-size: 1.5rem;
 	color: #6A6A73;
 }
 
@@ -404,7 +430,7 @@ input:focus, select:focus {
 	display: block;
 	font-family: 'Roboto', sans-serif;
 	font-weight: 400;
-	font-size: 1.45rem;
+	font-size: 1.4rem;
 	color: #6A6A73;	
 }
 
@@ -716,6 +742,16 @@ input:focus, select:focus {
 	font-family: 'Roboto', sans-serif;
 	font-weight: 500;
 	font-size: 2rem;
+}
+
+#AdminApp .Header .dropdown .toggle{
+	padding: 0 0 0 1.6rem;
+	color: #5d78ff;
+	font-weight: 500;
+}
+
+#AdminApp .Header .dropdown .menu{
+	min-width: 26rem;
 }
 
 @media only screen and (min-width: 1281px) {

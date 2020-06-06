@@ -3,8 +3,9 @@ import Header from './reusables/Header.js';
 import {Checkbox, Select_1, Input_1} from './reusables/Forms.js';
 import Table from './reusables/Table.js';
 import {Modal_1,Modal_2} from './reusables/Modal.js';
-import {Button_2} from './reusables/Buttons.js';
+import {Button_1, Button_2} from './reusables/Buttons.js';
 import Dropdown from './reusables/Dropdown.js';
+import SectionHeader from './reusables/SectionsAndWidgets.js';
 import LARAVEL_CSRF_TOKEN from './reusables/LARAVEL_CSRF_TOKEN.js';
 
 
@@ -41,8 +42,21 @@ export class HomeView extends React.Component{
 				font.num_of_files,
 				font.created_at,
 				font.updated_at,
-				<><a href={this.props.AppURLs.domain+'admin/fonts/edit/'+font.id}>Edit</a>
-				<a href="#">Delete</a></>,
+				<>
+				<Button_1
+					tagname = {'a'}
+					icon = {{position: 8, color: 'blue'}}
+					attr = {{
+						href: this.props.AppURLs.domain+'admin/fonts/edit/'+font.id,
+						style: {width: '3.8rem', height: '3.8rem'}
+					}}
+				/>
+				<Button_1
+					tagname = {'button'}
+					icon = {{position: 7, color: 'red'}}
+					attr = {{type: 'submit', style: {width: '3.8rem', height: '3.8rem'}}}
+				/>
+				</>//,
 			]
 		));
 
@@ -78,6 +92,14 @@ export class HomeView extends React.Component{
 								{tag: 'a', text: 'Action 2', attr: {href: '#'}},
 								{tag: 'a', text: 'Action 3', attr: {href: '#'}},
 							]}
+							DDFooter = {
+								<form method="POST" action={this.props.AppURLs.domain+'admin/logout'}>
+								<LARAVEL_CSRF_TOKEN />
+								<Button_2 tagname = {'button'} text = {'Sign out'}
+									color = {'blue'} attr = {{type: 'submit'}}
+								/>								
+								</form>
+							}
 						/>
 					</>,
 					rightCol: null,
@@ -86,11 +108,26 @@ export class HomeView extends React.Component{
 			/>
 
 			<section className="section_1">
-  				<div className="section_padding cols_container space_between align_center" style={{marginBottom: '4rem', borderBottom: '1px solid #ebedf2'}}>
-  				  <h1 className="heading">All Fonts</h1>
-  				  <button type="button" onClick={() => this.state.toggleModal.uploadFontMdl(true)}>add</button>
-  				  <button type="button" onClick={() => this.state.toggleModal.deleteFontsMdl(true)}>delete</button>
-  				</div>
+				<SectionHeader
+					headingTag = {'h2'}
+					headingText = {'All Fonts'}
+					headerActions = {<>
+    					<Button_2
+    					    tagname = {'button'}
+    					    text = {'New'}
+    					    color = {'green'}
+    					    attr = {{type: 'button', style: {marginLeft: '1.4rem'}}}
+    					    events = {{onClick: () => this.state.toggleModal.uploadFontMdl(true)}}
+    					/>
+    					<Button_2
+    					    tagname = {'button'}
+    					    text = {'Delete'}
+    					    color = {'red'}
+    					    attr = {{type: 'button', style: {marginLeft: '1.4rem'}}}
+    					    events = {{onClick: () => this.state.toggleModal.deleteFontsMdl(true)}}                     
+    					/>						
+					</>}
+				/>
 				<Table
 					headData = {this.TableHeadData}
 					bodyData = {this.TableBodyData}				
@@ -246,14 +283,14 @@ export class EditFontView extends React.Component{
 						text = {'Default'}
 						color = {'blue'}
 						isActive = {false}
-						attributes = {{type: 'submit', style: {marginLeft: '1.8rem'}}}
+						attr = {{type: 'submit', style: {marginLeft: '1.8rem'}}}
 					/>
 					<Button_2
 						tagname = {'button'}
 						text = {'Remove'}
 						color = {'red'}
 						isActive = {false}
-						attributes = {{type: 'submit', style: {marginLeft: '1.8rem'}}}
+						attr = {{type: 'submit', style: {marginLeft: '1.8rem'}}}
 						events = {{onClick:() => this.removeAddedFile(file_name)}}
 					/>
 				  </section>
@@ -280,14 +317,14 @@ export class EditFontView extends React.Component{
 							text = {'Default'}
 							color = {'blue'}
 							isActive = {false}
-							attributes = {{type: 'submit', style: {marginLeft: '1.8rem'}}}
+							attr = {{type: 'submit', style: {marginLeft: '1.8rem'}}}
 						/>
 						<Button_2
 							tagname = {'button'}
 							text = {'Remove'}
 							color = {'red'}
 							isActive = {false}
-							attributes = {{type: 'submit', style: {marginLeft: '1.8rem'}}}
+							attr = {{type: 'submit', style: {marginLeft: '1.8rem'}}}
 							events = {{onClick:() => this.toggleDelFiles(true, file.file_name)}}
 						/>
 					  </section>
@@ -315,7 +352,7 @@ export class EditFontView extends React.Component{
 						text = {'Add back'}
 						color = {'green'}
 						isActive = {false}
-						attributes = {{type: 'submit', style: {marginLeft: '1.8rem'}}}
+						attr = {{type: 'submit', style: {marginLeft: '1.8rem'}}}
 						events = {{onClick:() => this.toggleDelFiles(false, file_name)}}
 					/>
 				  </section>
@@ -336,4 +373,26 @@ export class EditFontView extends React.Component{
 
 /*
 input file, the value is the family name of the font
+*/
+
+/*
+<div className="header section_padding cols_container space_between align_center">
+  <h1 className="heading">All Fonts</h1>
+  <div className="cols_container align_center">
+    <Button_2
+        tagname = {'button'}
+        text = {'New'}
+        color = {'green'}
+        attr = {{type: 'button', style: {marginLeft: '1.4rem'}}}
+        events = {{onClick: () => this.state.toggleModal.uploadFontMdl(true)}}
+    />
+    <Button_2
+        tagname = {'button'}
+        text = {'Delete'}
+        color = {'red'}
+        attr = {{type: 'button', style: {marginLeft: '1.4rem'}}}
+        events = {{onClick: () => this.state.toggleModal.deleteFontsMdl(true)}}                     
+    />                      				    				  
+  </div>
+</div>
 */

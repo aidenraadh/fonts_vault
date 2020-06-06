@@ -18,10 +18,8 @@ class DisplaySelectedFam extends React.Component{
                             <h6>{getFontFamValue(file.file_name)}</h6>
                             <Button_1
                                 tagname = {'a'}
-                                data = {{
-                                    url: this.props.fontsDir+'/'+file.file_name,
-                                    btnIcon: 4,
-                                }}
+                                icon = {{position: 4, color: 'blue'}}
+                                attr = {{href: this.props.fontsDir+'/'+file.file_name}}                          
                             />
                         </div>
                         <div className="board" style={{fontFamily: getFontFamValue(file.file_name)}}>

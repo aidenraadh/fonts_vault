@@ -65653,24 +65653,21 @@ __webpack_require__.r(__webpack_exports__);
 |
 */
 
-var AppURLs = JSON.parse(document.getElementById('AppURLs').innerHTML);
-var AdminData = JSON.parse(document.getElementById('AdminData').innerHTML);
-
 function AdminApp(props) {
   var viewName = props.viewName;
 
   if (viewName === 'home') {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_AdminViews_js__WEBPACK_IMPORTED_MODULE_1__["HomeView"], {
       fonts: JSON.parse(document.getElementById('fonts').innerHTML),
-      AppURLs: AppURLs,
-      AdminData: AdminData
+      AppURLs: props.AppURLs,
+      AdminData: props.AdminData
     });
   } else if (viewName === 'edit_font') {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_AdminViews_js__WEBPACK_IMPORTED_MODULE_1__["EditFontView"], {
       font: JSON.parse(document.getElementById('font').innerHTML),
       typefaces: JSON.parse(document.getElementById('typefaces').innerHTML),
-      AppURLs: AppURLs,
-      AdminData: AdminData
+      AppURLs: props.AppURLs,
+      AdminData: props.AdminData
     });
   }
 }
@@ -65698,7 +65695,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _reusables_Modal_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./reusables/Modal.js */ "./resources/js/components/reusables/Modal.js");
 /* harmony import */ var _reusables_Buttons_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./reusables/Buttons.js */ "./resources/js/components/reusables/Buttons.js");
 /* harmony import */ var _reusables_Dropdown_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./reusables/Dropdown.js */ "./resources/js/components/reusables/Dropdown.js");
-/* harmony import */ var _reusables_LARAVEL_CSRF_TOKEN_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./reusables/LARAVEL_CSRF_TOKEN.js */ "./resources/js/components/reusables/LARAVEL_CSRF_TOKEN.js");
+/* harmony import */ var _reusables_SectionsAndWidgets_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./reusables/SectionsAndWidgets.js */ "./resources/js/components/reusables/SectionsAndWidgets.js");
+/* harmony import */ var _reusables_LARAVEL_CSRF_TOKEN_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./reusables/LARAVEL_CSRF_TOKEN.js */ "./resources/js/components/reusables/LARAVEL_CSRF_TOKEN.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
@@ -65726,6 +65724,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
 
 
 
@@ -65771,11 +65770,34 @@ var HomeView = /*#__PURE__*/function (_React$Component) {
           value: font.id,
           form: 'deleteFonts'
         }
-      }), font.family_name, font.num_of_files, font.created_at, font.updated_at, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-        href: _this.props.AppURLs.domain + 'admin/fonts/edit/' + font.id
-      }, "Edit"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-        href: "#"
-      }, "Delete"))];
+      }), font.family_name, font.num_of_files, font.created_at, font.updated_at, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_reusables_Buttons_js__WEBPACK_IMPORTED_MODULE_5__["Button_1"], {
+        tagname: 'a',
+        icon: {
+          position: 8,
+          color: 'blue'
+        },
+        attr: {
+          href: _this.props.AppURLs.domain + 'admin/fonts/edit/' + font.id,
+          style: {
+            width: '3.8rem',
+            height: '3.8rem'
+          }
+        }
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_reusables_Buttons_js__WEBPACK_IMPORTED_MODULE_5__["Button_1"], {
+        tagname: 'button',
+        icon: {
+          position: 7,
+          color: 'red'
+        },
+        attr: {
+          type: 'submit',
+          style: {
+            width: '3.8rem',
+            height: '3.8rem'
+          }
+        }
+      })) //,
+      ];
     });
     _this.getToggleModal = _this.getToggleModal.bind(_assertThisInitialized(_this)); //
 
@@ -65828,32 +65850,59 @@ var HomeView = /*#__PURE__*/function (_React$Component) {
               attr: {
                 href: '#'
               }
-            }]
+            }],
+            DDFooter: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+              method: "POST",
+              action: this.props.AppURLs.domain + 'admin/logout'
+            }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_reusables_LARAVEL_CSRF_TOKEN_js__WEBPACK_IMPORTED_MODULE_8__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_reusables_Buttons_js__WEBPACK_IMPORTED_MODULE_5__["Button_2"], {
+              tagname: 'button',
+              text: 'Sign out',
+              color: 'blue',
+              attr: {
+                type: 'submit'
+              }
+            }))
           })),
           rightCol: null
         },
         AppURLs: this.props.AppURLs
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
         className: "section_1"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "section_padding cols_container space_between align_center",
-        style: {
-          marginBottom: '4rem',
-          borderBottom: '1px solid #ebedf2'
-        }
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
-        className: "heading"
-      }, "All Fonts"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        type: "button",
-        onClick: function onClick() {
-          return _this2.state.toggleModal.uploadFontMdl(true);
-        }
-      }, "add"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        type: "button",
-        onClick: function onClick() {
-          return _this2.state.toggleModal.deleteFontsMdl(true);
-        }
-      }, "delete")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_reusables_Table_js__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_reusables_SectionsAndWidgets_js__WEBPACK_IMPORTED_MODULE_7__["default"], {
+        headingTag: 'h2',
+        headingText: 'All Fonts',
+        headerActions: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_reusables_Buttons_js__WEBPACK_IMPORTED_MODULE_5__["Button_2"], {
+          tagname: 'button',
+          text: 'New',
+          color: 'green',
+          attr: {
+            type: 'button',
+            style: {
+              marginLeft: '1.4rem'
+            }
+          },
+          events: {
+            onClick: function onClick() {
+              return _this2.state.toggleModal.uploadFontMdl(true);
+            }
+          }
+        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_reusables_Buttons_js__WEBPACK_IMPORTED_MODULE_5__["Button_2"], {
+          tagname: 'button',
+          text: 'Delete',
+          color: 'red',
+          attr: {
+            type: 'button',
+            style: {
+              marginLeft: '1.4rem'
+            }
+          },
+          events: {
+            onClick: function onClick() {
+              return _this2.state.toggleModal.deleteFontsMdl(true);
+            }
+          }
+        }))
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_reusables_Table_js__WEBPACK_IMPORTED_MODULE_3__["default"], {
         headData: this.TableHeadData,
         bodyData: this.TableBodyData
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_reusables_Modal_js__WEBPACK_IMPORTED_MODULE_4__["Modal_2"], {
@@ -65866,7 +65915,7 @@ var HomeView = /*#__PURE__*/function (_React$Component) {
           id: "deleteFonts",
           method: "POST",
           action: this.props.AppURLs.deleteFontsURL
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_reusables_LARAVEL_CSRF_TOKEN_js__WEBPACK_IMPORTED_MODULE_7__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_reusables_LARAVEL_CSRF_TOKEN_js__WEBPACK_IMPORTED_MODULE_8__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
           type: "submit"
         }, "DELETE"))),
         getToggleModal: this.getToggleModal
@@ -65877,7 +65926,7 @@ var HomeView = /*#__PURE__*/function (_React$Component) {
           method: "POST",
           action: this.props.AppURLs.domain + 'admin/fonts/store',
           encType: "multipart/form-data"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_reusables_LARAVEL_CSRF_TOKEN_js__WEBPACK_IMPORTED_MODULE_7__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_reusables_LARAVEL_CSRF_TOKEN_js__WEBPACK_IMPORTED_MODULE_8__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
           type: "text",
           name: "family_name",
           placeholder: "family_name",
@@ -66074,7 +66123,7 @@ var EditFontView = /*#__PURE__*/function (_React$Component2) {
           text: 'Default',
           color: 'blue',
           isActive: false,
-          attributes: {
+          attr: {
             type: 'submit',
             style: {
               marginLeft: '1.8rem'
@@ -66085,7 +66134,7 @@ var EditFontView = /*#__PURE__*/function (_React$Component2) {
           text: 'Remove',
           color: 'red',
           isActive: false,
-          attributes: {
+          attr: {
             type: 'submit',
             style: {
               marginLeft: '1.8rem'
@@ -66124,7 +66173,7 @@ var EditFontView = /*#__PURE__*/function (_React$Component2) {
             text: 'Default',
             color: 'blue',
             isActive: false,
-            attributes: {
+            attr: {
               type: 'submit',
               style: {
                 marginLeft: '1.8rem'
@@ -66135,7 +66184,7 @@ var EditFontView = /*#__PURE__*/function (_React$Component2) {
             text: 'Remove',
             color: 'red',
             isActive: false,
-            attributes: {
+            attr: {
               type: 'submit',
               style: {
                 marginLeft: '1.8rem'
@@ -66174,7 +66223,7 @@ var EditFontView = /*#__PURE__*/function (_React$Component2) {
           text: 'Add back',
           color: 'green',
           isActive: false,
-          attributes: {
+          attr: {
             type: 'submit',
             style: {
               marginLeft: '1.8rem'
@@ -66191,7 +66240,7 @@ var EditFontView = /*#__PURE__*/function (_React$Component2) {
         method: "POST",
         action: this.props.AppURLs.updateFontURL,
         encType: "multipart/form-data"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_reusables_LARAVEL_CSRF_TOKEN_js__WEBPACK_IMPORTED_MODULE_7__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_reusables_LARAVEL_CSRF_TOKEN_js__WEBPACK_IMPORTED_MODULE_8__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "hidden",
         name: "addedFiles",
         value: JSON.stringify(this.state.addedFiles)
@@ -66210,6 +66259,28 @@ var EditFontView = /*#__PURE__*/function (_React$Component2) {
 }(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
 /*
 input file, the value is the family name of the font
+*/
+
+/*
+<div className="header section_padding cols_container space_between align_center">
+  <h1 className="heading">All Fonts</h1>
+  <div className="cols_container align_center">
+    <Button_2
+        tagname = {'button'}
+        text = {'New'}
+        color = {'green'}
+        attr = {{type: 'button', style: {marginLeft: '1.4rem'}}}
+        events = {{onClick: () => this.state.toggleModal.uploadFontMdl(true)}}
+    />
+    <Button_2
+        tagname = {'button'}
+        text = {'Delete'}
+        color = {'red'}
+        attr = {{type: 'button', style: {marginLeft: '1.4rem'}}}
+        events = {{onClick: () => this.state.toggleModal.deleteFontsMdl(true)}}                     
+    />                      				    				  
+  </div>
+</div>
 */
 
 /***/ }),
@@ -66412,8 +66483,12 @@ var App = /*#__PURE__*/function (_React$Component) {
         }),
         headerWidgetBtn: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_reusables_Buttons_js__WEBPACK_IMPORTED_MODULE_9__["Button_1"], {
           tagname: 'button',
-          data: {
-            btnIcon: 1
+          icon: {
+            position: 1,
+            color: 'blue'
+          },
+          attr: {
+            type: 'submit'
           },
           events: {
             onClick: this.toggleFontFilter
@@ -66517,9 +66592,12 @@ var DisplaySelectedFam = /*#__PURE__*/function (_React$Component) {
             className: "displayHeader"
           }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, Object(_reusables_FontFileParsers_js__WEBPACK_IMPORTED_MODULE_2__["getFontFamValue"])(file.file_name)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_reusables_Buttons_js__WEBPACK_IMPORTED_MODULE_1__["Button_1"], {
             tagname: 'a',
-            data: {
-              url: _this.props.fontsDir + '/' + file.file_name,
-              btnIcon: 4
+            icon: {
+              position: 4,
+              color: 'blue'
+            },
+            attr: {
+              href: _this.props.fontsDir + '/' + file.file_name
             }
           })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
             className: "board",
@@ -66916,7 +66994,9 @@ if (document.getElementById('App')) {
   }), document.getElementById('App'));
 } else if (document.getElementById('AdminApp')) {
   react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_AdminApp_js__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    viewName: document.getElementById('AdminApp').getAttribute('data-view-name')
+    viewName: document.getElementById('AdminApp').getAttribute('data-view-name'),
+    AppURLs: AppURLs,
+    AdminData: JSON.parse(document.getElementById('AdminData').innerHTML)
   }), document.getElementById('AdminApp'));
 }
 
@@ -66972,24 +67052,36 @@ function _extends() { _extends = Object.assign || function (target) { for (var i
 function Button_1(props) {
   var iconPosition;
 
-  switch (props.data.btnIcon) {
+  switch (props.icon.position) {
     case 1:
       iconPosition = '0 0';
       break;
 
     case 2:
-      iconPosition = '25% 0';
+      iconPosition = '14.2% 0';
       break;
 
     case 3:
-      iconPosition = '50% 0';
+      iconPosition = '28.4% 0';
       break;
 
     case 4:
-      iconPosition = '75% 0';
+      iconPosition = '42.6% 0';
       break;
 
     case 5:
+      iconPosition = '56.8% 0';
+      break;
+
+    case 6:
+      iconPosition = '71% 0';
+      break;
+
+    case 7:
+      iconPosition = '85.2% 0';
+      break;
+
+    case 8:
       iconPosition = '100% 0';
       break;
 
@@ -66999,11 +67091,10 @@ function Button_1(props) {
 
   switch (props.tagname) {
     case 'a':
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-        href: props.data.url,
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", _extends({
         className: "btn_1"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-        className: "sprite",
+      }, props.attr, props.events), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: 'sprite ' + props.icon.color,
         style: {
           backgroundPosition: iconPosition
         }
@@ -67013,10 +67104,9 @@ function Button_1(props) {
 
     case 'button':
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", _extends({
-        type: "button",
         className: "btn_1"
-      }, props.events), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-        className: "sprite",
+      }, props.attr, props.events), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: 'sprite ' + props.icon.color,
         style: {
           backgroundPosition: iconPosition
         }
@@ -67033,14 +67123,14 @@ function Button_2(props) {
     case 'a':
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", _extends({
         className: "btn_2 " + props.color + (props.isActive ? ' active' : '')
-      }, props.attributes, props.events), props.text)) //
+      }, props.attr, props.events), props.text)) //
       ;
       break;
 
     case 'button':
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", _extends({
         className: "btn_2 " + props.color + (props.isActive ? ' active' : '')
-      }, props.attributes, props.events), props.text));
+      }, props.attr, props.events), props.text));
       break;
 
     default:
@@ -67081,9 +67171,9 @@ function Dropdown(props) {
     className: "toggle"
   }, props.DDToggleText), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
     className: "menu"
-  }, DDItems, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, DDItems, props.DDFooter ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "footer"
-  })));
+  }, props.DDFooter) : ''));
 }
 
 /* harmony default export */ __webpack_exports__["default"] = (Dropdown);
@@ -67594,6 +67684,36 @@ var Navbar = /*#__PURE__*/function (_React$Component) {
 }(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
 
 /* harmony default export */ __webpack_exports__["default"] = (Navbar);
+
+/***/ }),
+
+/***/ "./resources/js/components/reusables/SectionsAndWidgets.js":
+/*!*****************************************************************!*\
+  !*** ./resources/js/components/reusables/SectionsAndWidgets.js ***!
+  \*****************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return SectionHeader; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+function SectionHeader(props) {
+  var HeadingTag = props.headingTag;
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "sectionHeader section_padding cols_container space_between align_center"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "rows_container"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(HeadingTag, {
+    className: "heading"
+  }, props.headingText), props.subHeadingText ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: "subHeading"
+  }, props.subHeadingText) : ''), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "cols_container"
+  }, props.headerActions));
+}
 
 /***/ }),
 

@@ -142,7 +142,9 @@ class App extends React.Component{
 					/>
 
 					headerWidgetBtn = <Button_1
-						tagname = {'button'} data = {{btnIcon: 1}}
+						tagname = {'button'}
+						icon = {{position: 1, color: 'blue'}}
+						attr = {{type: 'submit'}}
 						events = {{
 							onClick: this.toggleFontFilter,
 						}}
