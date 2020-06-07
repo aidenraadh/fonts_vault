@@ -63,16 +63,17 @@ class AdminPanelController extends Controller
             abort(403);
         }
         // Validate Font Families
-        $v2 = Validator::make($request->all(), [
-            'selectedFams' => ['bail', 'required', 'array'],
-            'selectedFams.*' => ['bail', 'integer', 'exists:fonts,id'],
+        $deletedFonts = json_decode($request->deletedFonts);
+        $v2 = Validator::make(['deletedFonts' => $deletedFonts], [
+            'deletedFonts' => ['bail', 'required', 'array'],
+            'deletedFonts.*' => ['bail', 'integer', 'exists:fonts,id'],
         ]);
         
         if($v2->fails()){
             abort(403);
         }
 
-        app()->make('App\Admin\AdminCRUD')->deleteFonts($request->selectedFams);
+        app()->make('App\Admin\AdminCRUD')->deleteFonts($deletedFonts);
 
         return redirect()->back();
 	}
@@ -101,14 +102,40 @@ class AdminPanelController extends Controller
     }    
 
 	public function updateFont(Request $request){
-        $addedFiles = json_decode($request->newFiles, true);
+        $addedFiles = json_decode($request->addedFiles, true);
         $filteredNewFiles = $request->newFiles;
-        foreach ($request->newFiles as $key => $file) {
-            if(!in_array($file->getClientOriginalName(), $addedFiles)){
-                unset($filteredNewFiles[$key]);
+
+        if($request->newFiles){
+            foreach ($request->newFiles as $key => $file) {
+                if(!in_array($file->getClientOriginalName(), $addedFiles)){
+                    unset($filteredNewFiles[$key]);
+                }
             }
         }
+        $changes = [
+            'id' => $request->id,
+            'family_name' => $request->family_name,
+            'typeface' => $request->typeface,
+            'default_file' => $request->default_file,
+            'newFiles' => $filteredNewFiles,
+            'deletedFiles' => json_decode($request->deletedFiles),
+        ];
 
-        var_dump($filteredNewFiles);
+        $v = Validator::make($changes, [
+            'id' => ['bail', 'required', 'integer', 'exists:fonts,id'],
+            'family_name' => ['bail', 'string'],
+            'typeface' => ['bail', 'string', Rule::in(config('app.typefaces'))],
+            'default_file' => ['bail', 'string', 'exists:fonts_files,file_name'],
+            'newFiles.*' => ['bail', 'file', new FontFileRule],
+            'deletedFiles.*' => ['bail', 'string', 'exists:fonts_files,file_name'],
+        ]);
+
+        if($v->fails()){
+            dd($v->errors()->all());
+        }
+
+        app()->make('App\Admin\AdminCRUD')->updateFont($changes);
+
+        //dd($changes);
 	}		
 }

@@ -12,9 +12,9 @@ import {HomeView, EditFontView} from './AdminViews.js';
 */
 
 function AdminApp(props){
-	const viewName = props.viewName;
+	const AdminApp = document.getElementById('AdminApp');
 
-	if(viewName === 'home'){
+	if(AdminApp.classList.contains('home_view')){
 		return (
 			<HomeView
 				fonts = {JSON.parse(document.getElementById('fonts').innerHTML)}
@@ -24,7 +24,7 @@ function AdminApp(props){
 		);
 	}
 
-	else if(viewName === 'edit_font'){
+	else if(AdminApp.classList.contains('edit_font_view')){
 		return (
 			<EditFontView
 				font = {JSON.parse(document.getElementById('font').innerHTML)}

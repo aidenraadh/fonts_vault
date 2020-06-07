@@ -42,9 +42,11 @@ export class Modal_1 extends React.Component{
             <section id={this.props.modalid} className="modal_1" ref={this.modalRef}>
                 <div className="overlay">
                     <div className="content">
-                      <div className="header section_padding cols_container space_between">
+                      <div className="header section_padding cols_container space_between align_center">
                         <h6>{this.props.heading}</h6>
-                        <button type="button" onClick={() => this.toggleModal(false)}>&times;</button>
+                        <button className="clsModal" type="button" onClick={() => this.toggleModal(false)}>
+                          &times;
+                        </button>
                       </div>
                       <div className="body section_padding">
                           {this.props.body}

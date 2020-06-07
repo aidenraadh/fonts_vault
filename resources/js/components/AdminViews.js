@@ -1,11 +1,11 @@
 import React from 'react';
 import Header from './reusables/Header.js';
-import {Checkbox, Select_1, Input_1} from './reusables/Forms.js';
+import {Checkbox, Select_1, Input_1, Input_3, Select_3, FileInput} from './reusables/Forms.js';
 import Table from './reusables/Table.js';
 import {Modal_1,Modal_2} from './reusables/Modal.js';
 import {Button_1, Button_2} from './reusables/Buttons.js';
 import Dropdown from './reusables/Dropdown.js';
-import SectionHeader from './reusables/SectionsAndWidgets.js';
+import {SectionHeader, ListWidget_1} from './reusables/SectionsAndWidgets.js';
 import LARAVEL_CSRF_TOKEN from './reusables/LARAVEL_CSRF_TOKEN.js';
 
 
@@ -24,6 +24,7 @@ export class HomeView extends React.Component{
 				deleteFontsMdl: null,
 				uploadFontMdl: null,
 			},
+			deletedFonts: [],
 		};
 
 		this.TableHeadData = [
@@ -37,7 +38,7 @@ export class HomeView extends React.Component{
 
 		this.TableBodyData = this.props.fonts.map((font) => (
 			[
-				<Checkbox attr = {{name: 'selectedFams[]', value: font.id, form: 'deleteFonts'}} />,
+				<Checkbox attr = {{name: 'selectedFams', value: font.id}} />,
 				font.family_name,
 				font.num_of_files,
 				font.created_at,
@@ -55,13 +56,35 @@ export class HomeView extends React.Component{
 					tagname = {'button'}
 					icon = {{position: 7, color: 'red'}}
 					attr = {{type: 'submit', style: {width: '3.8rem', height: '3.8rem'}}}
+					events = {{onClick: () => this.addDeletedFont('insert',font.id)}}
 				/>
 				</>//,
 			]
 		));
 
 		this.getToggleModal = this.getToggleModal.bind(this);
+		this.addDeletedFont = this.addDeletedFont.bind(this);
 		//
+	}
+
+	addDeletedFont(action, font_id){
+		if(action === 'append'){
+			const checkedFonts = document.querySelectorAll('[name="selectedFams"]:checked');
+			let deletedFonts  = [];
+			checkedFonts.forEach((checked, idx) => {
+				deletedFonts.push(checked.value);
+			});
+			this.setState({
+				deletedFonts: deletedFonts
+			});			
+			this.state.toggleModal.deleteFontsMdl(true);
+		}
+		else{
+			this.setState({
+				deletedFonts: [font_id]
+			});
+			this.state.toggleModal.deleteFontsMdl(true);
+		}
 	}
 
 	getToggleModal(modalid, toggleModalFunc){
@@ -75,6 +98,10 @@ export class HomeView extends React.Component{
 			});
 			return {toggleModal: newToggleMdl};
 		});		
+	}
+
+	componentDidUpdate(){
+		console.log(this.state.deletedFonts);
 	}
 
 	render(){
@@ -124,7 +151,7 @@ export class HomeView extends React.Component{
     					    text = {'Delete'}
     					    color = {'red'}
     					    attr = {{type: 'button', style: {marginLeft: '1.4rem'}}}
-    					    events = {{onClick: () => this.state.toggleModal.deleteFontsMdl(true)}}                     
+    					    events = {{onClick: () => this.addDeletedFont('append')}}                     
     					/>						
 					</>}
 				/>
@@ -141,6 +168,9 @@ export class HomeView extends React.Component{
                     Are you sure want to delete the following fonts?
                     <form id="deleteFonts" method="POST" action={this.props.AppURLs.deleteFontsURL}>
                     	<LARAVEL_CSRF_TOKEN />
+                    	<input type="hidden" name="deletedFonts"
+                    		value={JSON.stringify(this.state.deletedFonts)}
+                    	/>
                     	<button type="submit">DELETE</button>
                     </form>
                   </div>					
@@ -149,20 +179,41 @@ export class HomeView extends React.Component{
 			/>
 			<Modal_1
 				modalid = {'uploadFontMdl'}
-				heading = {'test'}
+				heading = {'Add New Font'}
 				body = {
-				<form method="POST" action={this.props.AppURLs.domain+'admin/fonts/store'} encType="multipart/form-data">
+				<form method="POST"
+					action={this.props.AppURLs.domain+'admin/fonts/store'}
+					encType="multipart/form-data"
+				>
 					<LARAVEL_CSRF_TOKEN />
-					<input type="text" name="family_name" placeholder="family_name" required/><br/>
-					<select name="typeface" required>
-						<option value="serif">serif</option>
-						<option value="sans serif">sans serif</option>
-						<option value="monospace">monospace</option>
-						<option value="display">display</option>
-						<option value="script">script</option>
-					</select><br />	
-					<input type="file" name="font_files[]" multiple required/><br/>
-					<button type="submit">SUBMIT</button>
+					<Input_3
+						label = {'Family name'}
+						wrapperAttr = {{style: {width: '100%', marginBottom: '2rem'}}}
+						inputAttr = {{type: 'text', name: 'family_name', required:'required'}}
+					/>
+					<Select_3
+						label = {'Typeface'}
+						wrapperAttr = {{style: {width: '100%', marginBottom: '3rem'}}}
+						selectAttr = {{name:"typeface", required: 'required'}}
+						options = {[
+							{attr: {value:'serif'}, optionText: 'Serif'},
+							{attr: {value:'sans serif'}, optionText: 'Sans Serif'},
+							{attr: {value:'monospace'}, optionText: 'Monospace'},
+							{attr: {value:'display'}, optionText: 'Display'},
+							{attr: {value:'script'}, optionText: 'Script'},
+						]}
+
+					/>
+					<FileInput
+						label = {{inputLabel: 'Font files', actionLabel: 'Browse'}}
+						wrapperAttr = {{style: {width: '100%', marginBottom: '2rem'}}}
+						inputAttr = {{name: 'font_files[]', multiple: 'multiple', required: 'required'}}
+					/>
+					<Button_2
+						tagname = {'button'} text = {'Upload font'}
+						color = {'blue'} isActive = {true}
+						attr = {{type: 'submit', style: {margin: '0 auto'}}}
+					/>
 				</form>
 				}			
 				getToggleModal = {this.getToggleModal}
@@ -179,6 +230,7 @@ export class EditFontView extends React.Component{
 		super(props);
 
 		this.state = {
+			defaultFile: this.props.font.font_info.default_file,
 			addedFiles: [],
 			deletedFiles: [],
 		};
@@ -233,6 +285,16 @@ export class EditFontView extends React.Component{
 		}
 	}
 
+	changeDefaultFile(file_name){
+		this.setState({
+			defaultFile: file_name
+		});
+	}
+
+	componentDidMount(){
+		console.log(this.state.defaultFile);
+	}
+
 	render(){
 		return (
 			<>
@@ -248,6 +310,14 @@ export class EditFontView extends React.Component{
 								{tag: 'a', text: 'Action 2', attr: {href: '#'}},
 								{tag: 'a', text: 'Action 3', attr: {href: '#'}},
 							]}
+							DDFooter = {
+								<form method="POST" action={this.props.AppURLs.domain+'admin/logout'}>
+								<LARAVEL_CSRF_TOKEN />
+								<Button_2 tagname = {'button'} text = {'Sign out'}
+									color = {'blue'} attr = {{type: 'submit'}}
+								/>								
+								</form>
+							}							
 						/>
 					</>,
 					rightCol: null,
@@ -255,98 +325,122 @@ export class EditFontView extends React.Component{
 				AppURLs = {this.props.AppURLs}
 			/>			
 			<section className="section_1">
-			<Input_1 attr = {
-				{type:"text", name:"family_name", defaultValue: this.font_info.family_name, required: 'required'}
-			}/><br/><br/>
-			<Select_1
-				attr = {{name: 'typeface'}}
-				options = {this.props.typefaces.map((typeface) => (
-					{attr: {value: typeface}, optionText: typeface}
-				))}
-			/><br/><br/>	
-			<input form="updateFont" type="file" name="newFiles" multiple onChange={(e) => this.addFile(e)} />
+			<SectionHeader
+				headingTag = {'h2'}
+				headingText = {this.font_info.family_name+' Family'}
+				headerActions = {<>
+    				<Button_2
+    				    tagname = {'button'}
+    				    text = {'Save'}
+    				    color = {'green'}
+    				    attr = {{type: 'submit', style: {marginLeft: '1.4rem'}, form: 'updateFont'}}
+    				    events = {{}}
+    				/>
+    				<Button_2
+    				    tagname = {'a'}
+    				    text = {'Cancel'}
+    				    color = {'red'}
+    				    attr = {{
+    				    	href: this.props.AppURLs.domain+'admin/home',
+    				    	style: {marginLeft: '1.4rem'}
+    				    }}
+    				/>						
+				</>}
+			/>
+			<div className="cols_container space_between align_center" 
+					style={{padding: '0 2.2rem 1.4rem', flexWrap: 'wrap'}}
+			>
+				<Input_3
+					label = {'Family name'}
+					inputAttr = {{
+						type:"text", name:"family_name",
+						defaultValue: this.font_info.family_name,
+						required: 'required', form: 'updateFont'	
+					}}
+				/>
+				<Select_3
+					label = {'Typeface'}
+					selectAttr = {{name: 'typeface', form: 'updateFont', defaultValue: this.font_info.typeface}}
+					attr = {{name: 'typeface'}}
+					options = {this.props.typefaces.map((typeface) => (
+						{attr: {value: typeface}, optionText: typeface}
+					))}
+				/>			
+			</div>
+
+			<SectionHeader
+				headingTag = {'h2'}
+				headingText = {'Font Files'}
+				headerActions = {<>					
+					<FileInput
+						label = {{inputLabel: 'New font files', actionLabel: 'Browse'}}
+						inputAttr = {{name: 'newFiles[]', multiple: 'multiple', form: 'updateFont'}}
+						inputEvents = {{onChange: (e) => this.addFile(e)}}
+						wrapperAttr = {{style: {}}}
+					/>					
+				</>}
+			/>
 
 			{this.state.addedFiles.map((file_name, idx) => (
-				<section key={idx} className="FilesList list_widget_1 cols_container space_between section_padding">
-				  <div className="cols_container align_center">
-				    <div className="icon">
-				    	<span className="sprite" style={{backgroundPosition: '50% 0'}}></span>
-				    </div>
-				    <div className="text">
-				      <div className="main">{file_name}</div>
-				      <div className="sub">Test</div>
-				    </div>
-				  </div>
-				  <section className="cols_container center align_center">
+
+			<ListWidget_1
+				listTag = {'section'} text = {{mainText: file_name, subText: 'test'}}
+				barColor = {'green'} key={idx}
+				listActions = {
+					<Button_2
+						tagname = {'button'}
+						text = {'Remove'}
+						color = {'red'}
+						isActive = {false}
+						attr = {{type: 'submit', style: {marginLeft: '1.4rem'}}}
+						events = {{onClick:() => this.removeAddedFile(file_name)}}
+					/>
+				}
+			/>
+
+			))}
+
+			{this.font_files.map((file, idx) => {
+			if(!this.state.deletedFiles.includes(file.file_name)){
+			return (
+			<ListWidget_1
+				listTag = {'section'} text = {{mainText: file.file_name, subText: 'test'}}
+				barColor = {'blue'} key={idx}
+				listActions = {
+					<>
 					<Button_2
 						tagname = {'button'}
 						text = {'Default'}
 						color = {'blue'}
-						isActive = {false}
-						attr = {{type: 'submit', style: {marginLeft: '1.8rem'}}}
+						isActive = {(file.file_name === this.state.defaultFile ? true : false)}
+						attr = {{type: 'submit', style: {marginLeft: '1.4rem'}}}
+						events = {{onClick: () => this.changeDefaultFile(file.file_name)}}
 					/>
 					<Button_2
 						tagname = {'button'}
 						text = {'Remove'}
 						color = {'red'}
 						isActive = {false}
-						attr = {{type: 'submit', style: {marginLeft: '1.8rem'}}}
-						events = {{onClick:() => this.removeAddedFile(file_name)}}
+						attr = {{type: 'submit', style: {marginLeft: '1.4rem'}}}
+						events = {{onClick:() => this.toggleDelFiles(true, file.file_name)}}
 					/>
-				  </section>
-				</section>				
-			))}
-
-			<hr/>
-			{this.font_files.map((file, idx) => {
-				if(!this.state.deletedFiles.includes(file.file_name)){
-					return (
-					<section key={idx} className="FilesList list_widget_1 cols_container space_between section_padding">
-					  <div className="cols_container align_center">
-					    <div className="icon">
-					    	<span className="sprite" style={{backgroundPosition: '0 0'}}></span>
-					    </div>
-					    <div className="text">
-					      <div className="main">{file.file_name}</div>
-					      <div className="sub">Test</div>
-					    </div>
-					  </div>
-					  <section className="cols_container center align_center">
-						<Button_2
-							tagname = {'button'}
-							text = {'Default'}
-							color = {'blue'}
-							isActive = {false}
-							attr = {{type: 'submit', style: {marginLeft: '1.8rem'}}}
-						/>
-						<Button_2
-							tagname = {'button'}
-							text = {'Remove'}
-							color = {'red'}
-							isActive = {false}
-							attr = {{type: 'submit', style: {marginLeft: '1.8rem'}}}
-							events = {{onClick:() => this.toggleDelFiles(true, file.file_name)}}
-						/>
-					  </section>
-					</section>
-					)			
+					</>
 				}
+			/>				
+			)}
 			})}
 
-			<hr/>
+			<SectionHeader
+				headingTag = {'h3'}
+				headingText = {'Removed Files'}
+			/>			
 
 			{this.state.deletedFiles.map((file_name, idx) => (
-				<section key={idx} className="FilesList list_widget_1 cols_container space_between section_padding">
-				  <div className="cols_container align_center">
-				    <div className="icon">
-				    	<span className="sprite" style={{backgroundPosition: '100% 0'}}></span>
-				    </div>
-				    <div className="text">
-				      <div className="main">{file_name}</div>
-				      <div className="sub">Test</div>
-				    </div>
-				  </div>
-				  <section className="cols_container center align_center">
+
+			<ListWidget_1
+				listTag = {'section'} text = {{mainText: file_name, subText: 'test'}}
+				barColor = {'red'} key={idx}
+				listActions = {
 					<Button_2
 						tagname = {'button'}
 						text = {'Add back'}
@@ -355,12 +449,18 @@ export class EditFontView extends React.Component{
 						attr = {{type: 'submit', style: {marginLeft: '1.8rem'}}}
 						events = {{onClick:() => this.toggleDelFiles(false, file_name)}}
 					/>
-				  </section>
-				</section>				
-			))}
+				}
+			/>
+
+			))}			
+
 					
-			<form id="updateFont" method="POST" action={this.props.AppURLs.updateFontURL} encType="multipart/form-data">
+			<form id="updateFont" method="POST" action={this.props.AppURLs.updateFontURL}
+				encType="multipart/form-data"
+			>
 				<LARAVEL_CSRF_TOKEN />
+				<input type="hidden" name="id" value={this.font_info.id} />
+				<input type="hidden" name="default_file" value={this.state.defaultFile} />
 				<input type="hidden" name="addedFiles" value={JSON.stringify(this.state.addedFiles)} />
 				<input type="hidden" name="deletedFiles" value={JSON.stringify(this.state.deletedFiles)} />
 				<input type="hidden" value={this.font_info.id} />
@@ -370,29 +470,3 @@ export class EditFontView extends React.Component{
 		);
 	}
 }
-
-/*
-input file, the value is the family name of the font
-*/
-
-/*
-<div className="header section_padding cols_container space_between align_center">
-  <h1 className="heading">All Fonts</h1>
-  <div className="cols_container align_center">
-    <Button_2
-        tagname = {'button'}
-        text = {'New'}
-        color = {'green'}
-        attr = {{type: 'button', style: {marginLeft: '1.4rem'}}}
-        events = {{onClick: () => this.state.toggleModal.uploadFontMdl(true)}}
-    />
-    <Button_2
-        tagname = {'button'}
-        text = {'Delete'}
-        color = {'red'}
-        attr = {{type: 'button', style: {marginLeft: '1.4rem'}}}
-        events = {{onClick: () => this.state.toggleModal.deleteFontsMdl(true)}}                     
-    />                      				    				  
-  </div>
-</div>
-*/

@@ -48,6 +48,10 @@ input:focus, select:focus {
     outline-offset: 0;
 }
 
+select{
+	text-transform: capitalize;
+}
+
 .rows_container{
 	display: flex;
 	flex-direction: column;
@@ -129,7 +133,7 @@ input:focus, select:focus {
   border-radius: 2.6px;
   font-family: 'Roboto', sans-serif;
   font-weight: 500;
-  font-size: 1.45rem;
+  font-size: 1.4rem;
   transition: background-color 0.3s;
 }
 
@@ -264,6 +268,44 @@ input:focus, select:focus {
     font-size: 1.5rem;
 }
 
+.list_widget_1{
+	width: 100%;
+    font-family: 'Roboto', sans-serif;
+    color: #6A6A73;		
+}
+
+.list_widget_1 .bar{
+	width: 4px;
+	border-radius: 4px;
+	min-height: 120%;
+}
+
+.list_widget_1 .bar.blue{
+	background-color: #5d78ff;
+}
+
+.list_widget_1 .bar.green{
+	background-color: #0abb87;
+}
+
+.list_widget_1 .bar.red{
+	background-color: #fd397a;
+}
+
+.list_widget_1 .text{
+	padding-left: 1rem;
+}
+
+.list_widget_1 .mainText{
+	font-size: 1.5rem;
+	font-weight: 500;
+}
+
+.list_widget_1 .subText{
+	font-size: 1.4rem;
+	font-weight: 400;
+}
+
 .table{
   width: 100%;
   border-collapse: collapse;
@@ -329,7 +371,8 @@ input:focus, select:focus {
 	z-index: 1;
 	border-radius: 4px;
 	opacity: 0;
-	color: #6C7293;
+    font-family: 'Roboto', sans-serif;
+    color: #6A6A73;		
 	background-color: #FFFFFF;
 	transition: opacity 0.3s;
 }
@@ -342,9 +385,18 @@ input:focus, select:focus {
 	border-bottom: 1px solid #ebedf2;
 }
 
-.modal_1 h6{
-	font-size: 2.4rem;
+.modal_1 .clsModal{
+	width: 2.8rem; height: 2.8rem;
+	border-radius: 4px;
 	font-family: 'Roboto', sans-serif;
+	font-weight: 500;
+	font-size: 2.2rem;
+	background-color: rgba(93, 120, 255, 0.1);
+	color: #5d78ff;
+}
+
+.modal_1 h6{
+	font-size: 2rem;
 	font-weight: 500;
 }
 
@@ -407,33 +459,6 @@ input:focus, select:focus {
 	clear: both;
 }
 
-.list_widget_1 .icon{
-	position: relative;
-	width: 4rem;
-	height: 4rem;
-}
-
-.list_widget_1 .text{
-	padding-left: 0.8rem;
-}
-
-.list_widget_1 .main{
-	display: block;
-	margin-bottom: 0.4rem;
-	font-family: 'Roboto', sans-serif;
-	font-weight: 500;
-	font-size: 1.5rem;
-	color: #6A6A73;
-}
-
-.list_widget_1 .sub{
-	display: block;
-	font-family: 'Roboto', sans-serif;
-	font-weight: 400;
-	font-size: 1.4rem;
-	color: #6A6A73;	
-}
-
 .cards_container{
 	margin: 0 auto;
 	width: 94%;
@@ -486,10 +511,11 @@ input:focus, select:focus {
 }
 
 .form_1{
-	padding: 0.8rem 1.4rem;
+	padding: 0.8rem 1.45rem;
 	border: 1px solid #e2e5ec;
 	border-radius: 4px;
-	font-size: 1.45rem;
+	font-family: 'Roboto', sans-serif;
+	font-size: 1.4rem;
 	color: #495057;
 	transition: border-color 0.3s ease;
 }
@@ -509,23 +535,78 @@ input:focus, select:focus {
   align-items: center;
   border: 1px solid #e2e5ec;
   border-radius: 4px 0 0 4px;   
-  font-size: 1.45rem;
+  font-size: 1.4rem;
 }
 
 .form_2 .form{
   display: inline-block;
-  padding: 0.8rem 1.4rem;
+  padding: 0.8rem 1.45rem;
   border: 1px solid #e2e5ec;
   border-radius: 0 4px 4px 0;
-  font-size: 1.45rem;
+  font-family: 'Roboto', sans-serif;
+  font-size: 1.4rem;
   color: #495057;
   transition: border-color 0.3s ease;
 }
 
 .form_2 .form:focus{
-  font-size: 1.45rem;
+  font-size: 1.4rem;
   color: #495057;	
   border-color: #9aabff;
+}
+
+.form_3{
+    display: inline-flex;
+}
+
+.form_3 .label{
+    display: inline-block;
+    margin-bottom: 0.8rem;
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.4rem;
+    font-weight: 400;
+    color: #495057;
+}
+
+.form_3 .form{
+    display: block;
+    padding: 0.8rem 1.45rem;
+    border: 1px solid #e2e5ec;
+    border-radius: 4px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.4rem;
+    color: #495057;
+    transition: border-color 0.3s ease;
+}
+
+.form_3 .form:focus{
+    border-color: #9aabff;
+}
+
+.file_input{
+	min-width: 20rem;
+}
+.file_input input{
+    width: 1px; height: 1px;
+}
+
+.file_input .inputLabel, .file_input .actionLabel{
+	display: block;
+    padding: 0.8rem 1.45rem;
+    border: 1px solid #e2e5ec;
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.4rem;
+    color: #495057;
+}
+
+.file_input .inputLabel{
+	width: 100%;
+    border-radius: 4px 0 0 4px;
+}
+
+.file_input .actionLabel{
+    border-radius: 0 4px 4px 0;
+    background-color: #f7f8fa;
 }
 
 .cb{
@@ -687,14 +768,6 @@ input:focus, select:focus {
 	width: 10rem;
 }
 
-.FilesList .sprite{
-	position: absolute;
-	width: 100%;
-	height: 100%;
-	background: url('../images/icons/Asset 150.png') no-repeat scroll 0 0;
-	background-size: auto 100%;
-}
-
 #selectedFamily.modal_1 .body{
 	width: 80rem;
 	max-height: 70vh;
@@ -754,6 +827,10 @@ input:focus, select:focus {
 	min-width: 26rem;
 }
 
+#AdminApp.edit_font_view .form_3{
+	width: 48%;
+}
+
 @media only screen and (min-width: 1281px) {
   html{
     font-size: 0.78125vw;
@@ -784,7 +861,7 @@ input:focus, select:focus {
 
 @media only screen and (max-width: 500px) {
 	.section_1{
-		width: 92%;
+		width: 94%;
 	}
 
 	.FilesList .main, .FilesList .sub{
@@ -793,4 +870,9 @@ input:focus, select:focus {
   		overflow: hidden;
   		text-overflow: ellipsis;		
 	}
+
+	#AdminApp.edit_font_view .form_3{
+		width: 100%;
+	}
+
 }

@@ -95,5 +95,58 @@ class AdminCRUD{
 			)
 		];
 	}
+
+	public function updateFont($changes){
+		// Get the previous number of files
+		$num_of_files = DB::select('SELECT num_of_files FROM fonts WHERE id = ?', [$changes['id']])[0]->num_of_files;
+		$num_of_files = $num_of_files + 
+			($changes['newFiles'] ? count($changes['newFiles']) : 0) -
+			($changes['deletedFiles'] ? count($changes['deletedFiles']) : 0);
+
+		DB::beginTransaction();
+
+        try {
+        	DB::update(
+        		'UPDATE fonts SET family_name=? typeface=? default_file=? num_of_files=? WHERE id = ?',
+        		[
+        			$changes['family_name'], $changes['typeface'],
+        			$changes['defaultFile'], $num_of_files,
+        			$changes['id']
+        		]
+        	);
+
+        	if($changes['deletedFiles']){
+        		DB::delete(
+        			'DELETE FROM fonts_files WHERE font_id = ? AND file_name IN('.
+        			'"'.implode('","', $changes['deletedFiles']).'"'
+        			.')',
+        			[$changes['id']]
+        		);
+        	}
+
+        	if($changes['newFiles']){
+       			// Generate query for mass INSERT
+       			$lastFileKey = array_key_last($changes['newFiles']);
+       			$insertQueries = '';
+       			
+       			foreach ($changes['newFiles'] as $key => $fontFile) {
+       				$insertQueries .= '('.$changes['id'].',"'.$fontFile->getClientOriginalName().'")';
+       				if($key !== $lastFileKey){
+       					$insertQueries .= ', ';
+       				}
+       			}
+       			// Insert new font files to fonts_files table
+       			DB::insert('INSERT INTO fonts_files(font_id, file_name) VALUES '.$insertQueries);       			
+        	}
+       		DB::commit();
+
+			Storage::disk('public')->makeDirectory('fonts/'.$fontData['family_name']);
+
+
+        } catch (Exception $e) {
+        	DB::rollback();
+        	abort(403);
+        }      		
+	}	
 	
 }

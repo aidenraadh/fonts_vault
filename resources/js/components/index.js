@@ -18,7 +18,6 @@ if(document.getElementById('App')){
 else if(document.getElementById('AdminApp')){
 	ReactDOM.render(
 		<AdminApp
-			viewName = {document.getElementById('AdminApp').getAttribute('data-view-name')}
 			AppURLs = {AppURLs}
 			AdminData = {JSON.parse(document.getElementById('AdminData').innerHTML)}
 		/>,
