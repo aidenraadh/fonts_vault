@@ -65640,7 +65640,13 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _AdminViews_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./AdminViews.js */ "./resources/js/components/AdminViews.js");
+/* harmony import */ var _AdminViews_HomeView_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./AdminViews/HomeView.js */ "./resources/js/components/AdminViews/HomeView.js");
+/* harmony import */ var _AdminViews_EditFontView_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./AdminViews/EditFontView.js */ "./resources/js/components/AdminViews/EditFontView.js");
+/* harmony import */ var _AdminViews_LoginView_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./AdminViews/LoginView.js */ "./resources/js/components/AdminViews/LoginView.js");
+/* harmony import */ var _AdminViews_RegisterView_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./AdminViews/RegisterView.js */ "./resources/js/components/AdminViews/RegisterView.js");
+
+
+
 
 
 /*
@@ -65648,8 +65654,8 @@ __webpack_require__.r(__webpack_exports__);
 | AdminApp
 |--------------------------------------------------------------------------
 |
-| This component will serve the views for admin according to 'data-view-name'
-| attribute of #AdminApp element.
+| This component will serve the views for admin according to the view name
+| defined in the class of #AdminApp element.
 |
 */
 
@@ -65657,17 +65663,25 @@ function AdminApp(props) {
   var AdminApp = document.getElementById('AdminApp');
 
   if (AdminApp.classList.contains('home_view')) {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_AdminViews_js__WEBPACK_IMPORTED_MODULE_1__["HomeView"], {
-      fonts: JSON.parse(document.getElementById('fonts').innerHTML),
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_AdminViews_HomeView_js__WEBPACK_IMPORTED_MODULE_1__["default"], {
       AppURLs: props.AppURLs,
-      AdminData: props.AdminData
+      fonts: JSON.parse(document.getElementById('fonts').innerHTML),
+      AdminData: JSON.parse(document.getElementById('AdminData').innerHTML)
     });
   } else if (AdminApp.classList.contains('edit_font_view')) {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_AdminViews_js__WEBPACK_IMPORTED_MODULE_1__["EditFontView"], {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_AdminViews_EditFontView_js__WEBPACK_IMPORTED_MODULE_2__["default"], {
+      AppURLs: props.AppURLs,
       font: JSON.parse(document.getElementById('font').innerHTML),
       typefaces: JSON.parse(document.getElementById('typefaces').innerHTML),
-      AppURLs: props.AppURLs,
-      AdminData: props.AdminData
+      AdminData: JSON.parse(document.getElementById('AdminData').innerHTML)
+    });
+  } else if (AdminApp.classList.contains('login_view')) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_AdminViews_LoginView_js__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      AppURLs: props.AppURLs
+    });
+  } else if (AdminApp.classList.contains('register_view')) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_AdminViews_RegisterView_js__WEBPACK_IMPORTED_MODULE_4__["default"], {
+      AppURLs: props.AppURLs
     });
   }
 }
@@ -65676,27 +65690,419 @@ function AdminApp(props) {
 
 /***/ }),
 
-/***/ "./resources/js/components/AdminViews.js":
-/*!***********************************************!*\
-  !*** ./resources/js/components/AdminViews.js ***!
-  \***********************************************/
-/*! exports provided: HomeView, EditFontView */
+/***/ "./resources/js/components/AdminViews/EditFontView.js":
+/*!************************************************************!*\
+  !*** ./resources/js/components/AdminViews/EditFontView.js ***!
+  \************************************************************/
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "HomeView", function() { return HomeView; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "EditFontView", function() { return EditFontView; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return EditFontView; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _reusables_Header_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./reusables/Header.js */ "./resources/js/components/reusables/Header.js");
-/* harmony import */ var _reusables_Forms_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./reusables/Forms.js */ "./resources/js/components/reusables/Forms.js");
-/* harmony import */ var _reusables_Table_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./reusables/Table.js */ "./resources/js/components/reusables/Table.js");
-/* harmony import */ var _reusables_Modal_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./reusables/Modal.js */ "./resources/js/components/reusables/Modal.js");
-/* harmony import */ var _reusables_Buttons_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./reusables/Buttons.js */ "./resources/js/components/reusables/Buttons.js");
-/* harmony import */ var _reusables_Dropdown_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./reusables/Dropdown.js */ "./resources/js/components/reusables/Dropdown.js");
-/* harmony import */ var _reusables_SectionsAndWidgets_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./reusables/SectionsAndWidgets.js */ "./resources/js/components/reusables/SectionsAndWidgets.js");
-/* harmony import */ var _reusables_LARAVEL_CSRF_TOKEN_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./reusables/LARAVEL_CSRF_TOKEN.js */ "./resources/js/components/reusables/LARAVEL_CSRF_TOKEN.js");
+/* harmony import */ var _reusables_SectionsAndWidgets_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../reusables/SectionsAndWidgets.js */ "./resources/js/components/reusables/SectionsAndWidgets.js");
+/* harmony import */ var _reusables_Dropdown_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./../reusables/Dropdown.js */ "./resources/js/components/reusables/Dropdown.js");
+/* harmony import */ var _reusables_Forms_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./../reusables/Forms.js */ "./resources/js/components/reusables/Forms.js");
+/* harmony import */ var _reusables_Buttons_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./../reusables/Buttons.js */ "./resources/js/components/reusables/Buttons.js");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _createSuper(Derived) { return function () { var Super = _getPrototypeOf(Derived), result; if (_isNativeReflectConstruct()) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+
+
+
+
+var EditFontView = /*#__PURE__*/function (_React$Component) {
+  _inherits(EditFontView, _React$Component);
+
+  var _super = _createSuper(EditFontView);
+
+  function EditFontView(props) {
+    var _this;
+
+    _classCallCheck(this, EditFontView);
+
+    _this = _super.call(this, props);
+    _this.state = {
+      defaultFile: _this.props.font.font_info.default_file,
+      addedFiles: [],
+      deletedFiles: []
+    };
+    _this.font_info = _this.props.font.font_info;
+    _this.font_files = _this.props.font.font_files;
+    _this.addFile = _this.addFile.bind(_assertThisInitialized(_this));
+    _this.removeAddedFile = _this.removeAddedFile.bind(_assertThisInitialized(_this));
+    return _this;
+  }
+
+  _createClass(EditFontView, [{
+    key: "addFile",
+    value: function addFile(e) {
+      var keys = Object.getOwnPropertyNames(e.target.files);
+      var inputtedFiles = [];
+      keys.forEach(function (key) {
+        inputtedFiles.push(e.target.files[key].name);
+      });
+      this.setState({
+        addedFiles: inputtedFiles,
+        test: e.target
+      });
+    }
+  }, {
+    key: "removeAddedFile",
+    value: function removeAddedFile(removedFile) {
+      var newAddedFiles;
+      this.setState(function (state) {
+        newAddedFiles = state.addedFiles.filter(function (file_name) {
+          return file_name !== removedFile;
+        });
+        return {
+          addedFiles: newAddedFiles
+        };
+      });
+    }
+  }, {
+    key: "toggleDelFiles",
+    value: function toggleDelFiles(isDelete, file_name) {
+      if (isDelete) {
+        var newDeletedFiles;
+        this.setState(function (state) {
+          newDeletedFiles = state.deletedFiles;
+          newDeletedFiles.unshift(file_name);
+          return {
+            deletedFiles: newDeletedFiles
+          };
+        });
+      } else {
+        var _newDeletedFiles;
+
+        this.setState(function (state) {
+          _newDeletedFiles = state.deletedFiles.filter(function (file) {
+            return file_name !== file;
+          });
+          return {
+            deletedFiles: _newDeletedFiles
+          };
+        });
+      }
+    }
+  }, {
+    key: "changeDefaultFile",
+    value: function changeDefaultFile(file_name) {
+      this.setState({
+        defaultFile: file_name
+      });
+    }
+  }, {
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      console.log(this.state.defaultFile);
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this2 = this;
+
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_reusables_SectionsAndWidgets_js__WEBPACK_IMPORTED_MODULE_1__["Header"], {
+        subHeader: {
+          leftCol: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
+            className: "mainHeading"
+          }, "Edit Font"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_reusables_Dropdown_js__WEBPACK_IMPORTED_MODULE_2__["default"], {
+            DDTag: 'div',
+            DDToggleText: 'Hello, ' + this.props.AdminData.name,
+            DDItems: [{
+              tag: 'a',
+              text: 'Action 1',
+              attr: {
+                href: '#'
+              }
+            }, {
+              tag: 'a',
+              text: 'Action 2',
+              attr: {
+                href: '#'
+              }
+            }, {
+              tag: 'a',
+              text: 'Action 3',
+              attr: {
+                href: '#'
+              }
+            }],
+            DDFooter: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+              method: "POST",
+              action: this.props.AppURLs.domain + 'admin/logout'
+            }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_reusables_Forms_js__WEBPACK_IMPORTED_MODULE_3__["LARAVEL_CSRF_TOKEN"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_reusables_Buttons_js__WEBPACK_IMPORTED_MODULE_4__["Button_2"], {
+              tagname: 'button',
+              text: 'Sign out',
+              color: 'blue',
+              attr: {
+                type: 'submit'
+              }
+            }))
+          })),
+          rightCol: null
+        },
+        AppURLs: this.props.AppURLs
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
+        className: "section_1"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_reusables_SectionsAndWidgets_js__WEBPACK_IMPORTED_MODULE_1__["SectionHeader"], {
+        headingTag: 'h2',
+        headingText: this.font_info.family_name + ' Family',
+        headerActions: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_reusables_Buttons_js__WEBPACK_IMPORTED_MODULE_4__["Button_2"], {
+          tagname: 'button',
+          text: 'Save',
+          color: 'green',
+          attr: {
+            type: 'submit',
+            style: {
+              marginLeft: '1.4rem'
+            },
+            form: 'updateFont'
+          },
+          events: {}
+        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_reusables_Buttons_js__WEBPACK_IMPORTED_MODULE_4__["Button_2"], {
+          tagname: 'a',
+          text: 'Cancel',
+          color: 'red',
+          attr: {
+            href: this.props.AppURLs.domain + 'admin/home',
+            style: {
+              marginLeft: '1.4rem'
+            }
+          }
+        }))
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "cols_container space_between align_center",
+        style: {
+          padding: '0 2.2rem 1.4rem',
+          flexWrap: 'wrap'
+        }
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_reusables_Forms_js__WEBPACK_IMPORTED_MODULE_3__["Input_3"], {
+        label: 'Family name',
+        inputAttr: {
+          type: "text",
+          name: "family_name",
+          placeholder: this.font_info.family_name,
+          form: 'updateFont'
+        }
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_reusables_Forms_js__WEBPACK_IMPORTED_MODULE_3__["Select_3"], {
+        label: 'Typeface',
+        selectAttr: {
+          name: 'typeface',
+          form: 'updateFont',
+          placeholder: this.font_info.typeface
+        },
+        attr: {
+          name: 'typeface'
+        },
+        options: this.props.typefaces.map(function (typeface) {
+          return {
+            attr: {
+              value: typeface
+            },
+            optionText: typeface
+          };
+        })
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_reusables_SectionsAndWidgets_js__WEBPACK_IMPORTED_MODULE_1__["SectionHeader"], {
+        headingTag: 'h2',
+        headingText: 'Font Files',
+        headerActions: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_reusables_Forms_js__WEBPACK_IMPORTED_MODULE_3__["FileInput"], {
+          label: {
+            inputLabel: 'New font files',
+            actionLabel: 'Browse'
+          },
+          inputAttr: {
+            name: 'newFiles[]',
+            multiple: 'multiple',
+            form: 'updateFont'
+          },
+          inputEvents: {
+            onChange: function onChange(e) {
+              return _this2.addFile(e);
+            }
+          },
+          wrapperAttr: {
+            style: {}
+          }
+        }))
+      }), this.state.addedFiles.map(function (file_name, idx) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_reusables_SectionsAndWidgets_js__WEBPACK_IMPORTED_MODULE_1__["ListWidget_1"], {
+          listTag: 'section',
+          text: {
+            mainText: file_name,
+            subText: 'test'
+          },
+          barColor: 'green',
+          key: idx,
+          listActions: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_reusables_Buttons_js__WEBPACK_IMPORTED_MODULE_4__["Button_2"], {
+            tagname: 'button',
+            text: 'Remove',
+            color: 'red',
+            isActive: false,
+            attr: {
+              type: 'submit',
+              style: {
+                marginLeft: '1.4rem'
+              }
+            },
+            events: {
+              onClick: function onClick() {
+                return _this2.removeAddedFile(file_name);
+              }
+            }
+          })
+        });
+      }), this.font_files.map(function (file, idx) {
+        if (!_this2.state.deletedFiles.includes(file.file_name)) {
+          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_reusables_SectionsAndWidgets_js__WEBPACK_IMPORTED_MODULE_1__["ListWidget_1"], {
+            listTag: 'section',
+            text: {
+              mainText: file.file_name,
+              subText: 'test'
+            },
+            barColor: 'blue',
+            key: idx,
+            listActions: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_reusables_Buttons_js__WEBPACK_IMPORTED_MODULE_4__["Button_2"], {
+              tagname: 'button',
+              text: 'Default',
+              color: 'blue',
+              isActive: file.file_name === _this2.state.defaultFile ? true : false,
+              attr: {
+                type: 'submit',
+                style: {
+                  marginLeft: '1.4rem'
+                }
+              },
+              events: {
+                onClick: function onClick() {
+                  return _this2.changeDefaultFile(file.file_name);
+                }
+              }
+            }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_reusables_Buttons_js__WEBPACK_IMPORTED_MODULE_4__["Button_2"], {
+              tagname: 'button',
+              text: 'Remove',
+              color: 'red',
+              isActive: false,
+              attr: {
+                type: 'submit',
+                style: {
+                  marginLeft: '1.4rem'
+                }
+              },
+              events: {
+                onClick: function onClick() {
+                  return _this2.toggleDelFiles(true, file.file_name);
+                }
+              }
+            }))
+          });
+        }
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_reusables_SectionsAndWidgets_js__WEBPACK_IMPORTED_MODULE_1__["SectionHeader"], {
+        headingTag: 'h3',
+        headingText: 'Removed Files'
+      }), this.state.deletedFiles.map(function (file_name, idx) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_reusables_SectionsAndWidgets_js__WEBPACK_IMPORTED_MODULE_1__["ListWidget_1"], {
+          listTag: 'section',
+          text: {
+            mainText: file_name,
+            subText: 'test'
+          },
+          barColor: 'red',
+          key: idx,
+          listActions: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_reusables_Buttons_js__WEBPACK_IMPORTED_MODULE_4__["Button_2"], {
+            tagname: 'button',
+            text: 'Add back',
+            color: 'green',
+            isActive: false,
+            attr: {
+              type: 'submit',
+              style: {
+                marginLeft: '1.8rem'
+              }
+            },
+            events: {
+              onClick: function onClick() {
+                return _this2.toggleDelFiles(false, file_name);
+              }
+            }
+          })
+        });
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+        id: "updateFont",
+        method: "POST",
+        action: this.props.AppURLs.updateFontURL,
+        encType: "multipart/form-data"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_reusables_Forms_js__WEBPACK_IMPORTED_MODULE_3__["LARAVEL_CSRF_TOKEN"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "hidden",
+        name: "id",
+        value: this.font_info.id
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "hidden",
+        name: "default_file",
+        value: this.state.defaultFile
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "hidden",
+        name: "addedFiles",
+        value: JSON.stringify(this.state.addedFiles)
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "hidden",
+        name: "deletedFiles",
+        value: JSON.stringify(this.state.deletedFiles)
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "hidden",
+        value: this.font_info.id
+      })))) //
+      ;
+    }
+  }]);
+
+  return EditFontView;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/AdminViews/HomeView.js":
+/*!********************************************************!*\
+  !*** ./resources/js/components/AdminViews/HomeView.js ***!
+  \********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return HomeView; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _reusables_SectionsAndWidgets_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../reusables/SectionsAndWidgets.js */ "./resources/js/components/reusables/SectionsAndWidgets.js");
+/* harmony import */ var _reusables_Buttons_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./../reusables/Buttons.js */ "./resources/js/components/reusables/Buttons.js");
+/* harmony import */ var _reusables_Dropdown_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./../reusables/Dropdown.js */ "./resources/js/components/reusables/Dropdown.js");
+/* harmony import */ var _reusables_Forms_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./../reusables/Forms.js */ "./resources/js/components/reusables/Forms.js");
+/* harmony import */ var _reusables_Modal_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./../reusables/Modal.js */ "./resources/js/components/reusables/Modal.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
@@ -65732,14 +66138,6 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
-
-
-/*
-|
-| Below are all view components for admin
-|
-*/
-
 var HomeView = /*#__PURE__*/function (_React$Component) {
   _inherits(HomeView, _React$Component);
 
@@ -65758,19 +66156,19 @@ var HomeView = /*#__PURE__*/function (_React$Component) {
       },
       deletedFonts: []
     };
-    _this.TableHeadData = [/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_reusables_Forms_js__WEBPACK_IMPORTED_MODULE_2__["Checkbox"], {
+    _this.TableHeadData = [/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_reusables_Forms_js__WEBPACK_IMPORTED_MODULE_4__["Checkbox"], {
       cbData: [{
         name: 'test[]',
         value: 'haha'
       }]
     }), 'Family Name', 'Total Fonts', 'Inserted At', 'Updated At', 'Actions'];
     _this.TableBodyData = _this.props.fonts.map(function (font) {
-      return [/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_reusables_Forms_js__WEBPACK_IMPORTED_MODULE_2__["Checkbox"], {
+      return [/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_reusables_Forms_js__WEBPACK_IMPORTED_MODULE_4__["Checkbox"], {
         attr: {
           name: 'selectedFams',
           value: font.id
         }
-      }), font.family_name, font.num_of_files, font.created_at, font.updated_at, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_reusables_Buttons_js__WEBPACK_IMPORTED_MODULE_5__["Button_1"], {
+      }), font.family_name, font.num_of_files, font.created_at, font.updated_at, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_reusables_Buttons_js__WEBPACK_IMPORTED_MODULE_2__["Button_1"], {
         tagname: 'a',
         icon: {
           position: 8,
@@ -65783,7 +66181,7 @@ var HomeView = /*#__PURE__*/function (_React$Component) {
             height: '3.8rem'
           }
         }
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_reusables_Buttons_js__WEBPACK_IMPORTED_MODULE_5__["Button_1"], {
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_reusables_Buttons_js__WEBPACK_IMPORTED_MODULE_2__["Button_1"], {
         tagname: 'button',
         icon: {
           position: 7,
@@ -65856,11 +66254,11 @@ var HomeView = /*#__PURE__*/function (_React$Component) {
     value: function render() {
       var _this2 = this;
 
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_reusables_Header_js__WEBPACK_IMPORTED_MODULE_1__["default"], {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_reusables_SectionsAndWidgets_js__WEBPACK_IMPORTED_MODULE_1__["Header"], {
         subHeader: {
           leftCol: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
             className: "mainHeading"
-          }, "Dashboard"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_reusables_Dropdown_js__WEBPACK_IMPORTED_MODULE_6__["default"], {
+          }, "Dashboard"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_reusables_Dropdown_js__WEBPACK_IMPORTED_MODULE_3__["default"], {
             DDTag: 'div',
             DDToggleText: 'Hello, ' + this.props.AdminData.name,
             DDItems: [{
@@ -65885,7 +66283,7 @@ var HomeView = /*#__PURE__*/function (_React$Component) {
             DDFooter: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
               method: "POST",
               action: this.props.AppURLs.domain + 'admin/logout'
-            }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_reusables_LARAVEL_CSRF_TOKEN_js__WEBPACK_IMPORTED_MODULE_8__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_reusables_Buttons_js__WEBPACK_IMPORTED_MODULE_5__["Button_2"], {
+            }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_reusables_Forms_js__WEBPACK_IMPORTED_MODULE_4__["LARAVEL_CSRF_TOKEN"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_reusables_Buttons_js__WEBPACK_IMPORTED_MODULE_2__["Button_2"], {
               tagname: 'button',
               text: 'Sign out',
               color: 'blue',
@@ -65899,10 +66297,10 @@ var HomeView = /*#__PURE__*/function (_React$Component) {
         AppURLs: this.props.AppURLs
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
         className: "section_1"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_reusables_SectionsAndWidgets_js__WEBPACK_IMPORTED_MODULE_7__["SectionHeader"], {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_reusables_SectionsAndWidgets_js__WEBPACK_IMPORTED_MODULE_1__["SectionHeader"], {
         headingTag: 'h2',
         headingText: 'All Fonts',
-        headerActions: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_reusables_Buttons_js__WEBPACK_IMPORTED_MODULE_5__["Button_2"], {
+        headerActions: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_reusables_Buttons_js__WEBPACK_IMPORTED_MODULE_2__["Button_2"], {
           tagname: 'button',
           text: 'New',
           color: 'green',
@@ -65917,7 +66315,7 @@ var HomeView = /*#__PURE__*/function (_React$Component) {
               return _this2.state.toggleModal.uploadFontMdl(true);
             }
           }
-        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_reusables_Buttons_js__WEBPACK_IMPORTED_MODULE_5__["Button_2"], {
+        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_reusables_Buttons_js__WEBPACK_IMPORTED_MODULE_2__["Button_2"], {
           tagname: 'button',
           text: 'Delete',
           color: 'red',
@@ -65933,10 +66331,10 @@ var HomeView = /*#__PURE__*/function (_React$Component) {
             }
           }
         }))
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_reusables_Table_js__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_reusables_SectionsAndWidgets_js__WEBPACK_IMPORTED_MODULE_1__["Table"], {
         headData: this.TableHeadData,
         bodyData: this.TableBodyData
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_reusables_Modal_js__WEBPACK_IMPORTED_MODULE_4__["Modal_2"], {
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_reusables_Modal_js__WEBPACK_IMPORTED_MODULE_5__["Modal_2"], {
         modalid: "deleteFontsMdl",
         messages: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           style: {
@@ -65946,7 +66344,7 @@ var HomeView = /*#__PURE__*/function (_React$Component) {
           id: "deleteFonts",
           method: "POST",
           action: this.props.AppURLs.deleteFontsURL
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_reusables_LARAVEL_CSRF_TOKEN_js__WEBPACK_IMPORTED_MODULE_8__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_reusables_Forms_js__WEBPACK_IMPORTED_MODULE_4__["LARAVEL_CSRF_TOKEN"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
           type: "hidden",
           name: "deletedFonts",
           value: JSON.stringify(this.state.deletedFonts)
@@ -65954,14 +66352,14 @@ var HomeView = /*#__PURE__*/function (_React$Component) {
           type: "submit"
         }, "DELETE"))),
         getToggleModal: this.getToggleModal
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_reusables_Modal_js__WEBPACK_IMPORTED_MODULE_4__["Modal_1"], {
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_reusables_Modal_js__WEBPACK_IMPORTED_MODULE_5__["Modal_1"], {
         modalid: 'uploadFontMdl',
         heading: 'Add New Font',
         body: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
           method: "POST",
           action: this.props.AppURLs.domain + 'admin/fonts/store',
           encType: "multipart/form-data"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_reusables_LARAVEL_CSRF_TOKEN_js__WEBPACK_IMPORTED_MODULE_8__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_reusables_Forms_js__WEBPACK_IMPORTED_MODULE_2__["Input_3"], {
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_reusables_Forms_js__WEBPACK_IMPORTED_MODULE_4__["LARAVEL_CSRF_TOKEN"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_reusables_Forms_js__WEBPACK_IMPORTED_MODULE_4__["Input_3"], {
           label: 'Family name',
           wrapperAttr: {
             style: {
@@ -65974,7 +66372,7 @@ var HomeView = /*#__PURE__*/function (_React$Component) {
             name: 'family_name',
             required: 'required'
           }
-        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_reusables_Forms_js__WEBPACK_IMPORTED_MODULE_2__["Select_3"], {
+        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_reusables_Forms_js__WEBPACK_IMPORTED_MODULE_4__["Select_3"], {
           label: 'Typeface',
           wrapperAttr: {
             style: {
@@ -66012,7 +66410,7 @@ var HomeView = /*#__PURE__*/function (_React$Component) {
             },
             optionText: 'Script'
           }]
-        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_reusables_Forms_js__WEBPACK_IMPORTED_MODULE_2__["FileInput"], {
+        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_reusables_Forms_js__WEBPACK_IMPORTED_MODULE_4__["FileInput"], {
           label: {
             inputLabel: 'Font files',
             actionLabel: 'Browse'
@@ -66028,7 +66426,7 @@ var HomeView = /*#__PURE__*/function (_React$Component) {
             multiple: 'multiple',
             required: 'required'
           }
-        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_reusables_Buttons_js__WEBPACK_IMPORTED_MODULE_5__["Button_2"], {
+        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_reusables_Buttons_js__WEBPACK_IMPORTED_MODULE_2__["Button_2"], {
           tagname: 'button',
           text: 'Upload font',
           color: 'blue',
@@ -66048,353 +66446,202 @@ var HomeView = /*#__PURE__*/function (_React$Component) {
 
   return HomeView;
 }(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
-var EditFontView = /*#__PURE__*/function (_React$Component2) {
-  _inherits(EditFontView, _React$Component2);
 
-  var _super2 = _createSuper(EditFontView);
 
-  function EditFontView(props) {
-    var _this3;
 
-    _classCallCheck(this, EditFontView);
+/***/ }),
 
-    _this3 = _super2.call(this, props);
-    _this3.state = {
-      defaultFile: _this3.props.font.font_info.default_file,
-      addedFiles: [],
-      deletedFiles: []
-    };
-    _this3.font_info = _this3.props.font.font_info;
-    _this3.font_files = _this3.props.font.font_files;
-    _this3.addFile = _this3.addFile.bind(_assertThisInitialized(_this3));
-    _this3.removeAddedFile = _this3.removeAddedFile.bind(_assertThisInitialized(_this3));
-    return _this3;
-  }
+/***/ "./resources/js/components/AdminViews/LoginView.js":
+/*!*********************************************************!*\
+  !*** ./resources/js/components/AdminViews/LoginView.js ***!
+  \*********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-  _createClass(EditFontView, [{
-    key: "addFile",
-    value: function addFile(e) {
-      var keys = Object.getOwnPropertyNames(e.target.files);
-      var inputtedFiles = [];
-      keys.forEach(function (key) {
-        inputtedFiles.push(e.target.files[key].name);
-      });
-      this.setState({
-        addedFiles: inputtedFiles,
-        test: e.target
-      });
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return LoginView; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _reusables_Buttons_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../reusables/Buttons.js */ "./resources/js/components/reusables/Buttons.js");
+/* harmony import */ var _reusables_Forms_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./../reusables/Forms.js */ "./resources/js/components/reusables/Forms.js");
+
+
+
+function LoginView(props) {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+    className: "rows_container",
+    method: "POST",
+    action: props.AppURLs.login,
+    style: {
+      width: '50rem'
     }
-  }, {
-    key: "removeAddedFile",
-    value: function removeAddedFile(removedFile) {
-      var newAddedFiles;
-      this.setState(function (state) {
-        newAddedFiles = state.addedFiles.filter(function (file_name) {
-          return file_name !== removedFile;
-        });
-        return {
-          addedFiles: newAddedFiles
-        };
-      });
-    }
-  }, {
-    key: "toggleDelFiles",
-    value: function toggleDelFiles(isDelete, file_name) {
-      if (isDelete) {
-        var newDeletedFiles;
-        this.setState(function (state) {
-          newDeletedFiles = state.deletedFiles;
-          newDeletedFiles.unshift(file_name);
-          return {
-            deletedFiles: newDeletedFiles
-          };
-        });
-      } else {
-        var _newDeletedFiles;
-
-        this.setState(function (state) {
-          _newDeletedFiles = state.deletedFiles.filter(function (file) {
-            return file_name !== file;
-          });
-          return {
-            deletedFiles: _newDeletedFiles
-          };
-        });
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_reusables_Forms_js__WEBPACK_IMPORTED_MODULE_2__["LARAVEL_CSRF_TOKEN"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_reusables_Forms_js__WEBPACK_IMPORTED_MODULE_2__["Input_4"], {
+    inputAttr: {
+      type: 'email',
+      name: 'email',
+      placeholder: 'Email address',
+      required: 'required',
+      spellCheck: 'false',
+      autoComplete: 'autocomplete',
+      style: {
+        width: '100%'
       }
     }
-  }, {
-    key: "changeDefaultFile",
-    value: function changeDefaultFile(file_name) {
-      this.setState({
-        defaultFile: file_name
-      });
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    style: {
+      padding: '1rem',
+      fontSize: '1.45rem',
+      color: '#fd397a'
     }
-  }, {
-    key: "componentDidMount",
-    value: function componentDidMount() {
-      console.log(this.state.defaultFile);
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_reusables_Forms_js__WEBPACK_IMPORTED_MODULE_2__["Input_4"], {
+    inputAttr: {
+      type: 'password',
+      name: 'password',
+      placeholder: 'Password',
+      required: 'required',
+      style: {
+        width: '100%'
+      }
     }
-  }, {
-    key: "render",
-    value: function render() {
-      var _this4 = this;
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    style: {
+      padding: '1rem',
+      fontSize: '1.45rem',
+      color: '#fd397a'
+    }
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_reusables_Buttons_js__WEBPACK_IMPORTED_MODULE_1__["Button_3"], {
+    tagname: 'button',
+    color: 'blue',
+    text: 'Sign in',
+    attr: {
+      type: 'submit'
+    }
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    style: {
+      fontSize: '1.5rem'
+    }
+  }, "Doesn't have an account?", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+    style: {
+      display: 'inline',
+      fontWeight: '500'
+    },
+    href: props.AppURLs.registerPage
+  }, "Sign up"))));
+}
 
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_reusables_Header_js__WEBPACK_IMPORTED_MODULE_1__["default"], {
-        subHeader: {
-          leftCol: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
-            className: "mainHeading"
-          }, "Edit Font"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_reusables_Dropdown_js__WEBPACK_IMPORTED_MODULE_6__["default"], {
-            DDTag: 'div',
-            DDToggleText: 'Hello, ' + this.props.AdminData.name,
-            DDItems: [{
-              tag: 'a',
-              text: 'Action 1',
-              attr: {
-                href: '#'
-              }
-            }, {
-              tag: 'a',
-              text: 'Action 2',
-              attr: {
-                href: '#'
-              }
-            }, {
-              tag: 'a',
-              text: 'Action 3',
-              attr: {
-                href: '#'
-              }
-            }],
-            DDFooter: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
-              method: "POST",
-              action: this.props.AppURLs.domain + 'admin/logout'
-            }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_reusables_LARAVEL_CSRF_TOKEN_js__WEBPACK_IMPORTED_MODULE_8__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_reusables_Buttons_js__WEBPACK_IMPORTED_MODULE_5__["Button_2"], {
-              tagname: 'button',
-              text: 'Sign out',
-              color: 'blue',
-              attr: {
-                type: 'submit'
-              }
-            }))
-          })),
-          rightCol: null
-        },
-        AppURLs: this.props.AppURLs
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
-        className: "section_1"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_reusables_SectionsAndWidgets_js__WEBPACK_IMPORTED_MODULE_7__["SectionHeader"], {
-        headingTag: 'h2',
-        headingText: this.font_info.family_name + ' Family',
-        headerActions: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_reusables_Buttons_js__WEBPACK_IMPORTED_MODULE_5__["Button_2"], {
-          tagname: 'button',
-          text: 'Save',
-          color: 'green',
-          attr: {
-            type: 'submit',
-            style: {
-              marginLeft: '1.4rem'
-            },
-            form: 'updateFont'
-          },
-          events: {}
-        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_reusables_Buttons_js__WEBPACK_IMPORTED_MODULE_5__["Button_2"], {
-          tagname: 'a',
-          text: 'Cancel',
-          color: 'red',
-          attr: {
-            href: this.props.AppURLs.domain + 'admin/home',
-            style: {
-              marginLeft: '1.4rem'
-            }
-          }
-        }))
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "cols_container space_between align_center",
-        style: {
-          padding: '0 2.2rem 1.4rem',
-          flexWrap: 'wrap'
-        }
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_reusables_Forms_js__WEBPACK_IMPORTED_MODULE_2__["Input_3"], {
-        label: 'Family name',
-        inputAttr: {
-          type: "text",
-          name: "family_name",
-          defaultValue: this.font_info.family_name,
-          required: 'required',
-          form: 'updateFont'
-        }
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_reusables_Forms_js__WEBPACK_IMPORTED_MODULE_2__["Select_3"], {
-        label: 'Typeface',
-        selectAttr: {
-          name: 'typeface',
-          form: 'updateFont',
-          defaultValue: this.font_info.typeface
-        },
-        attr: {
-          name: 'typeface'
-        },
-        options: this.props.typefaces.map(function (typeface) {
-          return {
-            attr: {
-              value: typeface
-            },
-            optionText: typeface
-          };
-        })
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_reusables_SectionsAndWidgets_js__WEBPACK_IMPORTED_MODULE_7__["SectionHeader"], {
-        headingTag: 'h2',
-        headingText: 'Font Files',
-        headerActions: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_reusables_Forms_js__WEBPACK_IMPORTED_MODULE_2__["FileInput"], {
-          label: {
-            inputLabel: 'New font files',
-            actionLabel: 'Browse'
-          },
-          inputAttr: {
-            name: 'newFiles[]',
-            multiple: 'multiple',
-            form: 'updateFont'
-          },
-          inputEvents: {
-            onChange: function onChange(e) {
-              return _this4.addFile(e);
-            }
-          },
-          wrapperAttr: {
-            style: {}
-          }
-        }))
-      }), this.state.addedFiles.map(function (file_name, idx) {
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_reusables_SectionsAndWidgets_js__WEBPACK_IMPORTED_MODULE_7__["ListWidget_1"], {
-          listTag: 'section',
-          text: {
-            mainText: file_name,
-            subText: 'test'
-          },
-          barColor: 'green',
-          key: idx,
-          listActions: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_reusables_Buttons_js__WEBPACK_IMPORTED_MODULE_5__["Button_2"], {
-            tagname: 'button',
-            text: 'Remove',
-            color: 'red',
-            isActive: false,
-            attr: {
-              type: 'submit',
-              style: {
-                marginLeft: '1.4rem'
-              }
-            },
-            events: {
-              onClick: function onClick() {
-                return _this4.removeAddedFile(file_name);
-              }
-            }
-          })
-        });
-      }), this.font_files.map(function (file, idx) {
-        if (!_this4.state.deletedFiles.includes(file.file_name)) {
-          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_reusables_SectionsAndWidgets_js__WEBPACK_IMPORTED_MODULE_7__["ListWidget_1"], {
-            listTag: 'section',
-            text: {
-              mainText: file.file_name,
-              subText: 'test'
-            },
-            barColor: 'blue',
-            key: idx,
-            listActions: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_reusables_Buttons_js__WEBPACK_IMPORTED_MODULE_5__["Button_2"], {
-              tagname: 'button',
-              text: 'Default',
-              color: 'blue',
-              isActive: file.file_name === _this4.state.defaultFile ? true : false,
-              attr: {
-                type: 'submit',
-                style: {
-                  marginLeft: '1.4rem'
-                }
-              },
-              events: {
-                onClick: function onClick() {
-                  return _this4.changeDefaultFile(file.file_name);
-                }
-              }
-            }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_reusables_Buttons_js__WEBPACK_IMPORTED_MODULE_5__["Button_2"], {
-              tagname: 'button',
-              text: 'Remove',
-              color: 'red',
-              isActive: false,
-              attr: {
-                type: 'submit',
-                style: {
-                  marginLeft: '1.4rem'
-                }
-              },
-              events: {
-                onClick: function onClick() {
-                  return _this4.toggleDelFiles(true, file.file_name);
-                }
-              }
-            }))
-          });
-        }
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_reusables_SectionsAndWidgets_js__WEBPACK_IMPORTED_MODULE_7__["SectionHeader"], {
-        headingTag: 'h3',
-        headingText: 'Removed Files'
-      }), this.state.deletedFiles.map(function (file_name, idx) {
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_reusables_SectionsAndWidgets_js__WEBPACK_IMPORTED_MODULE_7__["ListWidget_1"], {
-          listTag: 'section',
-          text: {
-            mainText: file_name,
-            subText: 'test'
-          },
-          barColor: 'red',
-          key: idx,
-          listActions: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_reusables_Buttons_js__WEBPACK_IMPORTED_MODULE_5__["Button_2"], {
-            tagname: 'button',
-            text: 'Add back',
-            color: 'green',
-            isActive: false,
-            attr: {
-              type: 'submit',
-              style: {
-                marginLeft: '1.8rem'
-              }
-            },
-            events: {
-              onClick: function onClick() {
-                return _this4.toggleDelFiles(false, file_name);
-              }
-            }
-          })
-        });
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
-        id: "updateFont",
-        method: "POST",
-        action: this.props.AppURLs.updateFontURL,
-        encType: "multipart/form-data"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_reusables_LARAVEL_CSRF_TOKEN_js__WEBPACK_IMPORTED_MODULE_8__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        type: "hidden",
-        name: "id",
-        value: this.font_info.id
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        type: "hidden",
-        name: "default_file",
-        value: this.state.defaultFile
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        type: "hidden",
-        name: "addedFiles",
-        value: JSON.stringify(this.state.addedFiles)
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        type: "hidden",
-        name: "deletedFiles",
-        value: JSON.stringify(this.state.deletedFiles)
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        type: "hidden",
-        value: this.font_info.id
-      }))));
-    }
-  }]);
+/***/ }),
 
-  return EditFontView;
-}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+/***/ "./resources/js/components/AdminViews/RegisterView.js":
+/*!************************************************************!*\
+  !*** ./resources/js/components/AdminViews/RegisterView.js ***!
+  \************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return RegisterView; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _reusables_Buttons_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../reusables/Buttons.js */ "./resources/js/components/reusables/Buttons.js");
+/* harmony import */ var _reusables_Forms_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./../reusables/Forms.js */ "./resources/js/components/reusables/Forms.js");
+
+
+
+function RegisterView(props) {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+    className: "rows_container",
+    method: "POST",
+    action: props.AppURLs.login,
+    style: {
+      width: '50rem'
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_reusables_Forms_js__WEBPACK_IMPORTED_MODULE_2__["LARAVEL_CSRF_TOKEN"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_reusables_Forms_js__WEBPACK_IMPORTED_MODULE_2__["Input_4"], {
+    inputAttr: {
+      type: 'text',
+      name: 'name',
+      placeholder: 'Name',
+      required: 'required',
+      spellCheck: 'false',
+      autoComplete: 'autocomplete',
+      style: {
+        width: '100%'
+      }
+    }
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    style: {
+      padding: '1rem',
+      fontSize: '1.45rem',
+      color: '#fd397a'
+    }
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_reusables_Forms_js__WEBPACK_IMPORTED_MODULE_2__["Input_4"], {
+    inputAttr: {
+      type: 'email',
+      name: 'email',
+      placeholder: 'Email',
+      required: 'required',
+      style: {
+        width: '100%'
+      }
+    }
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    style: {
+      padding: '1rem',
+      fontSize: '1.45rem',
+      color: '#fd397a'
+    }
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_reusables_Forms_js__WEBPACK_IMPORTED_MODULE_2__["Input_4"], {
+    inputAttr: {
+      type: 'password',
+      name: 'password',
+      placeholder: 'Password',
+      required: 'required',
+      style: {
+        width: '100%'
+      }
+    }
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    style: {
+      padding: '1rem',
+      fontSize: '1.45rem',
+      color: '#fd397a'
+    }
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_reusables_Forms_js__WEBPACK_IMPORTED_MODULE_2__["Input_4"], {
+    inputAttr: {
+      type: 'password',
+      name: 'password_confirmation',
+      placeholder: 'Password confirmation',
+      required: 'required',
+      style: {
+        width: '100%'
+      }
+    }
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    style: {
+      padding: '1rem',
+      fontSize: '1.45rem',
+      color: '#fd397a'
+    }
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_reusables_Buttons_js__WEBPACK_IMPORTED_MODULE_1__["Button_3"], {
+    tagname: 'button',
+    color: 'blue',
+    text: 'Register',
+    attr: {
+      type: 'submit'
+    }
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    style: {
+      fontSize: '1.5rem'
+    }
+  }, "Already have an account?", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+    style: {
+      display: 'inline',
+      fontWeight: '500'
+    },
+    href: props.AppURLs.loginPage
+  }, "Sign in"))));
+}
 
 /***/ }),
 
@@ -66409,7 +66656,7 @@ var EditFontView = /*#__PURE__*/function (_React$Component2) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _reusables_Header_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./reusables/Header.js */ "./resources/js/components/reusables/Header.js");
+/* harmony import */ var _reusables_SectionsAndWidgets_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./reusables/SectionsAndWidgets.js */ "./resources/js/components/reusables/SectionsAndWidgets.js");
 /* harmony import */ var _reusables_Modal_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./reusables/Modal.js */ "./resources/js/components/reusables/Modal.js");
 /* harmony import */ var _reusables_FontFileParsers_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./reusables/FontFileParsers.js */ "./resources/js/components/reusables/FontFileParsers.js");
 /* harmony import */ var _reusables_AJAXRequest_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./reusables/AJAXRequest.js */ "./resources/js/components/reusables/AJAXRequest.js");
@@ -66589,7 +66836,7 @@ var App = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_reusables_Header_js__WEBPACK_IMPORTED_MODULE_1__["default"], {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_reusables_SectionsAndWidgets_js__WEBPACK_IMPORTED_MODULE_1__["Header"], {
         headerWidget: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_FontFilter_js__WEBPACK_IMPORTED_MODULE_5__["default"], {
           toggleFontFilter: this.toggleFontFilter,
           fontFilterShown: this.state.fontFilterShown
@@ -67107,8 +67354,7 @@ if (document.getElementById('App')) {
   }), document.getElementById('App'));
 } else if (document.getElementById('AdminApp')) {
   react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_AdminApp_js__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    AppURLs: AppURLs,
-    AdminData: JSON.parse(document.getElementById('AdminData').innerHTML)
+    AppURLs: AppURLs
   }), document.getElementById('AdminApp'));
 }
 
@@ -67149,13 +67395,14 @@ function AJAXGetRequest(data, URL, callback, callingComponent) {
 /*!******************************************************!*\
   !*** ./resources/js/components/reusables/Buttons.js ***!
   \******************************************************/
-/*! exports provided: Button_1, Button_2 */
+/*! exports provided: Button_1, Button_2, Button_3 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Button_1", function() { return Button_1; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Button_2", function() { return Button_2; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Button_3", function() { return Button_3; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
@@ -67249,6 +67496,25 @@ function Button_2(props) {
       return '';
   }
 }
+function Button_3(props) {
+  switch (props.tagname) {
+    case 'a':
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", _extends({
+        className: "btn_3 " + props.color
+      }, props.attr, props.events), props.text)) //
+      ;
+      break;
+
+    case 'button':
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", _extends({
+        className: "btn_3 " + props.color
+      }, props.attr, props.events), props.text));
+      break;
+
+    default:
+      return '';
+  }
+}
 
 /***/ }),
 
@@ -67321,11 +67587,12 @@ function getFontFace(fontName, fileName, storageLink) {
 /*!****************************************************!*\
   !*** ./resources/js/components/reusables/Forms.js ***!
   \****************************************************/
-/*! exports provided: Checkbox, Input_1, Select_1, Input_2, FileInput, Input_3, Select_3 */
+/*! exports provided: LARAVEL_CSRF_TOKEN, Checkbox, Input_1, Select_1, Input_2, FileInput, Input_3, Select_3, Input_4 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LARAVEL_CSRF_TOKEN", function() { return LARAVEL_CSRF_TOKEN; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Checkbox", function() { return Checkbox; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Input_1", function() { return Input_1; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Select_1", function() { return Select_1; });
@@ -67333,6 +67600,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FileInput", function() { return FileInput; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Input_3", function() { return Input_3; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Select_3", function() { return Select_3; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Input_4", function() { return Input_4; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -67360,6 +67628,15 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
 
+function LARAVEL_CSRF_TOKEN(props) {
+  var token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+    type: "hidden",
+    name: "_token",
+    value: token
+  })) //
+  ;
+}
 var Checkbox = /*#__PURE__*/function (_React$Component) {
   _inherits(Checkbox, _React$Component);
 
@@ -67432,7 +67709,7 @@ function Input_3(props) {
   ;
 }
 function Select_3(props) {
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", _extends({
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", _extends({
     className: "form_3 rows_container"
   }, props.wrapperAttr), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
     className: "label"
@@ -67442,147 +67719,16 @@ function Select_3(props) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", _extends({
       key: idx
     }, option.attr), option.optionText);
-  })));
+  }))));
 }
-
-/***/ }),
-
-/***/ "./resources/js/components/reusables/Header.js":
-/*!*****************************************************!*\
-  !*** ./resources/js/components/reusables/Header.js ***!
-  \*****************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _Navbar_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Navbar.js */ "./resources/js/components/reusables/Navbar.js");
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _createSuper(Derived) { return function () { var Super = _getPrototypeOf(Derived), result; if (_isNativeReflectConstruct()) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-
-
-/*
-headerWidget = JSX 
-headerWidgetBtn = JSX btn
-
-subHeader = {
-	leftCol: JSX,
-	rightCol: JSX
-}
-*/
-
-var Header = /*#__PURE__*/function (_React$Component) {
-  _inherits(Header, _React$Component);
-
-  var _super = _createSuper(Header);
-
-  function Header(props) {
-    var _this;
-
-    _classCallCheck(this, Header);
-
-    _this = _super.call(this, props);
-    _this.state = {
-      navbarShown: false
-    };
-    _this.toggleNavbar = _this.toggleNavbar.bind(_assertThisInitialized(_this));
-    return _this;
-  }
-
-  _createClass(Header, [{
-    key: "toggleNavbar",
-    value: function toggleNavbar() {
-      this.setState(function (state) {
-        return {
-          navbarShown: !state.navbarShown
-        };
-      });
-    }
-  }, {
-    key: "render",
-    value: function render() {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "Header rows_container"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "row cols_container align_center section_padding"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "rows_container center align_center"
-      }, this.props.headerWidgetBtn), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Navbar_js__WEBPACK_IMPORTED_MODULE_1__["default"], {
-        navbarShown: this.state.navbarShown,
-        navbarLinks: [{
-          URL: '#',
-          text: 'Home'
-        }, {
-          URL: '#',
-          text: 'Applications'
-        }, {
-          URL: '#',
-          text: 'Pages'
-        }, {
-          URL: '#',
-          text: 'About'
-        }]
-      })), this.props.subHeader !== null ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "subHeader cols_container space_between align_center section_padding"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "cols_container align_center"
-      }, this.props.subHeader.leftCol), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "cols_container align_center"
-      }, this.props.subHeader.rightCol)) : '', this.props.headerWidget));
-    }
-  }]);
-
-  return Header;
-}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
-
-/* harmony default export */ __webpack_exports__["default"] = (Header);
-
-/***/ }),
-
-/***/ "./resources/js/components/reusables/LARAVEL_CSRF_TOKEN.js":
-/*!*****************************************************************!*\
-  !*** ./resources/js/components/reusables/LARAVEL_CSRF_TOKEN.js ***!
-  \*****************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return LARAVEL_CSRF_TOKEN; });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _test_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../test.js */ "./resources/js/components/test.js");
-
-
-function LARAVEL_CSRF_TOKEN() {
-  var token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-    type: "hidden",
-    name: "_token",
-    value: token
-  }));
+function Input_4(props) {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", _extends({
+    className: "form_4"
+  }, props.wrapperAttr), props.labelText ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+    "for": props.formID
+  }, props.labelText) : '', /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", _extends({
+    id: props.formID
+  }, props.inputAttr, props.events)));
 }
 
 /***/ }),
@@ -67761,18 +67907,25 @@ var Modal_2 = /*#__PURE__*/function (_React$Component2) {
 
 /***/ }),
 
-/***/ "./resources/js/components/reusables/Navbar.js":
-/*!*****************************************************!*\
-  !*** ./resources/js/components/reusables/Navbar.js ***!
-  \*****************************************************/
-/*! exports provided: default */
+/***/ "./resources/js/components/reusables/SectionsAndWidgets.js":
+/*!*****************************************************************!*\
+  !*** ./resources/js/components/reusables/SectionsAndWidgets.js ***!
+  \*****************************************************************/
+/*! exports provided: Navbar, Header, Table, SectionHeader, ListWidget_1 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Navbar", function() { return Navbar; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Header", function() { return Header; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Table", function() { return Table; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SectionHeader", function() { return SectionHeader; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ListWidget_1", function() { return ListWidget_1; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -67795,66 +67948,119 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
 
+function Navbar(props) {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("nav", {
+    id: "Navbar",
+    className: "cols_container space_between align_center"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+    href: "#",
+    className: "brand"
+  }, "Fonts Vault"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "cols_container"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    id: "navbarLinks"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+    className: "cols_container"
+  }, props.navbarLinks.map(function (link, idx) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+      key: idx
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+      href: link.URL
+    }, link.text));
+  }))))));
+}
+/*
+headerWidget = JSX 
+headerWidgetBtn = JSX btn
 
-var Navbar = /*#__PURE__*/function (_React$Component) {
-  _inherits(Navbar, _React$Component);
+subHeader = {
+	leftCol: JSX,
+	rightCol: JSX
+}
+*/
 
-  var _super = _createSuper(Navbar);
+var Header = /*#__PURE__*/function (_React$Component) {
+  _inherits(Header, _React$Component);
 
-  function Navbar(props) {
-    _classCallCheck(this, Navbar);
+  var _super = _createSuper(Header);
 
-    return _super.call(this, props);
+  function Header(props) {
+    var _this;
+
+    _classCallCheck(this, Header);
+
+    _this = _super.call(this, props);
+    _this.state = {
+      navbarShown: false
+    };
+    _this.toggleNavbar = _this.toggleNavbar.bind(_assertThisInitialized(_this));
+    return _this;
   }
 
-  _createClass(Navbar, [{
+  _createClass(Header, [{
+    key: "toggleNavbar",
+    value: function toggleNavbar() {
+      this.setState(function (state) {
+        return {
+          navbarShown: !state.navbarShown
+        };
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("nav", {
-        id: "Navbar",
-        className: "cols_container space_between align_center"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-        href: "#",
-        className: "brand"
-      }, "Fonts Vault"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "cols_container"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        id: "navbarLinks"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
-        className: "cols_container"
-      }, this.props.navbarLinks.map(function (link, idx) {
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-          key: idx
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-          href: link.URL
-        }, link.text));
-      })))));
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "Header rows_container"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "row cols_container align_center section_padding"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "rows_container center align_center"
+      }, this.props.headerWidgetBtn), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Navbar, {
+        navbarShown: this.state.navbarShown,
+        navbarLinks: [{
+          URL: '#',
+          text: 'Home'
+        }, {
+          URL: '#',
+          text: 'Applications'
+        }, {
+          URL: '#',
+          text: 'Pages'
+        }, {
+          URL: '#',
+          text: 'About'
+        }]
+      })), this.props.subHeader !== null ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "subHeader cols_container space_between align_center section_padding"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "cols_container align_center"
+      }, this.props.subHeader.leftCol), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "cols_container align_center"
+      }, this.props.subHeader.rightCol)) : '', this.props.headerWidget)) //
+      ;
     }
   }]);
 
-  return Navbar;
+  return Header;
 }(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
-
-/* harmony default export */ __webpack_exports__["default"] = (Navbar);
-
-/***/ }),
-
-/***/ "./resources/js/components/reusables/SectionsAndWidgets.js":
-/*!*****************************************************************!*\
-  !*** ./resources/js/components/reusables/SectionsAndWidgets.js ***!
-  \*****************************************************************/
-/*! exports provided: SectionHeader, ListWidget_1 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SectionHeader", function() { return SectionHeader; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ListWidget_1", function() { return ListWidget_1; });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
-
-
+function Table(props) {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("table", {
+    className: "table"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("thead", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, props.headData.map(function (data, idx) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
+      key: idx
+    }, data);
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, props.bodyData.map(function (row, rowidx) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", {
+      key: rowidx
+    }, row.map(function (col, colidx) {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+        key: colidx
+      }, col);
+    }));
+  })))) //
+  ;
+}
 function SectionHeader(props) {
   var HeadingTag = props.headingTag;
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -67888,95 +68094,6 @@ function ListWidget_1(props) {
   }, props.listActions))) //
   ;
 }
-
-/***/ }),
-
-/***/ "./resources/js/components/reusables/Table.js":
-/*!****************************************************!*\
-  !*** ./resources/js/components/reusables/Table.js ***!
-  \****************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _createSuper(Derived) { return function () { var Super = _getPrototypeOf(Derived), result; if (_isNativeReflectConstruct()) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-
-
-var Table = /*#__PURE__*/function (_React$Component) {
-  _inherits(Table, _React$Component);
-
-  var _super = _createSuper(Table);
-
-  function Table(props) {
-    _classCallCheck(this, Table);
-
-    return _super.call(this, props);
-  }
-
-  _createClass(Table, [{
-    key: "render",
-    value: function render() {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("table", {
-        className: "table"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("thead", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, this.props.headData.map(function (data, idx) {
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
-          key: idx
-        }, data);
-      }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, this.props.bodyData.map(function (row, rowidx) {
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", {
-          key: rowidx
-        }, row.map(function (col, colidx) {
-          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
-            key: colidx
-          }, col);
-        }));
-      })))) //
-      ;
-    }
-  }]);
-
-  return Table;
-}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
-
-/* harmony default export */ __webpack_exports__["default"] = (Table);
-
-/***/ }),
-
-/***/ "./resources/js/components/test.js":
-/*!*****************************************!*\
-  !*** ./resources/js/components/test.js ***!
-  \*****************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-var x = 100;
-/* harmony default export */ __webpack_exports__["default"] = (x);
 
 /***/ }),
 

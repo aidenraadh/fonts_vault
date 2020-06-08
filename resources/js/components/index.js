@@ -19,7 +19,6 @@ else if(document.getElementById('AdminApp')){
 	ReactDOM.render(
 		<AdminApp
 			AppURLs = {AppURLs}
-			AdminData = {JSON.parse(document.getElementById('AdminData').innerHTML)}
 		/>,
 		document.getElementById('AdminApp')
 	);

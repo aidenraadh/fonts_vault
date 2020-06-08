@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Header from './reusables/Header.js';
+import {Header} from './reusables/SectionsAndWidgets.js';
 import {Modal_1} from './reusables/Modal.js';
 import {getFontFace} from './reusables/FontFileParsers.js';
 import {AJAXPostRequest} from './reusables/AJAXRequest.js';

@@ -4,7 +4,7 @@
 
 @section('content')
 
-<div id="AdminApp" class="App home_view">
+<div id="AdminApp" class="App home_view" style="padding-top: 15rem;">
 	
 </div>
 

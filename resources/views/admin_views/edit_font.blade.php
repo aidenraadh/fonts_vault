@@ -4,7 +4,7 @@
 
 @section('content')
 
-<div id="AdminApp" class="App edit_font_view">
+<div id="AdminApp" class="App edit_font_view" style="padding-top: 15rem;">
 	
 </div>
 

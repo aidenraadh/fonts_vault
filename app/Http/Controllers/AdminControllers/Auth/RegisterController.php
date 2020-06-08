@@ -74,7 +74,13 @@ class RegisterController extends Controller
 
     public function showRegistrationForm()
     {
-        return view('admin_views.auth.register');
+        return view('admin_views.auth.register', [
+            'AppURLs' => json_encode([
+                'domain' => config('app.url'),
+                'register' => route('admin/register'),
+                'loginPage' => route('admin/login')
+            ], true),
+        ]);
     }
 
     protected function guard()

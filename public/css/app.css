@@ -133,7 +133,7 @@ select{
   border-radius: 2.6px;
   font-family: 'Roboto', sans-serif;
   font-weight: 500;
-  font-size: 1.4rem;
+  font-size: 1.45rem;
   transition: background-color 0.3s;
 }
 
@@ -175,6 +175,34 @@ select{
 .btn_2.red:hover, .btn_2.red.active{
   background-color: #fd397a;
   color: #FFFFFF;
+}
+
+.btn_3{
+    position: relative;
+    display: inline-block;
+    padding: 0.6em 1.2em;
+    border-radius: 46px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    font-size: 1.5rem;
+    color: #FFFFFF;
+    transition: background-color 0.3s ease;
+}
+
+.btn_3.blue{
+    background-color: #5578eb;
+}
+
+.btn_3.blue:hover{
+    background-color: #335de7;
+}
+
+.btn_3.red{
+    background-color: #fd397a;
+}
+
+.btn_3.red:hover{
+    background-color: #fd1361;
 }
 
 .dropdown{
@@ -583,6 +611,27 @@ select{
     border-color: #9aabff;
 }
 
+.form_4{
+    display: inline-flex;
+}
+
+.form_4 label{
+    margin-bottom: 0.8rem;
+    display: inline-block;
+    font-size: 1.45rem;
+}
+
+.form_4 input{
+    display: inline-block;
+    padding: 1rem 1.6rem;
+    border: none;
+    border-radius: 46px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.45rem;
+    color: #495057;
+    background-color: rgba(235, 237, 242, 0.4);
+}
+
 .file_input{
 	min-width: 20rem;
 }
@@ -803,10 +852,6 @@ select{
 
 #FontDisplay{
 	padding-top: 18rem;
-}
-
-#AdminApp{
-	padding-top: 15rem;
 }
 
 #AdminApp .Header .mainHeading{

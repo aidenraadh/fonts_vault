@@ -45,14 +45,14 @@ class AdminCRUD{
 
        		DB::commit();
 
-			Storage::disk('public')->makeDirectory('fonts/'.$fontData['family_name']);
-			foreach ($fontFiles as $fontFile) {
-				$fontFile->storeAs(
-					'fonts/'.$fontData['family_name'],
-					$fontFile->getClientOriginalName(),
-					'public'
-				);
-			}
+			    Storage::disk('public')->makeDirectory('fonts/'.$fontData['family_name']);
+			    foreach ($fontFiles as $fontFile) {
+			    	 $fontFile->storeAs(
+			    	 	 'fonts/'.$fontData['family_name'],
+			    	 	 $fontFile->getClientOriginalName(),
+			    	 	 'public'
+			    	 );
+			    }
 
         } catch (Exception $e) {
         	DB::rollback();
@@ -99,6 +99,8 @@ class AdminCRUD{
 	public function updateFont($changes){
 		// Get the previous number of files
 		$num_of_files = DB::select('SELECT num_of_files FROM fonts WHERE id = ?', [$changes['id']])[0]->num_of_files;
+    $prev_family_name = DB::select('SELECT family_name FROM fonts WHERE id = ?', [$changes['id']])[0]->family_name;
+
 		$num_of_files = $num_of_files + 
 			($changes['newFiles'] ? count($changes['newFiles']) : 0) -
 			($changes['deletedFiles'] ? count($changes['deletedFiles']) : 0);
@@ -107,14 +109,15 @@ class AdminCRUD{
 
         try {
         	DB::update(
-        		'UPDATE fonts SET family_name=? typeface=? default_file=? num_of_files=? WHERE id = ?',
+        		'UPDATE fonts SET family_name=?, typeface=?, default_file=?, num_of_files=? WHERE id = ?',
         		[
         			$changes['family_name'], $changes['typeface'],
-        			$changes['defaultFile'], $num_of_files,
+        			$changes['default_file'], $num_of_files,
         			$changes['id']
         		]
         	);
 
+          // Delete the font's files in database if the deleted files exist
         	if($changes['deletedFiles']){
         		DB::delete(
         			'DELETE FROM fonts_files WHERE font_id = ? AND file_name IN('.
@@ -124,6 +127,7 @@ class AdminCRUD{
         		);
         	}
 
+          // Insert the new font's files to database if the new files exist
         	if($changes['newFiles']){
        			// Generate query for mass INSERT
        			$lastFileKey = array_key_last($changes['newFiles']);
@@ -135,13 +139,43 @@ class AdminCRUD{
        					$insertQueries .= ', ';
        				}
        			}
-       			// Insert new font files to fonts_files table
        			DB::insert('INSERT INTO fonts_files(font_id, file_name) VALUES '.$insertQueries);       			
         	}
+
        		DB::commit();
 
-			Storage::disk('public')->makeDirectory('fonts/'.$fontData['family_name']);
+          $publicDisk = Storage::disk('public');
+          // Delete the font's files in the storage if the deleted file exists
+          if($changes['deletedFiles']){
+            foreach ($changes['deletedFiles'] as $file_name) {
+              $publicDisk->delete('fonts/'.$prev_family_name.'/'.$file_name);
+            }
+          }
+          // Store the new font's files in the storage if there is any
+          if($changes['newFiles']){
+            foreach ($changes['newFiles'] as $file) {
+              $file->storeAs(
+                'fonts/'.$prev_family_name,
+                $file->getClientOriginalName(),
+                'public'
+              );
+            }
+          }
 
+          // Only when the family name is changed, which also change
+          // the directory where font's files stored
+          if($prev_family_name !== $changes['family_name']){
+            // Get all files
+            $all_files = $publicDisk->files('fonts/'.$prev_family_name);
+            // Make new directory
+            $publicDisk->makeDirectory('fonts/'.$changes['family_name']);
+            // Move the file to new directory
+            foreach ($all_files as $file) {
+              $publicDisk->move($file, 'fonts/'.$changes['family_name'].'/'.substr($file, strrpos($file, '/')+1));
+            }
+            // Remove the old directory
+            $publicDisk->deleteDirectory('fonts/'.$prev_family_name);
+          }
 
         } catch (Exception $e) {
         	DB::rollback();

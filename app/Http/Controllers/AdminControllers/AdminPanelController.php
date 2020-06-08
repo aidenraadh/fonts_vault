@@ -6,7 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
-use App\Rules\FontFileRule;
+use App\Rules\UploadFontFileRule;
+use App\Rules\DeleteFontFileRule;
 use App\Rules\Uppercase;
 
 use Illuminate\Support\Facades\Auth;
@@ -37,7 +38,7 @@ class AdminPanelController extends Controller
             'family_name' => ['bail', 'required', 'string', 'max:50'],
             'typeface' => ['bail', 'required', 'string', Rule::in(config('app.typefaces'))],
     		'font_files' => ['bail', 'required', 'array'],
-    		'font_files.*' => ['bail', 'required', 'file', new FontFileRule],
+    		'font_files.*' => ['bail', 'required', 'file', new UploadFontFileRule],
     	]);
 
     	if($v->fails()){
@@ -123,10 +124,15 @@ class AdminPanelController extends Controller
 
         $v = Validator::make($changes, [
             'id' => ['bail', 'required', 'integer', 'exists:fonts,id'],
-            'family_name' => ['bail', 'string'],
+            'family_name' => ['bail', 'unique:fonts,family_name'],
             'typeface' => ['bail', 'string', Rule::in(config('app.typefaces'))],
-            'default_file' => ['bail', 'string', 'exists:fonts_files,file_name'],
-            'newFiles.*' => ['bail', 'file', new FontFileRule],
+            //The default file musn't inside the deleted files
+            'default_file' => [
+                'bail', 'string', 'exists:fonts_files,file_name',
+                Rule::notIn($changes['deletedFiles'])
+            ],
+            'newFiles.*' => ['bail', 'file', new UploadFontFileRule],
+            'deletedFiles' => ['bail', 'array', new DeleteFontFileRule($changes['id'])],
             'deletedFiles.*' => ['bail', 'string', 'exists:fonts_files,file_name'],
         ]);
 

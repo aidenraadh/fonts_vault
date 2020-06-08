@@ -5,7 +5,7 @@ namespace App\Rules;
 use Illuminate\Contracts\Validation\Rule;
 use Illuminate\Support\Facades\DB;
 
-class FontFileRule implements Rule
+class UploadFontFileRule implements Rule
 {
     /**
      * Create a new rule instance.

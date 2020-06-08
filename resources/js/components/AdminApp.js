@@ -1,13 +1,16 @@
 import React from 'react';
-import {HomeView, EditFontView} from './AdminViews.js';
+import HomeView from './AdminViews/HomeView.js';
+import EditFontView from './AdminViews/EditFontView.js';
+import LoginView from './AdminViews/LoginView.js';
+import RegisterView from './AdminViews/RegisterView.js';
 
 /*
 |--------------------------------------------------------------------------
 | AdminApp
 |--------------------------------------------------------------------------
 |
-| This component will serve the views for admin according to 'data-view-name'
-| attribute of #AdminApp element.
+| This component will serve the views for admin according to the view name
+| defined in the class of #AdminApp element.
 |
 */
 
@@ -17,9 +20,9 @@ function AdminApp(props){
 	if(AdminApp.classList.contains('home_view')){
 		return (
 			<HomeView
-				fonts = {JSON.parse(document.getElementById('fonts').innerHTML)}
 				AppURLs = {props.AppURLs}
-				AdminData = {props.AdminData}
+				fonts = {JSON.parse(document.getElementById('fonts').innerHTML)}
+				AdminData = {JSON.parse(document.getElementById('AdminData').innerHTML)}
 			/>			
 		);
 	}
@@ -27,13 +30,27 @@ function AdminApp(props){
 	else if(AdminApp.classList.contains('edit_font_view')){
 		return (
 			<EditFontView
+				AppURLs = {props.AppURLs}
 				font = {JSON.parse(document.getElementById('font').innerHTML)}
 				typefaces = {JSON.parse(document.getElementById('typefaces').innerHTML)}
-				AppURLs = {props.AppURLs}
-				AdminData = {props.AdminData}
+				AdminData = {JSON.parse(document.getElementById('AdminData').innerHTML)}
 			/>			
 		);
-	}	
+	}
+	else if(AdminApp.classList.contains('login_view')){
+		return (
+			<LoginView
+				AppURLs = {props.AppURLs}
+			/>			
+		);
+	}
+	else if(AdminApp.classList.contains('register_view')){
+		return (
+			<RegisterView
+				AppURLs = {props.AppURLs}
+			/>			
+		);
+	}
 }
 
 export default AdminApp;

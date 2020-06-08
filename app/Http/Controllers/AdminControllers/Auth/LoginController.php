@@ -41,7 +41,13 @@ class LoginController extends Controller
 
     public function showLoginForm()
     {
-        return view('admin_views.auth.login');
+        return view('admin_views.auth.login', [
+            'AppURLs' => json_encode([
+                'domain' => config('app.url'),
+                'login' => route('admin/login'),
+                'registerPage' => route('admin/register')
+            ], true),
+        ]);
     } 
 
     protected function guard()

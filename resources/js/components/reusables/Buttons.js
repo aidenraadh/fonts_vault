@@ -59,3 +59,26 @@ export function Button_2(props){
 		default: return ('');
 	}
 }
+
+export function Button_3(props){
+	switch(props.tagname){
+		case 'a':
+			return (
+				<>
+				<a className={"btn_3 "+props.color} {...props.attr} {...props.events}>
+					{props.text}
+				</a>
+				</>
+				//
+			); break;
+		case 'button':
+			return (
+				<>
+				<button className={"btn_3 "+props.color} {...props.attr} {...props.events}>
+					{props.text}
+				</button>
+				</>
+			); break;
+		default: return ('');
+	}
+}

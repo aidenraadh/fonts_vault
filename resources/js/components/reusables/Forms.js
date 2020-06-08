@@ -1,5 +1,14 @@
 import React from 'react';
 
+export function LARAVEL_CSRF_TOKEN(props){
+	let token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+	return (
+		<>
+		<input type="hidden" name="_token" value={token} />
+		</>//
+	);
+}
+
 export class Checkbox extends React.Component{
 	constructor(props){
 		super(props);
@@ -73,6 +82,7 @@ export function Input_3(props){
 
 export function Select_3(props){
 	return (
+		<>
  		<label className="form_3 rows_container" {...props.wrapperAttr}>
  		   <span className="label">{props.label}</span>    
 			<select className="form" {...props.selectAttr} {...props.selectEvents}>
@@ -80,6 +90,20 @@ export function Select_3(props){
 				<option key={idx} {...option.attr}>{option.optionText}</option>
 				))}
 			</select> 		   
- 		</label>		
+ 		</label>
+ 		</>
+	);
+}
+
+export function Input_4(props){
+	return (
+		<span className="form_4" {...props.wrapperAttr}>
+		{(props.labelText ? 
+
+			<label for={props.formID}>{props.labelText}</label> : ''
+
+		)}
+			<input id={props.formID} {...props.inputAttr} {...props.events} />
+		</span>
 	);
 }
