@@ -7,8 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use App\Rules\UploadFontFileRule;
-use App\Rules\DeleteFontFileRule;
-use App\Rules\Uppercase;
+use App\Rules\UpdateFontRule;
 
 use Illuminate\Support\Facades\Auth;
 
@@ -119,29 +118,27 @@ class AdminPanelController extends Controller
             'typeface' => $request->typeface,
             'default_file' => $request->default_file,
             'newFiles' => $filteredNewFiles,
-            'deletedFiles' => json_decode($request->deletedFiles),
+            'deletedFiles' => (
+                json_decode($request->deletedFiles) ? json_decode($request->deletedFiles) : []
+            ),
         ];
 
         $v = Validator::make($changes, [
-            'id' => ['bail', 'required', 'integer', 'exists:fonts,id'],
-            'family_name' => ['bail', 'unique:fonts,family_name'],
-            'typeface' => ['bail', 'string', Rule::in(config('app.typefaces'))],
-            //The default file musn't inside the deleted files
-            'default_file' => [
-                'bail', 'string', 'exists:fonts_files,file_name',
-                Rule::notIn($changes['deletedFiles'])
-            ],
+            'id' => ['bail', 'integer', 'exists:fonts,id'],
+            'family_name' => ['bail', 'string', new UpdateFontRule($changes['id'])],
+            'typeface' => ['bail', 'required', 'string', Rule::in(config('app.typefaces'))],
+            'default_file' => ['bail', 'string', Rule::notIn($changes['deletedFiles'])],
             'newFiles.*' => ['bail', 'file', new UploadFontFileRule],
-            'deletedFiles' => ['bail', 'array', new DeleteFontFileRule($changes['id'])],
-            'deletedFiles.*' => ['bail', 'string', 'exists:fonts_files,file_name'],
+            'deletedFiles.*' => ['bail', new UpdateFontRule($changes['id'])],
         ]);
 
         if($v->fails()){
             dd($v->errors()->all());
         }
 
+
         app()->make('App\Admin\AdminCRUD')->updateFont($changes);
 
-        //dd($changes);
-	}		
+        return redirect()->route('admin/home');
+	}
 }

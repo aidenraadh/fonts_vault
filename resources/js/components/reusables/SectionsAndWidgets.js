@@ -1,16 +1,26 @@
 import React from 'react';
+import {Button_1} from './Buttons.js';
 
 export function Navbar(props){
 	return (
 		<>
 		<nav id="Navbar" className="cols_container space_between align_center">
-		    <a href="#" className="brand">
-		    Fonts Vault
+		    <a href={props.navbarBrandLink} className="brand">
+		    	Fonts Vault
 		    </a>
 		    <div className="cols_container">
-		        <div></div>
-		        <div id="navbarLinks">
-		            <div></div>
+		        <Button_1
+		        	tagname = {'button'}
+		        	icon = {{position: 3, color: 'blue'}}
+		        	events = {{onClick: props.toggleNavbar}}
+		        	attr = {{id: 'opnNavbar'}}
+		        />
+		        <div id="navbarLinks" className={(props.navbarShown ? 'shown': '')}>
+		            <div style={{display: 'flex', justifyContent: 'flex-start'}}>
+		            	<button id="clsNavbar" type="button" onClick={props.toggleNavbar}>
+		            		&times;
+		            	</button>
+		            </div>
 		            <ul className="cols_container">
 		            {
 		                props.navbarLinks.map((link, idx) => (
@@ -65,11 +75,13 @@ export class Header extends React.Component{
 			        <Navbar
 			        	navbarShown = {this.state.navbarShown}
 			        	navbarLinks = {[
-			        		{URL: '#', text: 'Home'},
-			        		{URL: '#', text: 'Applications'},
+			        		{URL: this.props.AppURLs.domain, text: 'Home'},
+			        		{URL: this.props.AppURLs.domain+'fonts', text: 'Applications'},
 			        		{URL: '#', text: 'Pages'},
 			        		{URL: '#', text: 'About'},
 			        	]}
+			        	navbarBrandLink = {this.props.AppURLs.domain}
+			        	toggleNavbar = {this.toggleNavbar}
 			        />          
 			    </div>
 			    {
@@ -94,28 +106,30 @@ export class Header extends React.Component{
 export function Table(props){
 	return (
 		<>
-		<table className="table">
-			<thead>
-				<tr>
-					{props.headData.map((data, idx) => (
+		<div className="table">
+			<table>
+				<thead>
+					<tr>
+						{props.headData.map((data, idx) => (
 
-					<th key={idx}>{data}</th>
+						<th key={idx}>{data}</th>
+
+						))}				
+					</tr>
+				</thead>
+				<tbody>
+					{props.bodyData.map((row, rowidx) => (
+
+					<tr key={rowidx}>
+						{row.map((col, colidx) => (
+						<td key={colidx}>{col}</td>
+						))}
+					</tr>
 
 					))}				
-				</tr>
-			</thead>
-			<tbody>
-				{props.bodyData.map((row, rowidx) => (
-
-				<tr key={rowidx}>
-					{row.map((col, colidx) => (
-					<td key={colidx}>{col}</td>
-					))}
-				</tr>
-
-				))}				
-			</tbody>
-		</table>
+				</tbody>
+			</table>
+		</div>
 		</>//
 	);
 }

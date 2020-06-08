@@ -272,7 +272,7 @@ select{
 }
 
 .section_1{
-  width: 86%;
+  width: 84%;
   margin: 0 auto;
   border-radius: 4px;
   background-color: #FFFFFF;
@@ -335,6 +335,12 @@ select{
 }
 
 .table{
+	width: 100%;
+	margin: 0 auto;
+	overflow-x: scroll;
+}
+
+.table table{
   width: 100%;
   border-collapse: collapse;
   text-align: center;
@@ -343,7 +349,7 @@ select{
   font-weight: 400;
 }      
 .table td, .table th{
-  padding: 1.4rem 2.2rem;
+  padding: 1.4rem 1.1rem;
 }
 .table th{
   font-weight: 500;
@@ -543,7 +549,7 @@ select{
 	border: 1px solid #e2e5ec;
 	border-radius: 4px;
 	font-family: 'Roboto', sans-serif;
-	font-size: 1.4rem;
+	font-size: 1.45rem;
 	color: #495057;
 	transition: border-color 0.3s ease;
 }
@@ -563,7 +569,7 @@ select{
   align-items: center;
   border: 1px solid #e2e5ec;
   border-radius: 4px 0 0 4px;   
-  font-size: 1.4rem;
+  font-size: 1.45rem;
 }
 
 .form_2 .form{
@@ -572,7 +578,7 @@ select{
   border: 1px solid #e2e5ec;
   border-radius: 0 4px 4px 0;
   font-family: 'Roboto', sans-serif;
-  font-size: 1.4rem;
+  font-size: 1.45rem;
   color: #495057;
   transition: border-color 0.3s ease;
 }
@@ -591,7 +597,7 @@ select{
     display: inline-block;
     margin-bottom: 0.8rem;
     font-family: 'Roboto', sans-serif;
-    font-size: 1.4rem;
+    font-size: 1.45rem;
     font-weight: 400;
     color: #495057;
 }
@@ -602,7 +608,7 @@ select{
     border: 1px solid #e2e5ec;
     border-radius: 4px;
     font-family: 'Roboto', sans-serif;
-    font-size: 1.4rem;
+    font-size: 1.45rem;
     color: #495057;
     transition: border-color 0.3s ease;
 }
@@ -644,7 +650,7 @@ select{
     padding: 0.8rem 1.45rem;
     border: 1px solid #e2e5ec;
     font-family: 'Roboto', sans-serif;
-    font-size: 1.4rem;
+    font-size: 1.45rem;
     color: #495057;
 }
 
@@ -708,6 +714,23 @@ select{
 
 #Navbar{
 	width: 100%;
+}
+
+#opnNavbar{
+	display: none;
+}
+
+#clsNavbar{
+	display: none;
+	margin: 1.8rem 2rem;
+	width: 2.8rem;
+	height: 2.8rem;
+	border-radius: 4px;
+	font-family: 'Roboto', sans-serif;
+	font-weight: 500;
+	font-size: 2.2rem;
+	background-color: rgba(93, 120, 255, 0.1);
+	color: #5d78ff;		
 }
 
 #navbarLinks ul{
@@ -876,6 +899,15 @@ select{
 	width: 48%;
 }
 
+#AdminApp.App.login_view, #AdminApp.App.register_view{
+	background: url('../images/bg_1.jpg') no-repeat scroll 0 0;
+	background-size: cover;
+}
+
+#AdminApp.login_view form, #AdminApp.register_view form{
+	width: 50rem;
+}
+
 @media only screen and (min-width: 1281px) {
   html{
     font-size: 0.78125vw;
@@ -896,17 +928,88 @@ select{
 	#selectedFamily.modal_1 .body{
 		width: 90vw;
 	}
+
+	.table{
+		width: 96%;
+	}	
+
+	.table table{
+		width: 110%;
+	}	
 }
 
 @media only screen and (max-width: 700px) {
 	.card{
 		width: 48%;
 	}
+	.table table{
+		width: 128%;
+	}
+
+	#FontFilter{
+		width: 49vw;
+	}
+
+	#opnNavbar{
+		display: inline-block;
+	}
+
+	#clsNavbar{
+		display: inline-block;
+	}
+
+	#navbarLinks{
+		position: fixed;
+		top: 0; right: 0;
+		display: flex;
+		flex-direction: column;
+		min-width: 49vw;
+		height: 100vh;
+		box-shadow: 10px 0 30px 0px rgba(82, 63, 105, 0.08);
+		background-color: #FFFFFF;
+		transform: translateX(100%);
+		transition: transform 0.4s ease;
+	}
+
+	#navbarLinks.shown{
+		transform: translateX(0);
+	}
+
+	#navbarLinks ul{
+		widows: 100%;
+		display: flex;
+		flex-direction: column;
+		height: 100vh;		
+	}
+
+	#navbarLinks li{
+		margin: 0;
+	}
+
+	#navbarLinks li a{
+		width: 100%;
+		padding: 1.8rem 2rem;
+	}
+
+	#AdminApp.login_view form, #AdminApp.register_view form{
+		width: 70%;
+	}
+}
+
+@media only screen and (max-width: 600px) {
+	.table table{
+		width: 150%;
+	}
+
+	.modal_1 .body {
+		width: 88vw;
+	}
+
 }
 
 @media only screen and (max-width: 500px) {
 	.section_1{
-		width: 94%;
+		width: 92%;
 	}
 
 	.FilesList .main, .FilesList .sub{
@@ -919,5 +1022,11 @@ select{
 	#AdminApp.edit_font_view .form_3{
 		width: 100%;
 	}
+	.table table{
+		width: 188%;
+	}
 
+	.modal_1 .body {
+		width: 92vw;
+	}	
 }

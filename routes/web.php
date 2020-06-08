@@ -31,9 +31,7 @@ Route::post('fonts/getFontFamily', 'FontsController@getFontFamily')->name('getFo
 Route::prefix('admin')->group(function () {
 	Route::get('home', 'AdminControllers\AdminPanelController@index')
 	->middleware('auth:admins')->name('admin/home');
-
-	Route::view('test', 'test_view');	
-
+	
 	Route::get('fonts/upload', 'AdminControllers\AdminPanelController@uploadFont')
 	->middleware('auth:admins');
 	Route::post('fonts/store', 'AdminControllers\AdminPanelController@storeFont')

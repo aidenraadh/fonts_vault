@@ -98,89 +98,102 @@ class AdminCRUD{
 
 	public function updateFont($changes){
 		// Get the previous number of files
-		$num_of_files = DB::select('SELECT num_of_files FROM fonts WHERE id = ?', [$changes['id']])[0]->num_of_files;
-    $prev_family_name = DB::select('SELECT family_name FROM fonts WHERE id = ?', [$changes['id']])[0]->family_name;
+		$num_of_files = DB::select(
+      'SELECT num_of_files FROM fonts WHERE id = ?',
+      [$changes['id']]
+    )[0]->num_of_files;
+
+    $data = DB::select(
+      'SELECT family_name, typeface, default_file FROM fonts WHERE id = ?',
+      [$changes['id']]
+    )[0];
+
+    $prev_val = [
+      'family_name' => $data->family_name,
+      'typeface' => $data->typeface,
+      'default_file' => $data->default_file,
+    ];
+
+
 
 		$num_of_files = $num_of_files + 
 			($changes['newFiles'] ? count($changes['newFiles']) : 0) -
 			($changes['deletedFiles'] ? count($changes['deletedFiles']) : 0);
-
 		DB::beginTransaction();
 
-        try {
-        	DB::update(
-        		'UPDATE fonts SET family_name=?, typeface=?, default_file=?, num_of_files=? WHERE id = ?',
-        		[
-        			$changes['family_name'], $changes['typeface'],
-        			$changes['default_file'], $num_of_files,
-        			$changes['id']
-        		]
-        	);
+    try {
+      $queriesForFontsTable = '';
+      $dataForFontsTable = [];
 
-          // Delete the font's files in database if the deleted files exist
-        	if($changes['deletedFiles']){
-        		DB::delete(
-        			'DELETE FROM fonts_files WHERE font_id = ? AND file_name IN('.
-        			'"'.implode('","', $changes['deletedFiles']).'"'
-        			.')',
-        			[$changes['id']]
-        		);
-        	}
+      foreach($prev_val as $key => $val){
+        if($val !== $changes[$key]){
+          $queriesForFontsTable .= $key.'="'.$changes[$key].'",';
+        }
+      }
 
-          // Insert the new font's files to database if the new files exist
-        	if($changes['newFiles']){
-       			// Generate query for mass INSERT
-       			$lastFileKey = array_key_last($changes['newFiles']);
-       			$insertQueries = '';
-       			
-       			foreach ($changes['newFiles'] as $key => $fontFile) {
-       				$insertQueries .= '('.$changes['id'].',"'.$fontFile->getClientOriginalName().'")';
-       				if($key !== $lastFileKey){
-       					$insertQueries .= ', ';
-       				}
-       			}
-       			DB::insert('INSERT INTO fonts_files(font_id, file_name) VALUES '.$insertQueries);       			
-        	}
-
-       		DB::commit();
-
-          $publicDisk = Storage::disk('public');
-          // Delete the font's files in the storage if the deleted file exists
-          if($changes['deletedFiles']){
-            foreach ($changes['deletedFiles'] as $file_name) {
-              $publicDisk->delete('fonts/'.$prev_family_name.'/'.$file_name);
-            }
-          }
-          // Store the new font's files in the storage if there is any
-          if($changes['newFiles']){
-            foreach ($changes['newFiles'] as $file) {
-              $file->storeAs(
-                'fonts/'.$prev_family_name,
-                $file->getClientOriginalName(),
-                'public'
-              );
-            }
-          }
-
-          // Only when the family name is changed, which also change
-          // the directory where font's files stored
-          if($prev_family_name !== $changes['family_name']){
-            // Get all files
-            $all_files = $publicDisk->files('fonts/'.$prev_family_name);
-            // Make new directory
-            $publicDisk->makeDirectory('fonts/'.$changes['family_name']);
-            // Move the file to new directory
-            foreach ($all_files as $file) {
-              $publicDisk->move($file, 'fonts/'.$changes['family_name'].'/'.substr($file, strrpos($file, '/')+1));
-            }
-            // Remove the old directory
-            $publicDisk->deleteDirectory('fonts/'.$prev_family_name);
-          }
-
-        } catch (Exception $e) {
-        	DB::rollback();
-        	abort(403);
-        }      		
+    	DB::update(
+    		'UPDATE fonts SET '.$queriesForFontsTable.' num_of_files='.$num_of_files.
+        ' WHERE id ='.$changes['id']
+    	);
+      // Delete the font's files in database if the deleted files exist
+    	if($changes['deletedFiles']){
+    		DB::delete(
+    			'DELETE FROM fonts_files WHERE font_id = ? AND file_name IN('.
+    			'"'.implode('","', $changes['deletedFiles']).'"'
+    			.')',
+    			[$changes['id']]
+    		);
+    	}
+      // Insert the new font's files to database if the new files exist
+    	if($changes['newFiles']){
+   			// Generate query for mass INSERT
+   			$lastFileKey = array_key_last($changes['newFiles']);
+   			$insertQueries = '';
+   			
+   			foreach ($changes['newFiles'] as $key => $fontFile) {
+   				$insertQueries .= '('.$changes['id'].',"'.$fontFile->getClientOriginalName().'")';
+   				if($key !== $lastFileKey){
+   					$insertQueries .= ', ';
+   				}
+   			}
+   			DB::insert('INSERT INTO fonts_files(font_id, file_name) VALUES '.$insertQueries);       			
+    	}
+   		DB::commit();
+      $publicDisk = Storage::disk('public');
+      // Delete the font's files in the storage if the deleted file exists
+      if($changes['deletedFiles']){
+        foreach ($changes['deletedFiles'] as $file_name) {
+          $publicDisk->delete('fonts/'.$prev_val['family_name'].'/'.$file_name);
+        }
+      }
+      // Store the new font's files in the storage if there is any
+      if($changes['newFiles']){
+        foreach ($changes['newFiles'] as $file) {
+          $file->storeAs(
+            'fonts/'.$prev_val['family_name'],
+            $file->getClientOriginalName(),
+            'public'
+          );
+        }
+      }
+      // Only when the family name is changed, which also change
+      // the directory where font's files stored
+      if($prev_val['family_name'] !== $changes['family_name']){
+        // Get all files
+        $all_files = $publicDisk->files('fonts/'.$prev_val['family_name']);
+        // Make new directory
+        $publicDisk->makeDirectory('fonts/'.$changes['family_name']);
+        // Move the file to new directory
+        foreach ($all_files as $file) {
+          $publicDisk->move($file, 'fonts/'.$changes['family_name'].'/'.substr($file, strrpos($file, '/')+1));
+        }
+        // Remove the old directory
+        $publicDisk->deleteDirectory('fonts/'.$prev_val['family_name']);
+      }
+    } catch (Exception $e) {
+    	DB::rollback();
+    	abort(403);
+    }      		
 	}	
 	
 }

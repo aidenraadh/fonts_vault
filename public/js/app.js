@@ -65873,7 +65873,7 @@ var EditFontView = /*#__PURE__*/function (_React$Component) {
         headingText: this.font_info.family_name + ' Family',
         headerActions: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_reusables_Buttons_js__WEBPACK_IMPORTED_MODULE_4__["Button_2"], {
           tagname: 'button',
-          text: 'Save',
+          text: 'Save changes',
           color: 'green',
           attr: {
             type: 'submit',
@@ -65905,18 +65905,25 @@ var EditFontView = /*#__PURE__*/function (_React$Component) {
         inputAttr: {
           type: "text",
           name: "family_name",
-          placeholder: this.font_info.family_name,
+          defaultValue: this.font_info.family_name,
           form: 'updateFont'
+        },
+        wrapperAttr: {
+          style: {
+            marginBottom: '2rem'
+          }
         }
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_reusables_Forms_js__WEBPACK_IMPORTED_MODULE_3__["Select_3"], {
         label: 'Typeface',
         selectAttr: {
           name: 'typeface',
           form: 'updateFont',
-          placeholder: this.font_info.typeface
+          defaultValue: this.font_info.typeface
         },
-        attr: {
-          name: 'typeface'
+        wrapperAttr: {
+          style: {
+            marginBottom: '2rem'
+          }
         },
         options: this.props.typefaces.map(function (typeface) {
           return {
@@ -66434,7 +66441,9 @@ var HomeView = /*#__PURE__*/function (_React$Component) {
           attr: {
             type: 'submit',
             style: {
-              margin: '0 auto'
+              display: 'block',
+              margin: '0 auto',
+              minWidth: '14rem'
             }
           }
         })),
@@ -66472,10 +66481,7 @@ function LoginView(props) {
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
     className: "rows_container",
     method: "POST",
-    action: props.AppURLs.login,
-    style: {
-      width: '50rem'
-    }
+    action: props.AppURLs.login
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_reusables_Forms_js__WEBPACK_IMPORTED_MODULE_2__["LARAVEL_CSRF_TOKEN"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_reusables_Forms_js__WEBPACK_IMPORTED_MODULE_2__["Input_4"], {
     inputAttr: {
       type: 'email',
@@ -66515,7 +66521,12 @@ function LoginView(props) {
     color: 'blue',
     text: 'Sign in',
     attr: {
-      type: 'submit'
+      type: 'submit',
+      style: {
+        display: 'block',
+        minWidth: '14rem',
+        margin: '0 auto'
+      }
     }
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
     style: {
@@ -66553,10 +66564,7 @@ function RegisterView(props) {
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
     className: "rows_container",
     method: "POST",
-    action: props.AppURLs.login,
-    style: {
-      width: '50rem'
-    }
+    action: props.AppURLs.login
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_reusables_Forms_js__WEBPACK_IMPORTED_MODULE_2__["LARAVEL_CSRF_TOKEN"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_reusables_Forms_js__WEBPACK_IMPORTED_MODULE_2__["Input_4"], {
     inputAttr: {
       type: 'text',
@@ -66628,7 +66636,12 @@ function RegisterView(props) {
     color: 'blue',
     text: 'Register',
     attr: {
-      type: 'submit'
+      type: 'submit',
+      style: {
+        display: 'block',
+        minWidth: '14rem',
+        margin: '0 auto'
+      }
     }
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
     style: {
@@ -66709,7 +66722,7 @@ var selectedFamFontFaces = document.getElementById('selectedFamFontFaces');
 var generateFontFaces = function generateFontFaces(displayedFonts, storageLink) {
   var rules = '';
   displayedFonts.forEach(function (displayedFont) {
-    rules += Object(_reusables_FontFileParsers_js__WEBPACK_IMPORTED_MODULE_3__["getFontFace"])(displayedFont.font_name, displayedFont.default_file, storageLink);
+    rules += Object(_reusables_FontFileParsers_js__WEBPACK_IMPORTED_MODULE_3__["getFontFace"])(displayedFont.family_name, displayedFont.default_file, storageLink);
   });
   return rules;
 };
@@ -67923,6 +67936,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ListWidget_1", function() { return ListWidget_1; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _Buttons_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Buttons.js */ "./resources/js/components/reusables/Buttons.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
@@ -67948,18 +67962,41 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
 
+
 function Navbar(props) {
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("nav", {
     id: "Navbar",
     className: "cols_container space_between align_center"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    href: "#",
+    href: props.navbarBrandLink,
     className: "brand"
   }, "Fonts Vault"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "cols_container"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    id: "navbarLinks"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Buttons_js__WEBPACK_IMPORTED_MODULE_1__["Button_1"], {
+    tagname: 'button',
+    icon: {
+      position: 3,
+      color: 'blue'
+    },
+    events: {
+      onClick: props.toggleNavbar
+    },
+    attr: {
+      id: 'opnNavbar'
+    }
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    id: "navbarLinks",
+    className: props.navbarShown ? 'shown' : ''
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    style: {
+      display: 'flex',
+      justifyContent: 'flex-start'
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    id: "clsNavbar",
+    type: "button",
+    onClick: props.toggleNavbar
+  }, "\xD7")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
     className: "cols_container"
   }, props.navbarLinks.map(function (link, idx) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
@@ -68018,10 +68055,10 @@ var Header = /*#__PURE__*/function (_React$Component) {
       }, this.props.headerWidgetBtn), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Navbar, {
         navbarShown: this.state.navbarShown,
         navbarLinks: [{
-          URL: '#',
+          URL: this.props.AppURLs.domain,
           text: 'Home'
         }, {
-          URL: '#',
+          URL: this.props.AppURLs.domain + 'fonts',
           text: 'Applications'
         }, {
           URL: '#',
@@ -68029,7 +68066,9 @@ var Header = /*#__PURE__*/function (_React$Component) {
         }, {
           URL: '#',
           text: 'About'
-        }]
+        }],
+        navbarBrandLink: this.props.AppURLs.domain,
+        toggleNavbar: this.toggleNavbar
       })), this.props.subHeader !== null ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "subHeader cols_container space_between align_center section_padding"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -68044,9 +68083,9 @@ var Header = /*#__PURE__*/function (_React$Component) {
   return Header;
 }(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
 function Table(props) {
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("table", {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "table"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("thead", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, props.headData.map(function (data, idx) {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("table", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("thead", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, props.headData.map(function (data, idx) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
       key: idx
     }, data);
@@ -68058,7 +68097,7 @@ function Table(props) {
         key: colidx
       }, col);
     }));
-  })))) //
+  }))))) //
   ;
 }
 function SectionHeader(props) {

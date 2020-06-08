@@ -17,7 +17,7 @@ const selectedFamFontFaces = document.getElementById('selectedFamFontFaces');
 const generateFontFaces = function(displayedFonts, storageLink){
 	let rules = '';
 	displayedFonts.forEach((displayedFont) => {
-		rules += getFontFace(displayedFont.font_name, displayedFont.default_file, storageLink);
+		rules += getFontFace(displayedFont.family_name, displayedFont.default_file, storageLink);
 	});
 	return rules;
 }

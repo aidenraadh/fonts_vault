@@ -111,7 +111,7 @@ export default class EditFontView extends React.Component{
 				headerActions = {<>
     				<Button_2
     				    tagname = {'button'}
-    				    text = {'Save'}
+    				    text = {'Save changes'}
     				    color = {'green'}
     				    attr = {{type: 'submit', style: {marginLeft: '1.4rem'}, form: 'updateFont'}}
     				    events = {{}}
@@ -134,14 +134,15 @@ export default class EditFontView extends React.Component{
 					label = {'Family name'}
 					inputAttr = {{
 						type:"text", name:"family_name",
-						placeholder: this.font_info.family_name,
+						defaultValue: this.font_info.family_name,
 						form: 'updateFont'	
 					}}
+					wrapperAttr = {{style: {marginBottom: '2rem'}}}
 				/>
 				<Select_3
 					label = {'Typeface'}
-					selectAttr = {{name: 'typeface', form: 'updateFont', placeholder: this.font_info.typeface}}
-					attr = {{name: 'typeface'}}
+					selectAttr = {{name: 'typeface', form: 'updateFont', defaultValue: this.font_info.typeface}}
+					wrapperAttr = {{style: {marginBottom: '2rem'}}}
 					options = {this.props.typefaces.map((typeface) => (
 						{attr: {value: typeface}, optionText: typeface}
 					))}

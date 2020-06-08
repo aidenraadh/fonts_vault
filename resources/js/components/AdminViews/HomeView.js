@@ -203,7 +203,7 @@ export default class HomeView extends React.Component{
 					<Button_2
 						tagname = {'button'} text = {'Upload font'}
 						color = {'blue'} isActive = {true}
-						attr = {{type: 'submit', style: {margin: '0 auto'}}}
+						attr = {{type: 'submit', style: {display: 'block', margin: '0 auto', minWidth: '14rem'}}}
 					/>
 				</form>
 				}			
