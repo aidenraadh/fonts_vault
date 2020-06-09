@@ -44,6 +44,8 @@ class LoginController extends Controller
         return view('admin_views.auth.login', [
             'AppURLs' => json_encode([
                 'domain' => config('app.url'),
+                'images' => asset('images').'/',
+                'icons' => asset('images/icons').'/',                
                 'login' => route('admin/login'),
                 'registerPage' => route('admin/register')
             ], true),

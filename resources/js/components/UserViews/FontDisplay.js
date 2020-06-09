@@ -1,5 +1,5 @@
 import React from 'react';
-import {getFontFamValue} from './reusables/FontFileParsers.js';
+import {getFontFamValue} from './../reusables/FontFileParsers.js';
 
 class FontDisplay extends React.Component{
 	constructor(props){

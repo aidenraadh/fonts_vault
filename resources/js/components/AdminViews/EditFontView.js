@@ -1,5 +1,5 @@
 import React from 'react';
-import {Header, SectionHeader, ListWidget_1} from './../reusables/SectionsAndWidgets.js';
+import {Header, SectionHeader, ListWidget_1, Footer} from './../reusables/SectionsAndWidgets.js';
 import Dropdown from './../reusables/Dropdown.js';
 import {Input_3, Select_3, FileInput, LARAVEL_CSRF_TOKEN} from './../reusables/Forms.js';
 import {Button_2} from './../reusables/Buttons.js';
@@ -69,10 +69,6 @@ export default class EditFontView extends React.Component{
 		this.setState({
 			defaultFile: file_name
 		});
-	}
-
-	componentDidMount(){
-		console.log(this.state.defaultFile);
 	}
 
 	render(){
@@ -247,6 +243,7 @@ export default class EditFontView extends React.Component{
 				<input type="hidden" value={this.font_info.id} />
 			</form>			
 			</section>
+			<Footer />
 			</>//
 		);
 	}

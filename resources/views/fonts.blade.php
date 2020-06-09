@@ -4,7 +4,7 @@
 
 @section('content')
 
-<div id="App" class="App"></div>
+<div id="UserApp" class="App fonts_view"></div>
 
 <script type="application/json" id="displayedFonts">
 	<?= $fonts ?>

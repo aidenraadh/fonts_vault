@@ -134,6 +134,7 @@ select{
   font-family: 'Roboto', sans-serif;
   font-weight: 500;
   font-size: 1.45rem;
+  text-align: center;
   transition: background-color 0.3s;
 }
 
@@ -185,6 +186,7 @@ select{
     font-family: 'Roboto', sans-serif;
     font-weight: 400;
     font-size: 1.5rem;
+    text-align: center;
     color: #FFFFFF;
     transition: background-color 0.3s ease;
 }
@@ -273,7 +275,7 @@ select{
 
 .section_1{
   width: 84%;
-  margin: 0 auto;
+  margin: 0 auto 4rem;
   border-radius: 4px;
   background-color: #FFFFFF;
   box-shadow: 0px 0px 13px 0px rgba(82, 63, 105, 0.1);
@@ -337,7 +339,7 @@ select{
 .table{
 	width: 100%;
 	margin: 0 auto;
-	overflow-x: scroll;
+	overflow-x: auto;
 }
 
 .table table{
@@ -369,6 +371,26 @@ select{
 }
 .table .checkmark{
   width: 2.2rem; height: 2.2rem;
+}
+
+.docFooter{
+	width: 100%;
+	padding: 3rem;
+	font-family: 'Roboto', sans-serif;
+	font-weight: 400;
+	font-size: 1.5rem;
+	color: #6A6A73;
+	background-color: #FFFFFF; 
+}
+
+.docFooter a{
+	display: inline-block;
+	color: #6A6A73;
+	transition: color 0.3s ease;
+}
+
+.docFooter a:hover{
+	color: #5d78ff;
 }
 
 .modal_1{
@@ -505,6 +527,8 @@ select{
 	position: relative;
 	width: 31%;
 	margin: 0 1% 2%;
+	font-family: 'Roboto', sans-serif;
+	color: #6A6A73;
 	background-color: #FFFFFF;
 	box-shadow: 0px 0px 13px 0px rgba(82, 63, 105, 0.05);
 	border-radius: 4px;
@@ -532,16 +556,10 @@ select{
 	font-size: 1.5rem;
 	font-weight: 500;
 	text-align: left;
-	color: #48465b;
 }
 
 .card .stylesNumber{
-	font-size: 1.3rem;
-	color: #74788D;
-}
-
-.TimingFunc{
-	transition-timing-function: ease;
+	font-size: 1.45rem;
 }
 
 .form_1{
@@ -716,6 +734,22 @@ select{
 	width: 100%;
 }
 
+#Navbar .brand{
+	font-family: 'Roboto', sans-serif;
+	font-size: 1.8rem;
+	font-weight: 500;
+	color: #5D78FF;
+}
+
+#Navbar .brand img{
+	width: 4rem; height: auto;
+}
+
+#Navbar .brand span{
+	display: inline-block;
+	margin-left: 1rem;
+}
+
 #opnNavbar{
 	display: none;
 }
@@ -854,8 +888,8 @@ select{
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	padding: 1rem 0;
-	margin-bottom: 1rem;
+	padding-bottom: 0.6rem;
+	margin-bottom: 0.6rem;
 	border-bottom: 1px solid #e2e5ec;
 }
 
@@ -866,7 +900,7 @@ select{
 }
 
 .selectedFamDisplay .board{
-	font-size: 2.6rem;
+	font-size: 2.4rem;
 }
 
 .selectedFamDisplay .btn_1{
@@ -875,6 +909,13 @@ select{
 
 #FontDisplay{
 	padding-top: 18rem;
+}
+
+#UserApp.landing_view{
+	font-family: 'Roboto', sans-serif;
+	color: #d1d7e2;
+	background: url('../images/bg_2.jpg') no-repeat scroll 0 0;
+	background-size: cover;
 }
 
 #AdminApp .Header .mainHeading{
@@ -908,6 +949,13 @@ select{
 	width: 50rem;
 }
 
+#AdminApp.login_view h1, #AdminApp.register_view h1{
+	width: 100%;
+	text-align: center;
+	font-size: 2.4rem;
+	margin-bottom: 2rem;
+}
+
 @media only screen and (min-width: 1281px) {
   html{
     font-size: 0.78125vw;
@@ -918,6 +966,12 @@ select{
 	html{
 		font-size: calc(10px -  ( (1280px - 100vw) *  0.00138 ) );
 	}
+}
+
+@media only screen and (max-width: 900px) {
+	#UserApp .subHeader{
+		overflow-x: auto;
+	} 	
 }
 
 @media only screen and (max-width: 800px) {
@@ -940,7 +994,8 @@ select{
 
 @media only screen and (max-width: 700px) {
 	.card{
-		width: 48%;
+		width: 46.4%;
+		margin: 1.4%;
 	}
 	.table table{
 		width: 128%;
@@ -951,7 +1006,7 @@ select{
 	}
 
 	#opnNavbar{
-		display: inline-block;
+		display: inline-flex;
 	}
 
 	#clsNavbar{
@@ -1028,5 +1083,8 @@ select{
 
 	.modal_1 .body {
 		width: 92vw;
-	}	
+	}
+	#UserApp.landing_view article{
+		width: 90%;
+	}
 }

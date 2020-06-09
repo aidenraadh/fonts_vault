@@ -1,5 +1,5 @@
 import React from 'react';
-import {Checkbox} from './reusables/Forms.js';
+import {Checkbox} from './../reusables/Forms.js';
 
 class FontFilter extends React.Component{
 	constructor(props){

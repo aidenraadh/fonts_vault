@@ -1,5 +1,5 @@
 import React from 'react';
-import {Header, SectionHeader, Table} from './../reusables/SectionsAndWidgets.js';
+import {Header, SectionHeader, Table, Footer} from './../reusables/SectionsAndWidgets.js';
 import {Button_1, Button_2} from './../reusables/Buttons.js';
 import Dropdown from './../reusables/Dropdown.js';
 import {Checkbox, Select_3, Input_3, FileInput, LARAVEL_CSRF_TOKEN} from './../reusables/Forms.js';
@@ -89,10 +89,6 @@ export default class HomeView extends React.Component{
 			});
 			return {toggleModal: newToggleMdl};
 		});		
-	}
-
-	componentDidUpdate(){
-		console.log(this.state.deletedFonts);
 	}
 
 	render(){
@@ -209,6 +205,7 @@ export default class HomeView extends React.Component{
 				}			
 				getToggleModal = {this.getToggleModal}
 			/>
+			<Footer />
 			</>
 			//
 		);

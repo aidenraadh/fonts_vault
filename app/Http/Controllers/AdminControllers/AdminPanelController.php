@@ -93,6 +93,8 @@ class AdminPanelController extends Controller
             'typefaces' => json_encode(config('app.typefaces'), true),
             'AppURLs' => json_encode([
                 'domain' => config('app.url'),
+                'images' => asset('images').'/',
+                'icons' => asset('images/icons').'/',                
                 'updateFontURL' => config('app.url').'admin/fonts/update',
             ], true),
             'AdminData' => json_encode([

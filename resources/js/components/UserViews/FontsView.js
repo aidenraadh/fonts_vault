@@ -1,15 +1,15 @@
 import React from 'react';
 
-import {Header} from './reusables/SectionsAndWidgets.js';
-import {Modal_1} from './reusables/Modal.js';
-import {getFontFace} from './reusables/FontFileParsers.js';
-import {AJAXPostRequest} from './reusables/AJAXRequest.js';
+import {Header, Footer} from './../reusables/SectionsAndWidgets.js';
+import {Modal_1} from './../reusables/Modal.js';
+import {getFontFace} from './../reusables/FontFileParsers.js';
+import {AJAXPostRequest} from './../reusables/AJAXRequest.js';
 
 import FontFilter from './FontFilter.js';
 import FontConfig from './FontConfig.js';
 import FontDisplay from './FontDisplay.js';
 import DisplaySelectedFam from './DisplaySelectedFam.js';
-import {Button_1} from './reusables/Buttons.js';
+import {Button_1} from './../reusables/Buttons.js';
 
 const fontFaces = document.getElementById('fontFaces');
 const selectedFamFontFaces = document.getElementById('selectedFamFontFaces');
@@ -22,7 +22,7 @@ const generateFontFaces = function(displayedFonts, storageLink){
 	return rules;
 }
 
-class App extends React.Component{
+class FontsView extends React.Component{
 	constructor(props){
 		super(props);
 
@@ -144,7 +144,10 @@ class App extends React.Component{
 					headerWidgetBtn = <Button_1
 						tagname = {'button'}
 						icon = {{position: 1, color: 'blue'}}
-						attr = {{type: 'submit'}}
+						attr = {{type: 'button', style: {
+								marginRight: '1.2rem', borderRight: '1px solid #EFF0F6',
+							},
+						}}
 						events = {{
 							onClick: this.toggleFontFilter,
 						}}
@@ -177,11 +180,12 @@ class App extends React.Component{
 						board = {this.state.board}
 					/>
 					getToggleModal = {this.getToggleModal}
-				/>			
+				/>
+				<Footer />
 			</>
 			//
 		);
 	}
 }
 
-export default App;
+export default FontsView;

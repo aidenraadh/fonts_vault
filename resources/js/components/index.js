@@ -1,17 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App.js';
+import UserApp from './UserApp.js';
 import AdminApp from './AdminApp.js';
 
 const AppURLs = JSON.parse(document.getElementById('AppURLs').innerHTML);
 
-if(document.getElementById('App')){
+if(document.getElementById('UserApp')){
 	ReactDOM.render(
-		<App
-			displayedFonts={JSON.parse(document.getElementById('displayedFonts').innerHTML)}
+		<UserApp
 			AppURLs = {AppURLs}
 		/>,
-		document.getElementById('App')
+		document.getElementById('UserApp')
 	);
 }
 

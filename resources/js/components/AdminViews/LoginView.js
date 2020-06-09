@@ -6,6 +6,11 @@ export default function LoginView(props){
 	return(
 		<>
 		<form className="rows_container" method="POST" action={props.AppURLs.login}>
+			<img src={props.AppURLs.icons+'logo_2.png'} style={{
+				display: 'block', width: '6rem', height: 'auto', margin: '0 auto 3rem',
+			}}
+			/>
+			<h1>Admin Login</h1>
 			<LARAVEL_CSRF_TOKEN/>
 			<Input_4
 				inputAttr = {{

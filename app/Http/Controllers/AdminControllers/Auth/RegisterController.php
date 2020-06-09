@@ -77,6 +77,8 @@ class RegisterController extends Controller
         return view('admin_views.auth.register', [
             'AppURLs' => json_encode([
                 'domain' => config('app.url'),
+                'images' => asset('images').'/',
+                'icons' => asset('images/icons').'/',                
                 'register' => route('admin/register'),
                 'loginPage' => route('admin/login')
             ], true),

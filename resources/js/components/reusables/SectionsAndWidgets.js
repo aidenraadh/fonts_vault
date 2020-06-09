@@ -5,8 +5,9 @@ export function Navbar(props){
 	return (
 		<>
 		<nav id="Navbar" className="cols_container space_between align_center">
-		    <a href={props.navbarBrandLink} className="brand">
-		    	Fonts Vault
+		    <a href={props.AppURLs.domain} className="brand cols_container align_center">
+		    	<img src={props.AppURLs.icons+'logo_2.png'} />
+		    	<span>Fonts Vault</span>
 		    </a>
 		    <div className="cols_container">
 		        <Button_1
@@ -33,7 +34,7 @@ export function Navbar(props){
 		        </div>                                
 		    </div>
 		</nav>
-		</>
+		</>//
 	);
 }
 
@@ -73,16 +74,16 @@ export class Header extends React.Component{
 			        	{this.props.headerWidgetBtn}
 			        </div>
 			        <Navbar
+			        	AppURLs = {this.props.AppURLs}
 			        	navbarShown = {this.state.navbarShown}
 			        	navbarLinks = {[
 			        		{URL: this.props.AppURLs.domain, text: 'Home'},
 			        		{URL: this.props.AppURLs.domain+'fonts', text: 'Applications'},
-			        		{URL: '#', text: 'Pages'},
 			        		{URL: '#', text: 'About'},
+			        		{URL: this.props.AppURLs.domain+'admin/home', text: 'Login'},
 			        	]}
-			        	navbarBrandLink = {this.props.AppURLs.domain}
 			        	toggleNavbar = {this.toggleNavbar}
-			        />          
+			        />
 			    </div>
 			    {
 			    (this.props.subHeader !== null ?
@@ -172,5 +173,25 @@ export function ListWidget_1(props){
 		</ListTag>		
 		</>
 		//
+	);
+}
+
+export function Footer(props){
+	return (
+		<>
+		<footer className="docFooter cols_container space_between align_center">
+			<div>
+				Developed an designed by
+				<a href="mailto: aidenraadh@gmail.com" style={{marginLeft: '0.4rem'}}>
+					aidenraadh@gmail.com
+				</a>
+			</div>
+			<div>
+				<a href="#" style={{marginLeft: '1.4rem'}}>About</a>
+				<a href="#" style={{marginLeft: '1.4rem'}}>Team</a>
+				<a href="#" style={{marginLeft: '1.4rem'}}>Contract</a>
+			</div>
+		</footer>
+		</>//		
 	);
 }

@@ -14,7 +14,13 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('landing', [
+    	'AppURLs' => json_encode([
+			'domain' => config('app.url'),
+			'images' => asset('images').'/',
+			'icons' => asset('images/icons').'/',
+    	], true),
+    ]);
 });
 
 Route::get('test', 'TestController@index');
@@ -25,8 +31,6 @@ Route::post('search', 'FontsController@searchFont');
 Route::post('fonts/getFontFamily', 'FontsController@getFontFamily')->name('getFontFamily');
 
 // Auth::routes();
-
-// Route::get('/home', 'HomeController@index')->name('home');
 
 Route::prefix('admin')->group(function () {
 	Route::get('home', 'AdminControllers\AdminPanelController@index')
